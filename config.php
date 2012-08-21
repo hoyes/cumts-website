@@ -26,12 +26,12 @@ if (!version_compare(phpversion(), '5.3.2', '>=')) {
 EOF;
 }
 
-if (!is_writable(__DIR__ . '/../app/cache')) {
+if (!is_writable(__DIR__ . '/symfony/app/cache')) {
     $majorProblems[] = 'Change the permissions of the "<strong>app/cache/</strong>"
         directory so that the web server can write into it.';
 }
 
-if (!is_writable(__DIR__ . '/../app/logs')) {
+if (!is_writable(__DIR__ . '/symfony/app/logs')) {
     $majorProblems[] = 'Change the permissions of the "<strong>app/logs/</strong>"
         directory so that the web server can write into it.';
 }

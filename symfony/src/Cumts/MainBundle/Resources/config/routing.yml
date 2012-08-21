@@ -1,0 +1,3 @@
+CumtsMainBundle_homepage:
+    pattern:  /
+    defaults: { _controller: CumtsMainBundle:Default:index }

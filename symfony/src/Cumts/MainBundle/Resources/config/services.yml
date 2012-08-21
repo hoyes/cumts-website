@@ -1,0 +1,7 @@
+parameters:
+#    cumts_main.example.class: Cumts\MainBundle\Example
+
+services:
+#    cumts_main.example:
+#        class: %cumts_main.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,196 @@
+<?php
+
+namespace Cumts\MainBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cumts\MainBundle\Entity\Event
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\EventRepository")
+ */
+class Event
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var datetime $start_at
+     *
+     * @ORM\Column(name="start_at", type="datetime")
+     */
+    private $start_at;
+
+    /**
+     * @var datetime $end_at
+     *
+     * @ORM\Column(name="end_at", type="datetime")
+     */
+    private $end_at;
+
+    /**
+     * @var text $summary
+     *
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
+
+    /**
+     * @var text $body
+     *
+     * @ORM\Column(name="body", type="text")
+     */
+    private $body;
+
+    /**
+     * @var smallint $event_type
+     *
+     * @ORM\Column(name="event_type", type="smallint")
+     */
+    private $event_type;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set start_at
+     *
+     * @param datetime $startAt
+     */
+    public function setStartAt($startAt)
+    {
+        $this->start_at = $startAt;
+    }
+
+    /**
+     * Get start_at
+     *
+     * @return datetime 
+     */
+    public function getStartAt()
+    {
+        return $this->start_at;
+    }
+
+    /**
+     * Set end_at
+     *
+     * @param datetime $endAt
+     */
+    public function setEndAt($endAt)
+    {
+        $this->end_at = $endAt;
+    }
+
+    /**
+     * Get end_at
+     *
+     * @return datetime 
+     */
+    public function getEndAt()
+    {
+        return $this->end_at;
+    }
+
+    /**
+     * Set summary
+     *
+     * @param text $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
+
+    /**
+     * Get summary
+     *
+     * @return text 
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * Set body
+     *
+     * @param text $body
+     */
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * Get body
+     *
+     * @return text 
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * Set event_type
+     *
+     * @param smallint $eventType
+     */
+    public function setEventType($eventType)
+    {
+        $this->event_type = $eventType;
+    }
+
+    /**
+     * Get event_type
+     *
+     * @return smallint 
+     */
+    public function getEventType()
+    {
+        return $this->event_type;
+    }
+}

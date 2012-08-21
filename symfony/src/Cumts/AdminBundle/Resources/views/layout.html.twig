@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CUMTS Admin - {% block pagename %}{% endblock%}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/cumtsadmin/css/main.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<header>
+<h1>CUMTS</h1>
+</header>
+<nav>
+<ul>
+    <li><a href="{{ path('CumtsAdminBundle_homepage') }}">Home</a></li>
+    <li><a href="{{ path('CumtsAdminBundle_members') }}">Members</a></li>
+    <li><a href="{{ path('CumtsMainBundle_homepage') }}">News</a></li>
+    <li><a href="{{ path('CumtsMainBundle_homepage') }}">Events</a></li>
+</ul>
+</nav>
+<section>
+{% block content %}{% endblock %}
+</section>
+<footer>
+Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}.
+</footer>
+{% endblock %}

@@ -1,0 +1,6 @@
+CumtsAdminBundle_homepage:
+    pattern:  /
+    defaults: { _controller: CumtsAdminBundle:Default:index }
+CumtsAdminBundle_members:
+    pattern: /members
+    defaults: { _controller: CumtsAdminBundle:Members:index }
