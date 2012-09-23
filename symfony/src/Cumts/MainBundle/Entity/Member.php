@@ -258,6 +258,16 @@ class Member
     {
         return $this->membership_type;
     }
+    
+    public function getMembershipTypeString()
+    {
+        switch ($this->membership_type) {
+            case self::TYPE_LIFE: return "life";
+            case self::TYPE_YEAR: return "one year";
+            case self::TYPE_ASSOCIATE: return "associate";
+            case self::TYPE_SPECIAL: return "special";
+        }
+    }
 
     /**
      * Set auth_id

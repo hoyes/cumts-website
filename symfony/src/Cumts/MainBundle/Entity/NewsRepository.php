@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class NewsRepository extends EntityRepository
 {
+    public function findAllPaginated($page, $limit)
+    {
+        $query = $this->createQueryBuilder("n")
+            ->orderBy("n.published_at", "DESC")
+            ->setMaxResults($limit)
+            ->setFirstResult(($page-1)*$limit)
+            ->getQuery();
+        return $query->getResult();
+    }
 }

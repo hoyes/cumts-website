@@ -3,20 +3,28 @@
 {% block title %}CUMTS Admin - {% block pagename %}{% endblock%}{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('bundles/cumtsadmin/css/main.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/cumtsmain/css/main.css') }}" type="text/css" media="all" />
+<link rel="stylesheet" href="{{ asset('bundles/cumtsadmin/css/admin.css') }}" type="text/css" media="all" />
 {% endblock %}
 
 {% block body %}
+<div id="wrapper">
 <header>
-<h1>CUMTS</h1>
+<h1><a href="{{ path('CumtsMainBundle_homepage') }}">
+<img src="{{ asset("bundles/cumtsmain/images/logo.png") }}" alt="Cambridge University Musical Theatre Society" />
+</a></h1>
+<h2>
+Admin Site
+</h2>
 </header>
 <nav>
 <ul>
     <li><a href="{{ path('CumtsAdminBundle_homepage') }}">Home</a></li>
-    <li><a href="{{ path('CumtsAdminBundle_members') }}">Members</a></li>
-    <li><a href="{{ path('CumtsMainBundle_homepage') }}">News</a></li>
-    <li><a href="{{ path('CumtsMainBundle_homepage') }}">Events</a></li>
+    <li><a href="{{ path('admin_members') }}">Members</a></li>
+    <li><a href="{{ path('admin_news') }}">News</a></li>
+    <li><a href="{{ path('admin_events') }}">Events</a></li>
 </ul>
+<div class="clear"></div>
 </nav>
 <section>
 {% block content %}{% endblock %}
@@ -24,4 +32,5 @@
 <footer>
 Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}.
 </footer>
+</div>
 {% endblock %}

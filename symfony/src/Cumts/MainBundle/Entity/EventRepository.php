@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventRepository extends EntityRepository
 {
+    public function findAllPaginated($page, $limit)
+    {
+        $query = $this->createQueryBuilder("e")
+            ->orderBy("e.start_at", "DESC")
+            ->setMaxResults($limit)
+            ->setFirstResult(($page-1)*$limit)
+            ->getQuery();
+        return $query->getResult();
+    }
 }

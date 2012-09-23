@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\NewsRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class News
 {
@@ -27,6 +28,13 @@ class News
      * @ORM\Column(name="headline", type="string", length=255)
      */
     private $headline;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @var text $summary
@@ -219,5 +227,39 @@ class News
     public function getCreatedById()
     {
         return $this->created_by_id;
+    }
+    
+    /** @ORM\PrePersist */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime;
+        $this->updated_at = new \DateTime;
+        $this->slug = '';
+    }
+    
+    /** @ORM\PreUpdate */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

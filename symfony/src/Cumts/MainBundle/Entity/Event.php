@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\EventRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Event
 {
@@ -27,6 +28,13 @@ class Event
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @var datetime $start_at
@@ -63,6 +71,11 @@ class Event
      */
     private $event_type;
 
+
+    const TYPE_SHOW = 0;
+    const TYPE_BAR_NIGHT = 1;
+    const TYPE_VISIT = 2;
+    const TYPE_WORKSHOP = 3;
 
     /**
      * Get id
@@ -192,5 +205,39 @@ class Event
     public function getEventType()
     {
         return $this->event_type;
+    }
+    
+   /** @ORM\PrePersist */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime;
+        $this->updated_at = new \DateTime;
+        $this->slug = '';
+    }
+    
+    /** @ORM\PreUpdate */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

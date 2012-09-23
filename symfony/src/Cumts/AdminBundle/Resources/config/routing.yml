@@ -2,5 +2,12 @@ CumtsAdminBundle_homepage:
     pattern:  /
     defaults: { _controller: CumtsAdminBundle:Default:index }
 CumtsAdminBundle_members:
-    pattern: /members
-    defaults: { _controller: CumtsAdminBundle:Members:index }
+    resource: "@CumtsAdminBundle/Resources/config/routing/member.yml"
+    prefix:   /members
+CumtsAdminBundle_news:
+    resource: "@CumtsAdminBundle/Resources/config/routing/news.yml"
+    prefix:   /news
+CumtsAdminBundle_events:
+    resource: "@CumtsAdminBundle/Resources/config/routing/event.yml"
+    prefix:   /events
+
