@@ -1,0 +1,30 @@
+admin_news:
+    pattern:  /
+    defaults: { _controller: "CumtsAdminBundle:News:index" }
+
+admin_news_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumtsAdminBundle:News:show" }
+
+admin_news_new:
+    pattern:  /new
+    defaults: { _controller: "CumtsAdminBundle:News:new" }
+
+admin_news_create:
+    pattern:  /create
+    defaults: { _controller: "CumtsAdminBundle:News:create" }
+    requirements: { _method: post }
+
+admin_news_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CumtsAdminBundle:News:edit" }
+
+admin_news_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CumtsAdminBundle:News:update" }
+    requirements: { _method: post }
+
+admin_news_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CumtsAdminBundle:News:delete" }
+    requirements: { _method: post }

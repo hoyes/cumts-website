@@ -1,0 +1,30 @@
+admin_events:
+    pattern:  /
+    defaults: { _controller: "CumtsAdminBundle:Event:index" }
+
+admin_events_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumtsAdminBundle:Event:show" }
+
+admin_events_new:
+    pattern:  /new
+    defaults: { _controller: "CumtsAdminBundle:Event:new" }
+
+admin_events_create:
+    pattern:  /create
+    defaults: { _controller: "CumtsAdminBundle:Event:create" }
+    requirements: { _method: post }
+
+admin_events_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CumtsAdminBundle:Event:edit" }
+
+admin_events_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CumtsAdminBundle:Event:update" }
+    requirements: { _method: post }
+
+admin_events_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CumtsAdminBundle:Event:delete" }
+    requirements: { _method: post }

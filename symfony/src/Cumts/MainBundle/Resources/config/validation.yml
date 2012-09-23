@@ -1,0 +1,10 @@
+Cumts\MainBundle\Entity\News:
+    properties:
+        headline:
+            - NotBlank: ~
+        summary:
+            - NotBlank: ~
+        published_at:
+            - NotBlank: ~
+            - Type: \DateTime
+
