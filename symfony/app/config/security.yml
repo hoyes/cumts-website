@@ -11,6 +11,8 @@ security:
             users:
                 user:  { password: userpass, roles: [ 'ROLE_USER' ] }
                 admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        raven:
+	    id: raven_user_provider
 
     firewalls:
         dev:
@@ -32,6 +34,10 @@ security:
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
+	
+	admin:
+	    pattern: ^/admin/.*
+	    raven: true
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
