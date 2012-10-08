@@ -1,0 +1,14 @@
+{% extends 'CumtsMainBundle::layout.html.twig' %}
+
+{% block pagename %}Membership{% endblock %}
+
+{% block content %}
+<h1>Membership</h1>
+<h2>Check Membership Status</h2>
+<p>You are a not a member of CUMTS</p>
+
+<p>
+        If any of the details above are incorrect (e.g. your name, college or year of graduation), please send an e-mail to 
+        <a href="mailto:membership@cumts.co.uk">membership@cumts.co.uk</a> with the details.
+</p>
+{% endblock %}

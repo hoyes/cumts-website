@@ -1,0 +1,37 @@
+CumtsMainBundle_homepage:
+    pattern:  /
+    defaults: { _controller: CumtsMainBundle:Default:index }
+CumtsMainBundle_about:
+    pattern:  /about
+    defaults: { _controller: CumtsMainBundle:About:index }
+CumtsMainBundle_get_involved:
+    pattern:  /get-involved
+    defaults: { _controller: CumtsMainBundle:GetInvolved:index }
+CumtsMainBundle_membership:
+    pattern:  /membership
+    defaults: { _controller: CumtsMainBundle:Membership:index }
+CumtsMainBundle_membership_raven:
+    pattern:  /membership/raven
+    defaults: { _controller: CumtsMainBundle:Membership:raven }
+CumtsMainBundle_membership_join:
+    pattern:  /membership/join
+    defaults: { _controller: CumtsMainBundle:Membership:join }
+CumtsMainBundle_membership_pay:
+    pattern:  /membership/pay
+    defaults: { _controller: CumtsMainBundle:Membership:pay }
+CumtsMainBundle_membership_cancel:
+    pattern:  /membership/cancel
+    defaults: { _controller: CumtsMainBundle:Membership:cancel }
+CumtsMainBundle_membership_complete:
+    pattern:  /membership/complete
+    defaults: { _controller: CumtsMainBundle:Membership:complete }
+CumtsMainBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: CumtsMainBundle:Contact:index }
+CumtsMainBundle_news_ext:
+        resource: "@CumtsMainBundle/Resources/config/routing/news.yml"
+        prefix:   /news
+CumtsMainBundle_events_ext:
+        resource: "@CumtsMainBundle/Resources/config/routing/event.yml"
+        prefix:   /events
+
