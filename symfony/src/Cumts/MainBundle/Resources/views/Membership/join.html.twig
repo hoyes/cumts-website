@@ -1,0 +1,32 @@
+{% extends 'CumtsMainBundle::layout.html.twig' %}
+
+{% block pagename %}Membership{% endblock %}
+
+{% block content %}
+<h1>Membership</h1>
+<h2>Check Membership Status</h2>
+<p>You are a not yet a member of CUMTS</p>
+
+<p>If you would like to become a member, you can sign up using the form below. It costs £10 and lasts for the duration of your time in Cambridge.</p>
+
+<h2>Join CUMTS</h2>
+
+<form action="{{ path('CumtsMainBundle_membership_join', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
+  {{ form_errors(form) }}
+  
+<div>
+<label>Id</label>
+<div class="form_static_text">{{ entity.authid }}</div>
+</div>
+{{ form_row(form.first_name) }}
+{{ form_row(form.last_name) }}
+{{ form_row(form.email) }}
+{{ form_row(form.college) }}
+
+    {{ form_rest(form) }}
+    <p>
+        <button type="submit">Sign Up</button>
+    </p>
+</form>
+
+{% endblock %}

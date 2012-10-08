@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\MemberRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Member
 {
@@ -16,6 +17,7 @@ class Member
     const TYPE_YEAR = 1;
     const TYPE_ASSOCIATE = 2;
     const TYPE_SPECIAL = 3;
+    const TYPE_COMMITTEE = 4;
 
     /**
      * @var integer $id
@@ -62,6 +64,13 @@ class Member
     private $auth_id;
     
     /**
+     * @var string $college
+     *
+     * @ORM\Column(name="college", type="string", length=255)
+     */
+    private $college;
+    
+    /**
      * @var datetime $created_at
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -88,6 +97,13 @@ class Member
      * @ORM\Column(name="leaves_at", type="datetime")
      */
     private $leaves_at;
+    
+    /**
+     * @var boolean $paid
+     *
+     * @ORM\Column(name="paid", type="boolean")
+     */
+    private $paid;
 
     /**
      * Get id
@@ -244,7 +260,7 @@ class Member
      *
      * @param int8 $membershipType
      */
-    public function setMembershipType(\int8 $membershipType)
+    public function setMembershipType($membershipType)
     {
         $this->membership_type = $membershipType;
     }
@@ -266,6 +282,7 @@ class Member
             case self::TYPE_YEAR: return "one year";
             case self::TYPE_ASSOCIATE: return "associate";
             case self::TYPE_SPECIAL: return "special";
+            case self::TYPE_COMMITTEE: return "committee";
         }
     }
 
@@ -287,5 +304,59 @@ class Member
     public function getAuthId()
     {
         return $this->auth_id;
+    }
+
+    /**
+     * Set college
+     *
+     * @param string $college
+     */
+    public function setCollege($college)
+    {
+        $this->college = $college;
+    }
+
+    /**
+     * Get college
+     *
+     * @return string 
+     */
+    public function getCollege()
+    {
+        return $this->college;
+    }
+
+    /**
+     * Set paid
+     *
+     * @param boolean $paid
+     */
+    public function setPaid($paid)
+    {
+        $this->paid = $paid;
+    }
+
+    /**
+     * Get paid
+     *
+     * @return boolean 
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+    
+    /** @ORM\PrePersist */
+    public function onPrePersist()
+    {
+        $this->created_at = new \DateTime;
+        $this->updated_at = new \DateTime;
+        $this->slug = '';
+    }
+    
+    /** @ORM\PreUpdate */
+    public function onPreUpdate()
+    {
+        $this->updated_at = new \DateTime;
     }
 }

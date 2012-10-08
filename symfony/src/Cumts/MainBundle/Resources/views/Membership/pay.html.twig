@@ -1,0 +1,22 @@
+{% extends 'CumtsMainBundle::layout.html.twig' %}
+
+{% block pagename %}Membership{% endblock %}
+
+{% block content %}
+<h1>Membership</h1>
+<h2>Join CUMTS</h2>
+
+<p>Thank you {{ entity.firstname }} - your details are now saved. The button below will transfer you to Paypal to pay the £10 membership fee</p>
+
+<form action="{{ url }}" method="post">
+                    
+    <input type="hidden" name="cmd" value="_s-xclick" />
+    <input type="hidden" name="hosted_button_id" value="{{ button }}" />
+    <input type="hidden" name="custom" value="{{ entity.id }}" />
+    <input type="hidden" name="first_name" value="{{ entity.firstname }}" />
+    <input type="hidden" name="last_name" value="{{ entity.lastname }}" />
+    <input type="hidden" name="email" value="{{ entity.email }}" />
+        <button type="submit">Pay with Paypal</button>
+</form>
+
+{% endblock %}

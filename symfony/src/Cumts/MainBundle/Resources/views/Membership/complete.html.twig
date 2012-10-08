@@ -1,0 +1,15 @@
+{% extends 'CumtsMainBundle::layout.html.twig' %}
+
+{% block pagename %}Membership{% endblock %}
+
+{% block content %}
+<h1>Membership</h1>
+<h2>Join CUMTS</h2>
+
+<p>Thank you for becoming a CUMTS member.</p>
+
+<p>A receipt for your purchase has been emailed to you. You may log into your account at www.paypal.com/uk to view details of this transaction.</p>
+
+<p><a href="{{ path("CumtsMainBundle_homepage") }}">Return to the home page</a></p>
+
+{% endblock %}
