@@ -21,4 +21,4 @@ CumtsMainBundle_events_ext:
      prefix:   /events
 OrderlyPayPalIpnBundle:
      pattern: /paypal/ipn
-     defaults: { _controller: @CumtsMainBundle:PaypalController:ipn }
+     defaults: { _controller: CumtsMainBundle:Paypal:ipn }

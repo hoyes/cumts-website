@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Europe/London");
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 

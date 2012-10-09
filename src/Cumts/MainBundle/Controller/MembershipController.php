@@ -19,33 +19,21 @@ class MembershipController extends Controller
     
     public function ravenAction()
     {
-        $path = realpath(__DIR__."/../Resources/ravenkeys");
-        $webauth = new \Ucam_Webauth(array(
-		'hostname' => $_SERVER['HTTP_HOST'],
-		'key_dir' => $path,
-		'cookie_key' => 'pa0ufi&dsfj$alkd£903'
-	));
-	$complete = $webauth->authenticate();
-	if ($complete) {
-	    $em = $this->getDoctrine()->getEntityManager();
-            $member = $em->getRepository('CumtsMainBundle:Member')->findOneBy(array('auth_id' => $webauth->principal()));
-            if ($member) {
-                if ($member->getPaid()) return $this->render('CumtsMainBundle:Membership:raven_success.html.twig', array('member' => $member, 'paid' => true));
-                else return $this->forward("CumtsMainBundle:Membership:pay", array('auth_id'  => $webauth->principal()));
-            }
-            else {
-                return $this->forward("CumtsMainBundle:Membership:join", array('auth_id'  => $webauth->principal()));
-            }
-	}
-	else {
-            die();
+        $em = $this->getDoctrine()->getEntityManager();
+	$user = $this->get('security.context')->getToken()->getUser();
+        $member = $em->getRepository('CumtsMainBundle:Member')->findOneBy(array('auth_id' => $user->getUsername()));
+        if ($member) {
+            if ($member->getPaid()) return $this->render('CumtsMainBundle:Membership:raven_success.html.twig', array('member' => $member, 'paid' => true));
+            else return $this->forward("CumtsMainBundle:Membership:pay", array('auth_id'  => $user->getUsername()));
+        }
+        else {
+            return $this->forward("CumtsMainBundle:Membership:join");
         }
     }
     
-    public function payAction($auth_id = null)
+    public function payAction()
     {
-        if (!$auth_id) $this->forward("CumtsMainBundle:Membership:raven");
-    
+	$auth_id = $this->get('security.context')->getToken()->getUser()->getUsername();
         $em = $this->getDoctrine()->getEntityManager();
         $member = $em->getRepository('CumtsMainBundle:Member')->findOneBy(array('auth_id' => $auth_id));
         
@@ -63,16 +51,20 @@ class MembershipController extends Controller
     
     public function cancelAction()
     {
-        $this->forward("CumtsMainBundle:Membership:raven");
+        $this->redirect($this->generateUrl("CumtsMainBundle_homepage"));
     }
     
     public function completeAction()
     {
-        return $this->render('CumtsMainBundle:Membership:complete.html.twig', array());
+	$auth_id = $this->get('security.context')->getToken()->getUser()->getUsername();
+        $em = $this->getDoctrine()->getEntityManager();
+        $member = $em->getRepository('CumtsMainBundle:Member')->findOneBy(array('auth_id' => $auth_id));
+        return $this->render('CumtsMainBundle:Membership:complete.html.twig', array('auth_id' => $auth_id, 'member' => $member));
     }
     
-    public function joinAction($auth_id = null)
+    public function joinAction()
     {
+	$auth_id = $this->get('security.context')->getToken()->getUser()->getUsername();
         $request = $this->getRequest();
         $entity  = new Member();
                 
@@ -97,11 +89,11 @@ class MembershipController extends Controller
                     $entity->setJoinedAt(new \DateTime);
                     $entity->setPaid(false);
                     $entity->setLeavesAt(new \DateTime($entity->getLeavesAt()));
-                    $entity->setMembershipType(Member::TYPE_LIFE);
+                    $entity->setMembershipType(Member::TYPE_CURRENT);
                     $em = $this->getDoctrine()->getEntityManager();
                     $em->persist($entity);
                     $em->flush();
-                    return $this->forward('CumtsMainBundle:Membership:pay', array('auth_id' => $entity->getAuthId()));
+                    return $this->forward('CumtsMainBundle:Membership:pay', array('auth_id' => $entity->getUsername()));
                 }
         }
         return $this->render('CumtsMainBundle:Membership:join.html.twig', array(
@@ -145,8 +137,9 @@ class MembershipController extends Controller
     
     public function logoutAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $user->logOut();
+        $token = $this->get('security.context')->getToken();
+        if ($token) $token->getUser()->logOut();
+	$this->get('request')->getSession()->invalidate();
         return $this->redirect('/');
     }
 }

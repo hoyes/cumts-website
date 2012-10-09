@@ -6,9 +6,19 @@
 <h1>Membership</h1>
 <h2>Join CUMTS</h2>
 
-<p>Thank you for becoming a CUMTS member.</p>
+{% if member and member.paid %}
 
-<p>A receipt for your purchase has been emailed to you. You may log into your account at www.paypal.com/uk to view details of this transaction.</p>
+<p>Thank you {{ member.firstname }} - you are now a member of the Cambridge University Musical Theatre Society!</p>
+
+<p>We have successfully received your payment and you should have received an e-mail confirmation from both ourselves and Paypal.</p>
+
+{% elseif member and not member.paid %}
+
+<p>Thank you for signing up to be a member of the Cambridge University Musical Theatre Society.</p>
+
+<p>We are still waiting for your payment to clear. When the transaction completes you will receive e-mails from both ourselves and Paypal confirming the details</p>
+
+{% endif %}
 
 <p><a href="{{ path("CumtsMainBundle_homepage") }}">Return to the home page</a></p>
 
