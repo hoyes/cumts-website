@@ -1,13 +1,3 @@
-admin_members:
-    pattern:  /{page}/{limit}
-    defaults: 
-        _controller: "CumtsAdminBundle:Member:index"
-        page: 1
-        limit: 25
-    requirements:
-        page: \d+
-        limit: \d+
-
 admin_members_show:
     pattern:  /{id}/show
     defaults: { _controller: "CumtsAdminBundle:Member:show" }
@@ -34,3 +24,14 @@ admin_members_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "CumtsAdminBundle:Member:delete" }
     requirements: { _method: post }
+    
+admin_members:
+    pattern:  /{page}/{filter}
+    defaults: 
+        _controller: "CumtsAdminBundle:Member:index"
+        page: 1
+        limit: 25
+        filter: 0
+    requirements:
+        page: \d+
+        limit: \d+

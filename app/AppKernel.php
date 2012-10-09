@@ -22,6 +22,9 @@ class AppKernel extends Kernel
             new Cumts\MainBundle\CumtsMainBundle(),
             new Cumts\AdminBundle\CumtsAdminBundle(),
             new Misd\RavenBundle\MisdRavenBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

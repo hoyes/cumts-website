@@ -17,14 +17,17 @@ class MemberController extends Controller
      * Lists all Member entities.
      *
      */
-    public function indexAction($page, $limit)
+    public function indexAction($page, $limit, $filter)
     {
+    
         $em = $this->getDoctrine()->getEntityManager();
-
-        $entities = $em->getRepository('CumtsMainBundle:Member')->findAllPaginated($page, $limit);
+        $paginator = $this->get('knp_paginator'); // (1)
+        $query = $em->getRepository('CumtsMainBundle:Member')->findAllQuery($filter);
+        $entities = $paginator->paginate($query, $page, $limit); // (3)
+       var_dump($filter);
 
         return $this->render('CumtsAdminBundle:Member:index.html.twig', array(
-            'entities' => $entities
+            'entities' => $entities, 'filter' => $filter
         ));
     }
 
@@ -141,7 +144,7 @@ class MemberController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('members_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_members_edit', array('id' => $id)));
         }
 
         return $this->render('CumtsAdminBundle:Member:edit.html.twig', array(
@@ -174,7 +177,7 @@ class MemberController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('members'));
+        return $this->redirect($this->generateUrl('admin_members'));
     }
 
     private function createDeleteForm($id)

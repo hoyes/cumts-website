@@ -34,3 +34,13 @@ Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}.
 </footer>
 </div>
 {% endblock %}
+
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% block pagescripts %}
+{% endblock %}
+
+{% endblock %}

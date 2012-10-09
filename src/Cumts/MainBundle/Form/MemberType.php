@@ -3,22 +3,26 @@
 namespace Cumts\MainBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class MemberType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('first_name')
             ->add('last_name')
-            ->add('email')
-            ->add('membership_type')
-            ->add('auth_id')
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('joined_at')
-            ->add('leaves_at')
+            ->add('auth_id', 'text', array('label' => 'CRSid'))
+            ->add('email', 'text', array('label' => 'Preferred e-mail'))
+            ->add('membership_type', 'choice', array('choices' => array(
+                0 => 'active',
+                3 => 'special',
+                2 => 'associate',
+                4 => 'committee'
+            )))
+            ->add('joined_at', 'date')
+            ->add('leaves_at', 'date')
+            ->add('paid')
         ;
     }
 

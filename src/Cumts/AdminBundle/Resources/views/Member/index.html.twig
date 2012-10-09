@@ -6,33 +6,50 @@
 
 <h1>Member list</h1>
 
+<ul>
+    <li>
+        <a href="{{ path('admin_members_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+
+<form id="filter_form">
+<div>
+<label for="filter">Filter by membership type:</label>
+<select id="filter">
+        <option value="all">All</option>
+        <option value="0" {% if filter is sameas('0') %} selected {% endif %}>Active</option>
+        <option value="3" {% if filter is sameas('3') %} selected {% endif %}>Special</option>
+        <option value="2" {% if filter is sameas('2') %} selected {% endif %}>Associate</option>
+        <option value="4" {% if filter is sameas('4') %} selected {% endif %}>Committee</option>
+</select>
+</div>
+</form>
+
+{{ entities.render()|raw }}
+
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>{{ entities.sortable('Auth ID', 'm.auth_id')|raw }}</th>
             <th>First Name</th>
-            <th>Last Name</th>
+            <th>{{ entities.sortable('Last Name', 'm.last_name')|raw }}</th>
             <th>Email</th>
             <th>Membership Type</th>
-            <th>Auth Id</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Joined</th>
-            <th>Leaves</th>
+            <th>{{ entities.sortable('Joined', 'm.joined_at')|raw }}</th>
+            <th>{{ entities.sortable('Graduates', 'm.leaves_at')|raw }}</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('admin_members_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('admin_members_show', { 'id': entity.id }) }}">{{ entity.authid }}</a></td>
             <td>{{ entity.firstname }}</td>
             <td>{{ entity.lastname }}</td>
             <td>{{ entity.email }}</td>
             <td>{{ entity.getMembershipTypeString() }}</td>
-            <td>{{ entity.authid }}</td>
-            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.joinedat %}{{ entity.joinedat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.leavesat %}{{ entity.leavesat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>
@@ -50,11 +67,22 @@
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('admin_members_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
+{{ entities.render()|raw }}
+
+{% endblock %}
+
+{% block pagescripts %}
+<script>
+$(function() {
+    var reload = function() {
+        var id = $('#filter').val();
+        document.location = Routing.generate('admin_members', { filter: id });
+    };
+    $('#filter').change(reload);
+    $('#filter_form').submit(function() {
+        reload();
+        return false;
+    });
+});
+</script>
 {% endblock %}

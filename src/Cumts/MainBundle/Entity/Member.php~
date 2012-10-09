@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Member implements UserInterface
 {
-    const TYPE_LIFE = 0;
+    const TYPE_CURRENT = 0;
     const TYPE_YEAR = 1;
     const TYPE_ASSOCIATE = 2;
     const TYPE_SPECIAL = 3;
@@ -279,7 +279,7 @@ class Member implements UserInterface
     public function getMembershipTypeString()
     {
         switch ($this->membership_type) {
-            case self::TYPE_LIFE: return "life";
+            case self::TYPE_CURRENT: return "active";
             case self::TYPE_YEAR: return "one year";
             case self::TYPE_ASSOCIATE: return "associate";
             case self::TYPE_SPECIAL: return "special";
@@ -370,7 +370,7 @@ class Member implements UserInterface
     public function getRoles()
     {
         switch($this->getMembershipType()) {
-            case self::TYPE_LIFE:
+            case self::TYPE_CURRENT:
             case self::TYPE_YEAR:
             case self::TYPE_SPECIAL:
                 return array('ROLE_CURRENT');
@@ -399,5 +399,10 @@ class Member implements UserInterface
     }
     public function eraseCredentials()
     {
+    }
+    
+    public function getFullName()
+    {
+        return $this->getFirstName().' '.$this->getLastName();
     }
 }

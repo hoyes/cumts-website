@@ -12,14 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class MemberRepository extends EntityRepository
 {
-    public function findAllPaginated($page, $limit)
+    public function findAllQuery($type = null)
     {
         $query = $this->createQueryBuilder("m")
             ->orderBy("m.last_name", "ASC")
             ->addOrderBy("m.first_name", "ASC")
-            ->setMaxResults($limit)
-            ->setFirstResult(($page-1)*$limit)
-            ->getQuery();
-        return $query->getResult();
+            ->where("m.paid = true");
+        if (is_numeric($type)) {
+            $query->andWhere("m.membership_type = $type");
+        }
+        
+        return $query->getQuery();
     }
 }
