@@ -16,6 +16,7 @@ CumtsMainBundle_membership_cancel:
 CumtsMainBundle_membership_complete:
     pattern:  /raven/complete
     defaults: { _controller: CumtsMainBundle:Membership:complete }
-CumtsMainBundle_membership_ipn:
-    pattern:  /ipn
-    defaults: { _controller: CumtsMainBundle:Membership:ipn }
+CumtsMainBundle_membership_logout:
+    pattern:  /logout
+    defaults: { _controller: CumtsMainBundle:Membership:logout }
+    

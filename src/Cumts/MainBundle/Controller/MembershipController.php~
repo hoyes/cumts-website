@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Cumts\MainBundle\Entity\Member;
 use Cumts\MainBundle\Form\JoinType;
 
-require_once __DIR__.'/../../../../vendor/Ucam_Webauth/Ucam_Webauth.php';
+//require_once __DIR__.'/../../../../vendor/Ucam_Webauth/Ucam_Webauth.php';
 
 class MembershipController extends Controller
 {
@@ -68,7 +68,7 @@ class MembershipController extends Controller
     
     public function completeAction()
     {
-        return $this->render('CumtsMainBundle:Membership:pay.html.twig', array('entity' => $member, 'url' => $url, 'button' => $button));
+        return $this->render('CumtsMainBundle:Membership:complete.html.twig', array());
     }
     
     public function joinAction($auth_id = null)

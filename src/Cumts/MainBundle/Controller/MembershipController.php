@@ -142,4 +142,11 @@ class MembershipController extends Controller
                 'auth_id' => $id,
         );
     }
+    
+    public function logoutAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $user->logOut();
+        return $this->redirect('/');
+    }
 }

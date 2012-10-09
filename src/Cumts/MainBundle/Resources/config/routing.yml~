@@ -8,17 +8,17 @@ CumtsMainBundle_get_involved:
     pattern:  /get-involved
     defaults: { _controller: CumtsMainBundle:GetInvolved:index }
 CumtsMainBundle_membership_ext:
-        resource: "@CumtsMainBundle/Resources/config/routing/membership.yml"
-        prefix:   /membership
+    resource: "@CumtsMainBundle/Resources/config/routing/membership.yml"
+    prefix:   /membership
 CumtsMainBundle_contact:
     pattern:  /contact
     defaults: { _controller: CumtsMainBundle:Contact:index }
 CumtsMainBundle_news_ext:
-        resource: "@CumtsMainBundle/Resources/config/routing/news.yml"
-        prefix:   /news
+     resource: "@CumtsMainBundle/Resources/config/routing/news.yml"
+     prefix:   /news
 CumtsMainBundle_events_ext:
-        resource: "@CumtsMainBundle/Resources/config/routing/event.yml"
-        prefix:   /events
+     resource: "@CumtsMainBundle/Resources/config/routing/event.yml"
+     prefix:   /events
 OrderlyPayPalIpnBundle:
-    pattern: /paypal/ipn
-    defaults: { _controller: "@CumtsMainBundle:PaypalController:ipn" }
+     pattern: /paypal/ipn
+     defaults: { _controller: @CumtsMainBundle:PaypalController:ipn }
