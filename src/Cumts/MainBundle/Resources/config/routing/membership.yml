@@ -1,0 +1,21 @@
+CumtsMainBundle_membership:
+    pattern:  /
+    defaults: { _controller: CumtsMainBundle:Membership:index }
+CumtsMainBundle_membership_raven:
+    pattern:  /raven
+    defaults: { _controller: CumtsMainBundle:Membership:raven }
+CumtsMainBundle_membership_join:
+    pattern:  /raven/join
+    defaults: { _controller: CumtsMainBundle:Membership:join }
+CumtsMainBundle_membership_pay:
+    pattern:  /raven/pay
+    defaults: { _controller: CumtsMainBundle:Membership:pay }
+CumtsMainBundle_membership_cancel:
+    pattern:  /raven/cancel
+    defaults: { _controller: CumtsMainBundle:Membership:cancel }
+CumtsMainBundle_membership_complete:
+    pattern:  /raven/complete
+    defaults: { _controller: CumtsMainBundle:Membership:complete }
+CumtsMainBundle_membership_ipn:
+    pattern:  /ipn
+    defaults: { _controller: CumtsMainBundle:Membership:ipn }

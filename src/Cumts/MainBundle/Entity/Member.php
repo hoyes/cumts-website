@@ -2,6 +2,7 @@
 
 namespace Cumts\MainBundle\Entity;
 
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\MemberRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Member
+class Member implements UserInterface
 {
     const TYPE_LIFE = 0;
     const TYPE_YEAR = 1;
@@ -358,5 +359,45 @@ class Member
     public function onPreUpdate()
     {
         $this->updated_at = new \DateTime;
+    }
+    
+    
+    public function getUsername()
+    {
+        return $this->getAuthId();
+    }
+    
+    public function getRoles()
+    {
+        switch($this->getMembershipType()) {
+            case self::TYPE_LIFE:
+            case self::TYPE_YEAR:
+            case self::TYPE_SPECIAL:
+                return array('ROLE_CURRENT');
+                break;
+            case self::TYPE_COMMITTEE:
+                return array('ROLE_COMMITTEE');
+                break;
+            default:
+                return array('ROLE_MEMBER');
+                break;
+        }
+    }
+    
+    public function getPassword()
+    {
+        return null;
+    }
+    public function getSalt()
+    {
+        return null;
+    }
+    
+    public function equals(UserInterface $user)
+    {
+        return $user->getUsername() == $this->getAuthId();
+    }
+    public function eraseCredentials()
+    {
     }
 }

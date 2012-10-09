@@ -57,3 +57,6 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+misd_raven:
+    description: "Cambridge University Musical Theatre Society"

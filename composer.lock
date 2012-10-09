@@ -1,5 +1,5 @@
 {
-    "hash": "871ca732d39c832f0b78012cc83cec2e",
+    "hash": "ff2c64b4f43c3e40e569a4291c25152a",
     "packages": [
         {
             "name": "doctrine/common",
@@ -590,6 +590,52 @@
                 "assets",
                 "compression",
                 "minification"
+            ]
+        },
+        {
+            "name": "misd/raven-bundle",
+            "version": "dev-master",
+            "target-dir": "Misd/RavenBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/misd-service-development/raven-bundle.git",
+                "reference": "7dcd2ef2a7c35d2d9bdca2f60f7e3d8fce8d2022"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/misd-service-development/raven-bundle/zipball/7dcd2ef2a7c35d2d9bdca2f60f7e3d8fce8d2022",
+                "reference": "7dcd2ef2a7c35d2d9bdca2f60f7e3d8fce8d2022",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "ext-openssl": "*",
+                "symfony/framework-bundle": ">=2.1.0",
+                "symfony/security-bundle": ">=2.1.0"
+            },
+            "time": "1349707387",
+            "type": "symfony-bundle",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Misd\\RavenBundle": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Wilkinson",
+                    "email": "chris.wilkinson@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Allows Raven authentication",
+            "homepage": "https://github.com/misd-service-development/raven-bundle",
+            "keywords": [
+                "Authentication",
+                "bundle",
+                "University of Cambridge"
             ]
         },
         {
@@ -1206,7 +1252,7 @@
 
     ],
     "minimum-stability": "dev",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "misd/raven-bundle": 20
+    }
 }
