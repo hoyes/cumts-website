@@ -1,0 +1,62 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Members{% endblock %}
+
+{% block content %}
+
+<h1>Bulk membership check</h1>
+
+<form action="{{ path('admin_members_check') }}" method="post">
+    <div>
+        <div>
+           <label for="crsids">Paste a list of CRSids or e-mail addresses</label>
+           <textarea id="crsids" name="crsids">{{data}}</textarea>
+        </div>
+    </div>
+    <p>
+        <button type="submit">Look Up</button>
+    </p>
+</form>
+
+{% if data %}
+
+<h3>Already Members</h3>
+<ul>
+{% for member in members %}
+<li>{{ member.firstname }} {{ member.lastname }} ({{member.authid}})</li>
+{% endfor %}
+</ul>
+
+
+<h3>Not Yet Members</h3>
+<ul>
+{% for person in not_members %}
+<li>{{ person.name }} ({{person.auth_id}})</li>
+{% endfor %}
+</ul>
+
+<h3>Not Elligible (according to data from lookup service)</h3>
+<ul>
+{% for person in not_elligible %}
+<li>{{ person.name }} ({{person.auth_id}})</li>
+{% endfor %}
+</ul>
+
+<h3>Unknown</h3>
+<ul>
+{% for line in not_found %}
+<li>{{line}}</li>
+{% endfor %}
+</ul>
+
+{% endif %}
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_members') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+
+{% endblock %}

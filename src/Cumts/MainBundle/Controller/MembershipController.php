@@ -5,7 +5,7 @@ namespace Cumts\MainBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cumts\MainBundle\Entity\Member;
-use Cumts\MainBundle\Form\JoinType;
+use Cumts\MainBundle\Form\Type\MemberType;
 
 //require_once __DIR__.'/../../../../vendor/Ucam_Webauth/Ucam_Webauth.php';
 
@@ -69,7 +69,7 @@ class MembershipController extends Controller
         $entity  = new Member();
                 
         if ($auth_id) {
-                $details = $this->getDetails($auth_id);
+                $details = $this->get('cambridge_ldap')->lookup($auth_id);
                 $entity->setFirstName($details['first_name']);
                 $entity->setLastName($details['last_name']);
                 $entity->setAuthId($auth_id);
@@ -78,11 +78,11 @@ class MembershipController extends Controller
                 $entity->setJoinedAt(new \DateTime);
         
                 $year = date("Y") + 3;
-                $default_leave = $year."-06-30 00:00:00";
+                $default_leave = $year."-09-30 00:00:00";
                 $entity->setLeavesAt($default_leave);
         }
         
-        $form    = $this->createForm(new JoinType(), $entity);
+        $form    = $this->createForm(new MemberType(), $entity);
         if ($this->getRequest()->getMethod() == 'POST') {
                 $form->bindRequest($request);
                 if ($form->isValid()) {
@@ -103,38 +103,6 @@ class MembershipController extends Controller
         ));
     }
     
-    private function getDetails($id) {
-        $l = \ldap_connect("ldap.lookup.cam.ac.uk");
-        $dn = "ou=people,o=University of Cambridge,dc=cam,dc=ac,dc=uk";
-        $r = \ldap_search($l, $dn, "(uid=".$id.")", array("misaffiliation", "sn", "ou", "displayname", "instid", "mail"));
-        $info = \ldap_get_entries($l, $r);
-        $is_student = array_search("student",$info[0]["misaffiliation"]) !== false;
-        $last_name = $info[0]["sn"][0];
-        $name = $info[0]["displayname"][0];
-        $first_name = trim(str_replace($last_name, "", $name));
-        $email = $info[0]["mail"][0];
-        $college = NULL;
-        if (substr_count($first_name, ".") > 0) $first_name = "";
-        
-        for ($i=0; $i < $info[0]["ou"]["count"]; $i++) {
-                $ou = $info[0]["ou"][$i];
-                if (preg_match("/^([A-Z'a-z ]+) \-/", $ou, $matches)) {
-                        $college = $matches[1];
-                        if (substr($college,-7) == "College") $college = substr($college,0,-8);
-                }
-        }
-        
-        return array(
-                'name' => $name,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
-                'is_student' => $is_student, 
-                'college' => $college,
-                'email' => $email,
-                'auth_id' => $id,
-        );
-    }
-    
     public function logoutAction()
     {
         $token = $this->get('security.context')->getToken();
@@ -142,4 +110,5 @@ class MembershipController extends Controller
 	$this->get('request')->getSession()->invalidate();
         return $this->redirect('/');
     }
+
 }

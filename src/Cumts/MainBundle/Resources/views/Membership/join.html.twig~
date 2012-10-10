@@ -25,7 +25,7 @@
 
     {{ form_rest(form) }}
     <p>
-        <button type="submit">Pay £10 with Paypal</button>
+        <button type="submit">Sign Up</button>
     </p>
 </form>
 

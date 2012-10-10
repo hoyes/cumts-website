@@ -2,6 +2,26 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
 
+services:
+    cambridge_ldap:
+        class:        Cumts\MainBundle\Service\CambridgeLdap
+        arguments:    ["ldap.lookup.cam.ac.uk", "ou=people,o=University of Cambridge,dc=cam,dc=ac,dc=uk"]
+    cumts_main.type.graduation_year:
+        class: Cumts\MainBundle\Form\Type\GraduationYearType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: graduation_year }
+    cumts_main.type.college:
+        class: Cumts\MainBundle\Form\Type\CollegeType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: college }
+    cumts_main.type.membership_type:
+        class: Cumts\MainBundle\Form\Type\MembershipTypeType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: membership_type }
+                      
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }

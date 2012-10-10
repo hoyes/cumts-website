@@ -122,6 +122,10 @@ footer {
     clear:both;
 }
 
+form {
+        width:800px;
+}
+
 form > div > div, form p {
     clear:both;
 }
@@ -135,17 +139,28 @@ form label {
     clear:left;
 }
 
-form input, form textarea, form select, .form_static_text, form > div > div > div {
+form input, form textarea, form > div > div > select, .form_static_text, form > div > div > div {
     margin:0.2em 0.5em;
     float:left;
     clear:none;
+}
+
+form ul {
+        float:right;
+        list-style:none;
+        color:red;
+        margin-left: 0.2em;
+        margin-top:0.5em;
+}
+form ul li {
+        margin-bottom:0.5em;
 }
 
 form select {
     margin:0.2em 0.5em;
 }
 
-form > div > div > div > div {
+form > div > div > div {
     margin-left:-0.2em;
 }
 

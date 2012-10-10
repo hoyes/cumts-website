@@ -6,11 +6,18 @@
 
 <h1>Member creation</h1>
 
-<form action="{{ path('admin_members_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+<form action="{{ path('admin_members_create') }}" id="new_member_form" method="post" {{ form_enctype(form) }}>
+<div>
+  {{ form_errors(form) }}
+        {{form_row(form.auth_id)}}
+
+<p><button id="lookup_button" type="button">Lookup</button></p>
+
+    {{ form_rest(form) }}
     <p>
         <button type="submit">Create</button>
     </p>
+</div>
 </form>
 
 <ul class="record_actions">
@@ -20,5 +27,45 @@
         </a>
     </li>
 </ul>
+
+{% endblock %}
+
+{% block pagescripts %}
+
+<script>
+$(function() {
+    $('#lookup_button').click(function() {
+        id = $('#cumts_mainbundle_membertype_auth_id').val();
+        $.get(Routing.generate('admin_members_ldap', { crsid: id }), function(data) {
+            if (data) {
+                if (data.exists) {
+                        alert('That person is already a member');
+                        $('#new_member_form').get(0).reset();
+                }
+                else {
+                        $('#cumts_mainbundle_membertype_first_name').val(data.first_name);
+                        $('#cumts_mainbundle_membertype_last_name').val(data.last_name);
+                        $('#cumts_mainbundle_membertype_email').val(data.email);
+                        $('#cumts_mainbundle_membertype_college').val(data.college);
+                        if (!data.is_student) {
+                                alert('Warning: the lookup service says this person is not a student')
+                        }
+                }
+            }
+            else {
+                alert('Invalid CRSid');
+                $('#new_member_form').get(0).reset();
+            }
+        });
+        return false;
+    });
+    $('#cumts_mainbundle_membertype_auth_id').keydown(function(e) {
+        if (e.keyCode == 13) {
+             $('#lookup_button').click();
+             return false;
+        };
+    });
+});
+</script>
 
 {% endblock %}

@@ -12,6 +12,7 @@
 <h2>Join CUMTS</h2>
 
 <form action="{{ path('CumtsMainBundle_membership_join', { 'id': entity.id }) }}" method="post" {{ form_enctype(form) }}>
+<div>
   {{ form_errors(form) }}
   
 <div>
@@ -27,6 +28,7 @@
     <p>
         <button type="submit">Sign Up</button>
     </p>
+</div>
 </form>
 
 {% endblock %}

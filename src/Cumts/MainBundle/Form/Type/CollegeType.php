@@ -1,26 +1,23 @@
 <?php
-
-namespace Cumts\MainBundle\Form;
+namespace Cumts\MainBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class JoinType extends AbstractType
+class CollegeType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $years = array();
-        $cur_year = date('Y');
-        for ($i=0; $i<=7; $i++) {
-                $years[$cur_year."-06-30 00:00:00"] = $cur_year;
-                $cur_year++;
-        }
-    
-        $builder
-            ->add('first_name')
-            ->add('last_name')
-            ->add('email', 'text', array('label' => 'Preferred e-mail address'))
-            ->add('college', 'choice', array('choices' => array(
+
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    { 
+        $resolver->setDefaults(array(
+            'choices' => array(
                 "Christ's" => "Christ's", 
                 "Churchill" => "Churchill", 
                 "Clare" => "Clare",
@@ -52,14 +49,17 @@ class JoinType extends AbstractType
                 "Trinity" => "Trinity",
                 "Trinity Hall" => "Trinity Hall",
                 "Wolfson" => "Wolfson",
-            )))
-            ->add('leaves_at', 'choice', array('label' => 'Expected year of graduation', 'choices' => $years))
-            ->add('auth_id', 'hidden')
-        ;
+            )
+        ));
+    }
+
+    public function getParent()
+    {
+        return 'choice';
     }
 
     public function getName()
     {
-        return 'cumts_mainbundle_jointype';
+        return 'college';
     }
 }

@@ -4,8 +4,9 @@ namespace Cumts\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
 use Cumts\MainBundle\Entity\Member;
-use Cumts\MainBundle\Form\MemberType;
+use Cumts\AdminBundle\Form\Type\MemberType;
 
 /**
  * Member controller.
@@ -21,10 +22,9 @@ class MemberController extends Controller
     {
     
         $em = $this->getDoctrine()->getEntityManager();
-        $paginator = $this->get('knp_paginator'); // (1)
+        $paginator = $this->get('knp_paginator');
         $query = $em->getRepository('CumtsMainBundle:Member')->findAllQuery($filter);
-        $entities = $paginator->paginate($query, $page, $limit); // (3)
-       var_dump($filter);
+        $entities = $paginator->paginate($query, $page, $limit);
 
         return $this->render('CumtsAdminBundle:Member:index.html.twig', array(
             'entities' => $entities, 'filter' => $filter
@@ -76,6 +76,7 @@ class MemberController extends Controller
     public function createAction()
     {
         $entity  = new Member();
+        $entity->setPaid(true);
         $request = $this->getRequest();
         $form    = $this->createForm(new MemberType(), $entity);
         $form->bindRequest($request);
@@ -85,7 +86,7 @@ class MemberController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('members_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_members_show', array('id' => $entity->getId())));
             
         }
 
@@ -186,5 +187,66 @@ class MemberController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    public function ldapAction($crsid)
+    {
+        $data = $this->get('cambridge_ldap')->lookup($crsid);
+        if ($data) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $m = $em->getRepository('CumtsMainBundle:Member')->findOneBy(array('auth_id' => $crsid));
+            $data['exists'] = !is_null($m);
+        }
+        
+        return new Response(json_encode($data),200,array('Content-Type'=>'application/json'));
+    }
+    
+        
+    public function checkAction()
+    {
+        if ($this->get('request')->getMethod() == 'POST') {
+            $data = $this->get('request')->get('crsids');
+            $lines = explode("\n",$data);
+            $crsids = array();
+                        
+            $repo = $this->getDoctrine()->getEntityManager()->getRepository('CumtsMainBundle:Member');
+            $ldap = $this->get('cambridge_ldap');
+            $members = array();
+            $not_members = array();
+            $not_elligible = array();
+            $not_found = array();
+            
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if (preg_match("/([a-z]{2,6}[0-9]{1,})(?:@cam\.ac\.uk)?/i", $line, $matches)) {
+                        $crsids[] = $matches[1];
+                }
+                else if ($line) $not_found[] = $line;
+            }
+            
+            foreach ($crsids as $crsid) {
+                $m = $repo->findOneBy(array('auth_id' => $crsid));
+                if ($m) $members[] = $m;
+                else {
+                    $m = $ldap->lookup($crsid);
+                    if ($m) {
+                        if ($m['is_student']) $not_members[] = $m;
+                        else $not_elligible[] = $m;
+                    }
+                    else $not_found[] = $crsid;
+                }
+            }
+            return $this->render('CumtsAdminBundle:Member:check.html.twig', array(
+                'data' => $data,
+                'members' => $members,
+                'not_members' => $not_members,
+                'not_elligible' => $not_elligible,
+                'not_found' => $not_found
+            ));
+
+        }
+        return $this->render('CumtsAdminBundle:Member:check.html.twig', array(
+            'data' => ''
+        ));
     }
 }
