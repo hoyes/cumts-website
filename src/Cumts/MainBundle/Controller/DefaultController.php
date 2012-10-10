@@ -12,4 +12,9 @@ class DefaultController extends Controller
     {
         return $this->render('CumtsMainBundle:Default:index.html.twig', array());
     }
+    
+    public function holdingAction()
+    {
+       return $this->render('CumtsMainBundle:Default:holding.html.twig', array());
+    }
 }
