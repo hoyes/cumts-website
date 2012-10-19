@@ -5,7 +5,7 @@ namespace Cumts\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cumts\MainBundle\Entity\News;
-use Cumts\MainBundle\Form\NewsType;
+use Cumts\AdminBundle\Form\Type\NewsType;
 
 /**
  * News controller.
@@ -73,6 +73,7 @@ class NewsController extends Controller
     public function createAction()
     {
         $entity  = new News();
+        $entity->setCreatedBy($this->get('security.context')->getToken()->getUser());
         $request = $this->getRequest();
         $form    = $this->createForm(new NewsType(), $entity);
         $form->bindRequest($request);
@@ -82,7 +83,7 @@ class NewsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('news_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_news_show', array('id' => $entity->getId())));
             
         }
 
@@ -141,7 +142,7 @@ class NewsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('news_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_news_edit', array('id' => $id)));
         }
 
         return $this->render('CumtsAdminBundle:News:edit.html.twig', array(
@@ -174,7 +175,7 @@ class NewsController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('news'));
+        return $this->redirect($this->generateUrl('admin_news'));
     }
 
     private function createDeleteForm($id)

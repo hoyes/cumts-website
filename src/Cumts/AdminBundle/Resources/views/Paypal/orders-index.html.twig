@@ -1,0 +1,143 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Paypal Transactions{% endblock %}
+
+{% block content %}
+
+<h1>Paypal Transactions</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Verifysign</th>
+            <th>Testipn</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Payerbusinessname</th>
+            <th>Payeremail</th>
+            <th>Payerid</th>
+            <th>Payerstatus</th>
+            <th>Custom</th>
+            <th>Parenttxnid</th>
+            <th>Paymentdate</th>
+            <th>Paymentstatus</th>
+            <th>Paymenttype</th>
+            <th>Pendingreason</th>
+            <th>Reasoncode</th>
+            <th>Remainingsettle</th>
+            <th>Shippingmethod</th>
+            <th>Shipping</th>
+            <th>Transactionentity</th>
+            <th>Txnid</th>
+            <th>Txntype</th>
+            <th>Exchangerate</th>
+            <th>Mccurrency</th>
+            <th>Mcfee</th>
+            <th>Paymentfee</th>
+            <th>Paymentgross</th>
+            <th>Settleamount</th>
+            <th>Settlecurrency</th>
+            <th>Recurring</th>
+            <th>Reattempt</th>
+            <th>Username</th>
+            <th>Orderstatus</th>
+            <th>Createdat</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('ipnorders_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.notifyVersion }}</td>
+            <td>{{ entity.verifySign }}</td>
+            <td>{{ entity.testIpn }}</td>
+            <td>{{ entity.protectionEligibility }}</td>
+            <td>{{ entity.charset }}</td>
+            <td>{{ entity.btnId }}</td>
+            <td>{{ entity.firstName }}</td>
+            <td>{{ entity.lastName }}</td>
+            <td>{{ entity.payerBusinessName }}</td>
+            <td>{{ entity.payerEmail }}</td>
+            <td>{{ entity.payerId }}</td>
+            <td>{{ entity.payerStatus }}</td>
+            <td>{{ entity.contactPhone }}</td>
+            <td>{{ entity.residenceCountry }}</td>
+            <td>{{ entity.business }}</td>
+            <td>{{ entity.receiverEmail }}</td>
+            <td>{{ entity.receiverId }}</td>
+            <td>{{ entity.custom }}</td>
+            <td>{{ entity.invoice }}</td>
+            <td>{{ entity.memo }}</td>
+            <td>{{ entity.tax }}</td>
+            <td>{{ entity.authId }}</td>
+            <td>{{ entity.authExp }}</td>
+            <td>{{ entity.authAmount }}</td>
+            <td>{{ entity.authStatus }}</td>
+            <td>{{ entity.numCartItems }}</td>
+            <td>{{ entity.parentTxnId }}</td>
+            <td>{{ entity.paymentDate }}</td>
+            <td>{{ entity.paymentStatus }}</td>
+            <td>{{ entity.paymentType }}</td>
+            <td>{{ entity.pendingReason }}</td>
+            <td>{{ entity.reasonCode }}</td>
+            <td>{{ entity.remainingSettle }}</td>
+            <td>{{ entity.shippingMethod }}</td>
+            <td>{{ entity.shipping }}</td>
+            <td>{{ entity.transactionEntity }}</td>
+            <td>{{ entity.txnId }}</td>
+            <td>{{ entity.txnType }}</td>
+            <td>{{ entity.exchangeRate }}</td>
+            <td>{{ entity.mcCurrency }}</td>
+            <td>{{ entity.mcFee }}</td>
+            <td>{{ entity.mcGross }}</td>
+            <td>{{ entity.mcHandling }}</td>
+            <td>{{ entity.mcShipping }}</td>
+            <td>{{ entity.paymentFee }}</td>
+            <td>{{ entity.paymentGross }}</td>
+            <td>{{ entity.settleAmount }}</td>
+            <td>{{ entity.settleCurrency }}</td>
+            <td>{{ entity.auctionBuyerId }}</td>
+            <td>{{ entity.auctionClosingDate }}</td>
+            <td>{{ entity.auctionMultiItem }}</td>
+            <td>{{ entity.forAuction }}</td>
+            <td>{{ entity.subscrDate }}</td>
+            <td>{{ entity.subscrEffective }}</td>
+            <td>{{ entity.period1 }}</td>
+            <td>{{ entity.period2 }}</td>
+            <td>{{ entity.period3 }}</td>
+            <td>{{ entity.amount1 }}</td>
+            <td>{{ entity.amount2 }}</td>
+            <td>{{ entity.amount3 }}</td>
+            <td>{{ entity.mcAmount1 }}</td>
+            <td>{{ entity.mcAmount2 }}</td>
+            <td>{{ entity.mcAmount3 }}</td>
+            <td>{{ entity.recurring }}</td>
+            <td>{{ entity.reattempt }}</td>
+            <td>{{ entity.retryAt }}</td>
+            <td>{{ entity.recurTimes }}</td>
+            <td>{{ entity.username }}</td>
+            <td>{{ entity.password }}</td>
+            <td>{{ entity.subscrId }}</td>
+            <td>{{ entity.caseId }}</td>
+            <td>{{ entity.caseType }}</td>
+            <td>{{ entity.caseCreationDate }}</td>
+            <td>{{ entity.orderStatus }}</td>
+            <td>{{ entity.discount }}</td>
+            <td>{{ entity.shippingDiscount }}</td>
+            <td>{{ entity.ipnTrackId }}</td>
+            <td>{{ entity.transactionSubject }}</td>
+            <td>{% if entity.createdAt %}{{ entity.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('ipnorders_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

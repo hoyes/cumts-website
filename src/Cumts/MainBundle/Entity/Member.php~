@@ -13,6 +13,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\MemberRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("auth_id")
+ * @UniqueEntity("email")
  */
 class Member implements UserInterface
 {
@@ -62,7 +63,7 @@ class Member implements UserInterface
     /**
      * @var string $auth_id
      *
-     * @ORM\Column(name="auth_id", type="string", length=255, unique=true)
+     * @ORM\Column(name="auth_id", type="string", length=255)
      */
     private $auth_id;
     
@@ -107,6 +108,13 @@ class Member implements UserInterface
      * @ORM\Column(name="paid", type="boolean")
      */
     private $paid;
+    
+    /**
+     * @var integer $camdram_id
+     *
+     * @ORM\Column(name="camdram_id", type="integer")
+     */
+    private $camdram_id;
 
     /**
      * Get id

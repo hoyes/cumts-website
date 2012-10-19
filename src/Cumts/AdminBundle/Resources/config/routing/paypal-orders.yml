@@ -1,0 +1,7 @@
+ipnorders:
+    pattern:  /
+    defaults: { _controller: "CumtsAdminBundle:Paypal:index" }
+
+ipnorders_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumtsAdminBundle:Paypal:show" }

@@ -72,11 +72,12 @@ class News
     private $published_at;
 
     /**
-     * @var integer $created_by_id
+     * @var Member $created_by
      *
-     * @ORM\Column(name="created_by_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Member")
+     * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id")
      */
-    private $created_by_id;
+    private $created_by;
 
 
     /**
@@ -208,26 +209,6 @@ class News
     {
         return $this->published_at;
     }
-
-    /**
-     * Set created_by_id
-     *
-     * @param integer $createdById
-     */
-    public function setCreatedById($createdById)
-    {
-        $this->created_by_id = $createdById;
-    }
-
-    /**
-     * Get created_by_id
-     *
-     * @return integer 
-     */
-    public function getCreatedById()
-    {
-        return $this->created_by_id;
-    }
     
     /** @ORM\PrePersist */
     public function onPrePersist()
@@ -261,5 +242,28 @@ class News
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set created_by
+     *
+     * @param Cumts\MainBundle\Entity\Member $createdBy
+     * @return News
+     */
+    public function setCreatedBy(\Cumts\MainBundle\Entity\Member $createdBy = null)
+    {
+        $this->created_by = $createdBy;
+    
+        return $this;
+    }
+
+    /**
+     * Get created_by
+     *
+     * @return Cumts\MainBundle\Entity\Member 
+     */
+    public function getCreatedBy()
+    {
+        return $this->created_by;
     }
 }

@@ -1,0 +1,30 @@
+shows:
+    pattern:  /
+    defaults: { _controller: "CumtsMainBundle:Show:index" }
+
+shows_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumtsMainBundle:Show:show" }
+
+shows_new:
+    pattern:  /new
+    defaults: { _controller: "CumtsMainBundle:Show:new" }
+
+shows_create:
+    pattern:  /create
+    defaults: { _controller: "CumtsMainBundle:Show:create" }
+    requirements: { _method: post }
+
+shows_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CumtsMainBundle:Show:edit" }
+
+shows_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CumtsMainBundle:Show:update" }
+    requirements: { _method: post }
+
+shows_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CumtsMainBundle:Show:delete" }
+    requirements: { _method: post }

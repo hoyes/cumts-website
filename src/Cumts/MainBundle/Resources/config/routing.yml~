@@ -1,5 +1,8 @@
-CumtsMainBundle_homepage:
+CumtsMainBundle_holding:
     pattern:  /
+    defaults: { _controller: CumtsMainBundle:Default:holding }
+CumtsMainBundle_homepage:
+    pattern:  /home
     defaults: { _controller: CumtsMainBundle:Default:index }
 CumtsMainBundle_about:
     pattern:  /about

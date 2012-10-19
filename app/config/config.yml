@@ -6,6 +6,9 @@ services:
     cambridge_ldap:
         class:        Cumts\MainBundle\Service\CambridgeLdap
         arguments:    ["ldap.lookup.cam.ac.uk", "ou=people,o=University of Cambridge,dc=cam,dc=ac,dc=uk"]
+    camdram:
+        class:        Cumts\MainBundle\Service\Camdram
+        arguments: [@doctrine.orm.entity_manager, "http://www.camdram.net/queryxml.php?socid=19", "http://www.camdram.net/showdata.php"]
     cumts_main.type.graduation_year:
         class: Cumts\MainBundle\Form\Type\GraduationYearType
         arguments: ~
@@ -65,7 +68,8 @@ doctrine:
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
-
+        mapping_types: 
+            enum:       string 
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
@@ -104,3 +108,8 @@ orderly_pay_pal_ipn:
     sandbox_email:   peter_1349650760_biz@cumts.co.uk
     sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
     sandbox_debug:   true
+    
+stfalcon_tinymce:
+    include_jquery: false
+    tinymce_jquery: true
+    textarea_class: "tinymce"

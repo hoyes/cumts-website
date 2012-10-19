@@ -2,15 +2,15 @@
 namespace Cumts\AdminBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class NewsType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('headline');
         $builder->add('summary');
-        $builder->add('body');
+        $builder->add('body', 'textarea', array('attr' => array('class' => 'tinymce')));
         $builder->add('published_at', 'date');
     }
     

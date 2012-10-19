@@ -25,3 +25,5 @@ CumtsMainBundle_events_ext:
 OrderlyPayPalIpnBundle:
      pattern: /paypal/ipn
      defaults: { _controller: CumtsMainBundle:Paypal:ipn }
+CamdramUpdate:
+        pattern: /cron/camdram

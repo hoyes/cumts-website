@@ -63,7 +63,7 @@ class Member implements UserInterface
     /**
      * @var string $auth_id
      *
-     * @ORM\Column(name="auth_id", type="string", length=255, unique=true)
+     * @ORM\Column(name="auth_id", type="string", length=255)
      */
     private $auth_id;
     
@@ -108,6 +108,13 @@ class Member implements UserInterface
      * @ORM\Column(name="paid", type="boolean")
      */
     private $paid;
+    
+    /**
+     * @var integer $camdram_id
+     *
+     * @ORM\Column(name="camdram_id", type="integer")
+     */
+    private $camdram_id;
 
     /**
      * Get id
@@ -407,5 +414,28 @@ class Member implements UserInterface
     public function getFullName()
     {
         return $this->getFirstName().' '.$this->getLastName();
+    }
+
+    /**
+     * Set camdram_id
+     *
+     * @param integer $camdramId
+     * @return Member
+     */
+    public function setCamdramId($camdramId)
+    {
+        $this->camdram_id = $camdramId;
+    
+        return $this;
+    }
+
+    /**
+     * Get camdram_id
+     *
+     * @return integer 
+     */
+    public function getCamdramId()
+    {
+        return $this->camdram_id;
     }
 }

@@ -30,7 +30,7 @@
             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.publishedat %}{{ entity.publishedat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.createdbyid }}</td>
+            <td>{{ entity.createdby.getUsername() }}</td>
             <td>
                 <ul>
                     <li>

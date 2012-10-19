@@ -5,7 +5,7 @@ namespace Cumts\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cumts\MainBundle\Entity\Event;
-use Cumts\MainBundle\Form\EventType;
+use Cumts\AdminBundle\Form\Type\EventType;
 
 /**
  * Event controller.

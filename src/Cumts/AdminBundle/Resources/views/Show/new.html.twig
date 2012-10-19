@@ -1,0 +1,23 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Shows{% endblock %}
+
+{% block content %}
+
+<h1>Show creation</h1>
+
+<form action="{{ path('admin_shows_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_shows') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
