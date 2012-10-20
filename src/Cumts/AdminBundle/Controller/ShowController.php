@@ -3,6 +3,7 @@
 namespace Cumts\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cumts\MainBundle\Entity\Show;
@@ -23,7 +24,7 @@ class ShowController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $paginator = $this->get('knp_paginator');
-        $query = $em->getRepository('CumtsMainBundle:Show')->findAll();
+        $query = $em->getRepository('CumtsMainBundle:Show')->findBy(array(), array('start_at' => 'desc'));
         $entities = $paginator->paginate($query, $page, $limit);
 
         return $this->render('CumtsAdminBundle:Show:index.html.twig', array(
@@ -81,6 +82,7 @@ class ShowController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            $this->get('camdram')->updateShow($entity);
 
             return $this->redirect($this->generateUrl('admin_shows_show', array('id' => $entity->getId())));
         }
@@ -136,6 +138,7 @@ class ShowController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            $this->get('camdram')->updateShow($entity);
 
             return $this->redirect($this->generateUrl('admin_shows_edit', array('id' => $id)));
         }
@@ -177,5 +180,17 @@ class ShowController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    public function camdramAction($id)
+    {
+        $data = $this->get('camdram')->getShowData($id);
+        if ($data) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $m = $em->getRepository('CumtsMainBundle:Show')->findOneBy(array('camdram_id' => $id));
+            $data->exists = !is_null($m);
+        }
+
+        return new Response(json_encode($data),200,array('Content-Type'=>'application/json'));
     }
 }

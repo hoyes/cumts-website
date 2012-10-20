@@ -6,6 +6,15 @@
 
 <h1>Show list</h1>
 
+
+<ul>
+    <li>
+        <a href="{{ path('admin_shows_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+
 {{ entities.render()|raw }}
 
 <table class="records_list">
@@ -52,11 +61,4 @@
 
 {{ entities.render()|raw }}
 
-<ul>
-    <li>
-        <a href="{{ path('admin_shows_new') }}">
-            Create a new entry
-        </a>
-    </li>
-</ul>
 {% endblock %}

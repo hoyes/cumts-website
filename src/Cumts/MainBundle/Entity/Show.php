@@ -4,6 +4,8 @@ namespace Cumts\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Cumts\MainBundle\Entity\Show
@@ -75,21 +77,21 @@ class Show
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string $ticket_url
      *
-     * @ORM\Column(name="ticket_url", type="string", length=255)
+     * @ORM\Column(name="ticket_url", type="string", length=255, nullable=true)
      */
     private $ticket_url;
 
     /**
      * @var integer $image
      *
-     * @ORM\Column(name="image", type="integer")
+     * @ORM\Column(name="image", type="integer", nullable=true)
      */
     private $image;
     
@@ -103,13 +105,23 @@ class Show
 
     /**
      * @ORM\OneToMany(targetEntity="Performance", mappedBy="show")
+     * @ORM\OrderBy({"start_at" = "ASC"})
      */
     private $performances;
 
     /**
      * @ORM\OneToMany(targetEntity="ShowRole", mappedBy="show")
+     * @ORM\OrderBy({"role_type" = "ASC", "sort" = "ASC"})
      */    
     private $roles;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"camdram_id", "title"})
+     */
+    private $slug;
     
 
     public function __construct()
@@ -341,7 +353,6 @@ class Show
     {
         $this->created_at = new \DateTime;
         $this->updated_at = new \DateTime;
-        $this->slug = '';
     }
     
     /** @ORM\PreUpdate */
@@ -483,5 +494,52 @@ class Show
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Show
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    protected function getRolesByType($type) {
+         $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("role_type", $type))
+            ->orderBy(array("sort" => "ASC"))
+        ;
+
+        return $this->getRoles()->matching($criteria);
+    }
+
+    public function getCast()
+    {
+        return $this->getRolesByType('cast');
+    }
+
+    public function getOrchestra()
+    {
+        return $this->getRolesByType('orchestra');
+    }
+
+    public function getProductionTeam()
+    {
+        return $this->getRolesByType('prod');
     }
 }

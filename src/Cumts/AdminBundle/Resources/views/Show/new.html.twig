@@ -6,11 +6,18 @@
 
 <h1>Show creation</h1>
 
-<form action="{{ path('admin_shows_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
+<form action="{{ path('admin_shows_create') }}" id="new_show_form" method="post" {{ form_enctype(form) }}>
+<div>
+  {{ form_errors(form) }}
+        {{form_row(form.camdram_id)}}
+
+<p><button id="lookup_button" type="button">Lookup</button></p>
+
+    {{ form_rest(form) }}
     <p>
         <button type="submit">Create</button>
     </p>
+</div>
 </form>
 
 <ul class="record_actions">
@@ -20,4 +27,54 @@
         </a>
     </li>
 </ul>
+{% endblock %}
+
+{% block pagescripts %}
+
+<script>
+$(function() {
+    $('#lookup_button').click(function() {
+        id = $('#cumts_mainbundle_showtype_camdram_id').val();
+        $.get(Routing.generate('admin_shows_lookup', { id: id }), function(data) {
+            if (data) {
+                if (data.exists) {
+                    alert('That show already exists');
+                    $('#new_show_form').get(0).reset();
+                }
+                else {
+                    $('#cumts_mainbundle_showtype_title').val(data.title)
+                    $('#cumts_mainbundle_showtype_venue').val(data.venue)
+                    $('#cumts_mainbundle_showtype_author').val(data.author)
+
+                    var start_at = new Date(data.start_at.date);
+                    $('#cumts_mainbundle_showtype_start_at_date_year').val(start_at.getFullYear());
+                    $('#cumts_mainbundle_showtype_start_at_date_month').val(start_at.getMonth()+1);
+                    $('#cumts_mainbundle_showtype_start_at_date_day').val(start_at.getDate());
+                    $('#cumts_mainbundle_showtype_start_at_time_hour').val(start_at.getHours());
+                    $('#cumts_mainbundle_showtype_start_at_time_minute').val(start_at.getMinutes());
+
+                    var end_at = new Date(data.end_at.date);
+                    $('#cumts_mainbundle_showtype_end_at_date_year').val(end_at.getFullYear());
+                    $('#cumts_mainbundle_showtype_end_at_date_month').val(end_at.getMonth()+1);
+                    $('#cumts_mainbundle_showtype_end_at_date_day').val(end_at.getDate());
+                    $('#cumts_mainbundle_showtype_end_at_time_hour').val(end_at.getHours());
+                    $('#cumts_mainbundle_showtype_end_at_time_minute').val(end_at.getMinutes());
+                }
+            }
+            else {
+                alert('Invalid show id');
+                $('#new_show_form').get(0).reset();
+            }
+        });
+        return false;
+    });
+    $('#cumts_mainbundle_showtype_camdram_id').keydown(function(e) {
+        if (e.keyCode == 13) {
+             $('#lookup_button').click();
+             return false;
+        };
+    });
+});
+</script>
+
 {% endblock %}

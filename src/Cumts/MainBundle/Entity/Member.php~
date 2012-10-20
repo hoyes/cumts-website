@@ -415,4 +415,27 @@ class Member implements UserInterface
     {
         return $this->getFirstName().' '.$this->getLastName();
     }
+
+    /**
+     * Set camdram_id
+     *
+     * @param integer $camdramId
+     * @return Member
+     */
+    public function setCamdramId($camdramId)
+    {
+        $this->camdram_id = $camdramId;
+    
+        return $this;
+    }
+
+    /**
+     * Get camdram_id
+     *
+     * @return integer 
+     */
+    public function getCamdramId()
+    {
+        return $this->camdram_id;
+    }
 }

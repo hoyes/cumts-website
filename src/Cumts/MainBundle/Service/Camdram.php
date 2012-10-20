@@ -39,7 +39,14 @@ class Camdram
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $data = curl_exec($ch);
         curl_close($ch);
-        return json_decode($data);
+        $data = json_decode($data);
+
+        //Add overall start and end date for show
+        list($earliest, $latest) = $this->getDates($data->performances);
+        $data->start_at = $earliest;
+        $data->end_at = $latest;
+
+        return $data;
     }
         
     public function addOrUpdateShow($id) {
@@ -49,7 +56,7 @@ class Camdram
     }
         
     public function updateShow($show) {
-    var_dump($show->getTitle());
+       echo ($show->getTitle()."\r\n");
         $data = $this->getShowData($show->getCamdramId());
         $show->setTitle($data->title);
         $show->setAuthor($data->author);
@@ -81,7 +88,10 @@ class Camdram
                 $show->addPerformance($p);
                 $this->em->persist($p);
             }
-        } 
+        }
+        list($earliest, $latest) = $this->getDates($data->performances);
+        $show->setStartAt($earliest);
+        $show->setEndAt($latest);
         $this->updateRoles($show, $data->cast, 'cast');
         $this->updateRoles($show, $data->prod, 'prod');
         $this->updateRoles($show, $data->orchestra, 'orchestra');
@@ -132,10 +142,9 @@ class Camdram
         $show->setTicketUrl("");
         $show->setImage(0);
         $show->setCamdramId($id);
+        $show->setStartAt($data->start_at);
+        $show->setEndAt($data->end_at);
         $this->em->persist($show);
-        
-        $earliest = null;
-        $latest = null;
         
         foreach ($data->performances as $perf) {
                 $p = new Performance;
@@ -143,12 +152,9 @@ class Camdram
                 $p->setStartAt($this->convertDate($perf->date));
                 $p->setVenue($perf->venue);
                 $show->addPerformance($p);
-                $this->em->persist($p);
-                if (!$earliest || $p->getStartAt() < $earliest) $earliest = $p->getStartAt();
-                if (!$latest || $p->getStartAt() > $latest) $latest = $p->getStartAt();
+                $this->em->persist($p);                
         }
-        $show->setStartAt($earliest);
-        $show->setEndAt($latest);
+
         $i=0;
         foreach ($data->cast as $role) {
                 $r = $this->convertRole($role);
@@ -178,6 +184,17 @@ class Camdram
         }
         
         $this->em->flush();
+    }
+
+    public function getDates($performances) {
+        $earliest = null;
+        $latest = null;
+        foreach ($performances as $p) {
+            $date = new \DateTime($p->date->value, new \DateTimeZone($p->date->timezone));
+            if (!$earliest || $date < $earliest) $earliest = $date;
+            if (!$latest || $date > $latest) $latest = $date;
+        }
+        return array($earliest, $latest);
     }
 
     private function convertRole($role_json) {

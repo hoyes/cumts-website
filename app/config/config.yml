@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: doctrine_extensions.yml }
 
 services:
     cambridge_ldap:
@@ -113,3 +114,9 @@ stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
     textarea_class: "tinymce"
+
+stof_doctrine_extensions:
+    default_locale: en_GB
+    orm:
+        default:
+            sluggable: ~

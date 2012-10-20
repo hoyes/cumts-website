@@ -17,9 +17,9 @@ class ShowType extends AbstractType
             ->add('venue')
             ->add('start_at')
             ->add('end_at')
-            ->add('description')
-            ->add('ticket_url')
-            ->add('image')
+            ->add('description', null, array('required' => false))
+            ->add('ticket_url', null, array('required' => false))
+            ->add('image', null, array('required' => false))
         ;
     }
 

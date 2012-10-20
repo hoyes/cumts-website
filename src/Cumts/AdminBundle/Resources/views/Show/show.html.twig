@@ -59,6 +59,48 @@
     </tbody>
 </table>
 
+<h2>Performances</h2>
+<ul>
+{% for p in entity.performances %}
+<li>{{ p.startat | date("r") }}</li>
+{% endfor %}
+</ul>
+
+<h2>Roles</h2>
+<h3>Cast</h3>
+<table class="record_properties">
+    <tbody>
+{% for r in entity.getCast() %}
+        <tr>
+            <th>{{ r.role }}</th>
+            <td>{{ r.name }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+<h3>Orchestra</h3>
+<table class="record_properties">
+    <tbody>
+{% for r in entity.getOrchestra() %}
+        <tr>
+            <th>{{ r.role }}</th>
+            <td>{{ r.name }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+<h3>Production Team</h3>
+<table class="record_properties">
+    <tbody>
+{% for r in entity.getProductionTeam() %}
+        <tr>
+            <th>{{ r.role }}</th>
+            <td>{{ r.name }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
 <ul class="record_actions">
     <li>
         <a href="{{ path('admin_shows') }}">

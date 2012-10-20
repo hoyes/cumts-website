@@ -3,6 +3,7 @@
 namespace Cumts\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Cumts\MainBundle\Entity\News
@@ -28,13 +29,6 @@ class News
      * @ORM\Column(name="headline", type="string", length=255)
      */
     private $headline;
-
-    /**
-     * @var string $slug
-     *
-     * @ORM\Column(name="slug", type="string", length=255)
-     */
-    private $slug;
 
     /**
      * @var text $summary
@@ -78,6 +72,14 @@ class News
      * @ORM\JoinColumn(name="created_by_id", referencedColumnName="id")
      */
     private $created_by;
+
+    /**
+     * @var string $slug
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     * @Gedmo\Slug(fields={"headline"})
+     */
+    private $slug;
 
 
     /**
