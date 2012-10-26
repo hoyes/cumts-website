@@ -1,22 +1,25 @@
-{% extends 'CumtsMainBundle::layout.html.twig' %}
+{% extends 'CumtsMainBundle::basic.html.twig' %}
 
 {% block pagename %}Membership{% endblock %}
 
 {% block content %}
 <h1>Membership</h1>
 <p>
-sadfakslf j
+Here you can sign up to become a member of the Cambridge University Musical Theatre Society. As well as being a necessity
+for participation in our shows, it also gives you reduced price or prioritised access to our workshops, theatre trips and 
+other events. Please note that membership is only open to people who are currently students in Cambridge.
 </p>
-<h2>Check Membership Status</h2>
-<p>Students at Cambridge University, <a href="">sign in with Raven</a></p>
-<p>Students at Anglia Ruskin University, please enter your @aru.cam.ac.uk e-mail address below</p>
+<p>Membership costs just £10 and lasts until you graduate.</p>
 
-<h2>
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="XCQN3ULLBR25W">
-<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-</form>
+<h2>Sign up online</h2>
+<p>Click the link below to start the online sign up process. You will first be asked to sign in using Raven so we know 
+who you are and can check whether you are already registered. After provided a few more details about yourself, you will be
+taken to Paypal to make your payment.</p>
+<p>Unfortunately, we're not able to accept online membership submissions for students at institutions other than the University
+of Cambridge. If this applies to you, please e-mail <a href="mailto:membership@cumts.co.uk">membership@cumts.co.uk</a> to 
+arrange an alternative payment method.</p>
+<p><a href="{{ path("CumtsMainBundle_membership_raven") }}">Start the membership process &gt;&gt;</a></p>
+
+<!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="#" onclick="javascript:window.open('https://www.paypal.com/uk/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img  src="{{ asset("bundles/cumtsmain/images/paypal.gif") }}" border="0" alt="Solution Graphics"></a></td></tr></table><!-- PayPal Logo -->
 
 {% endblock %}

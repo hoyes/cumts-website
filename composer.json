@@ -23,7 +23,8 @@
         "friendsofsymfony/jsrouting-bundle": "dev-master",
         "orderly/paypal-ipn-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master",
-        "stof/doctrine-extensions-bundle": "dev-master"
+        "stof/doctrine-extensions-bundle": "dev-master",
+	"imagine/Imagine": "0.3.*"
     },
     "scripts": {
         "post-install-cmd": [

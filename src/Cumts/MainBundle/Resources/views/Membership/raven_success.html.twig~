@@ -25,8 +25,12 @@
 </tr>
 <tr>
         <th>Membership Ends</th>
-        <td>{{ member.leavesat | date("jS F Y") }}</td>
+        <td>{{ member.leavesat | date("Y") }}</td>
 </tr>
 </table>
 
+<p>
+        If any of the details above are incorrect (e.g. your name, college or year of graduation), please send an e-mail to 
+        <a href="mailto:membership@cumts.co.uk">membership@cumts.co.uk</a> with the correct details.
+</p>
 {% endblock %}

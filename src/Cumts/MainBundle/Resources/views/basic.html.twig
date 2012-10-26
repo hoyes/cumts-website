@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}CUMTS - Cambridge University Musical Theatre Society - {% block pagename %}{% endblock%}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/cumtsmain/css/main.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block body %}
+<div id="wrapper">
+<header>
+<h1><img src="{{ asset("bundles/cumtsmain/images/logo.png") }}" alt="Cambridge University Musical Theatre Society" /></h1>
+</header>
+<section>
+{% block content %}{% endblock %}
+</section>
+<footer>
+Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}.
+</footer>
+</div>
+{% endblock %}
