@@ -16,7 +16,7 @@ other events. Please note that membership is only open to people who are current
 who you are and can check whether you are already registered. After provided a few more details about yourself, you will be
 taken to Paypal to make your payment.</p>
 <p>Unfortunately, we're not able to accept online membership submissions for students at institutions other than the University
-of Cambridge. If this applies to you, please e-mail <a href="mailto:membership@cumts.co.uk">membership@cumts.co.uk</a> to 
+of Cambridge at this time. If this applies to you, please e-mail <a href="mailto:membership@cumts.co.uk">membership@cumts.co.uk</a> to 
 arrange an alternative payment method.</p>
 <p><a href="{{ path("CumtsMainBundle_membership_raven") }}">Start the membership process &gt;&gt;</a></p>
 

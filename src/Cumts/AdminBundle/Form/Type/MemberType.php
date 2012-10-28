@@ -10,7 +10,7 @@ class MemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {   
         $builder
-            ->add('auth_id', 'text', array('label' => 'CRSid'))
+            ->add('auth_id', 'text', array('label' => 'CRSid', 'required' => false))
             ->add('first_name')
             ->add('last_name')
             ->add('email', 'text', array('label' => 'Preferred e-mail'))
@@ -18,6 +18,7 @@ class MemberType extends AbstractType
             ->add('college', 'college')
             ->add('joined_at', 'date', array('data' => new \DateTime, 'label' => 'Joined on'))
             ->add('leaves_at', 'graduation_year', array('label' => 'Year of Graduation'))
+            ->add('paid')
         ;
     }
 

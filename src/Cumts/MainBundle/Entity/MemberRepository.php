@@ -16,10 +16,15 @@ class MemberRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder("m")
             ->orderBy("m.last_name", "ASC")
-            ->addOrderBy("m.first_name", "ASC")
-            ->where("m.paid = true");
+            ->addOrderBy("m.first_name", "ASC");
         if (is_numeric($type)) {
-            $query->andWhere("m.membership_type = $type");
+            if ($type == Member::UNPAID) {
+                $query->where("m.paid = false");
+            }
+            else {
+                $query->where("m.membership_type = $type")
+                    ->andWhere("m.paid = true");
+            }
         }
         
         return $query->getQuery();
