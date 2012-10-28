@@ -51,7 +51,7 @@ class MembershipController extends Controller
     
     public function cancelAction()
     {
-        $this->redirect($this->generateUrl("CumtsMainBundle_homepage"));
+       return $this->redirect($this->generateUrl("CumtsMainBundle_membership"));
     }
     
     public function completeAction()
@@ -59,7 +59,10 @@ class MembershipController extends Controller
 	$auth_id = $this->get('security.context')->getToken()->getUser()->getUsername();
         $em = $this->getDoctrine()->getEntityManager();
         $member = $em->getRepository('CumtsMainBundle:Member')->findOneBy(array('auth_id' => $auth_id));
-        return $this->render('CumtsMainBundle:Membership:complete.html.twig', array('auth_id' => $auth_id, 'member' => $member));
+	if ($member && $auth_id) {
+	        return $this->render('CumtsMainBundle:Membership:complete.html.twig', array('auth_id' => $auth_id, 'member' => $member));
+	}
+        else return $this->redirect($this->generateUrl("CumtsMainBundle_membership"));
     }
     
     public function joinAction()
@@ -76,10 +79,8 @@ class MembershipController extends Controller
                 $entity->setCollege($details['college']);
                 $entity->setEmail($details['email']);
                 $entity->setJoinedAt(new \DateTime);
-        
-                $year = date("Y") + 3;
-                $default_leave = $year."-09-30 00:00:00";
-                $entity->setLeavesAt($default_leave);
+       		
+		$entity->setLeavesAt(date('Y') + 3);
         }
         
         $form    = $this->createForm(new MemberType(), $entity);
@@ -88,7 +89,6 @@ class MembershipController extends Controller
                 if ($form->isValid()) {
                     $entity->setJoinedAt(new \DateTime);
                     $entity->setPaid(false);
-                    $entity->setLeavesAt(new \DateTime($entity->getLeavesAt()));
                     $entity->setMembershipType(Member::TYPE_CURRENT);
                     $em = $this->getDoctrine()->getEntityManager();
                     $em->persist($entity);

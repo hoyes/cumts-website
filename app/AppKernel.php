@@ -27,7 +27,7 @@ class AppKernel extends Kernel
             new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Hoyes\ImageManagerBundle\HoyesImageManagerBundle(),
+//            new Hoyes\ImageManagerBundle\HoyesImageManagerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

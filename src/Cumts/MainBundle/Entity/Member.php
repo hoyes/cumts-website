@@ -112,7 +112,7 @@ class Member implements UserInterface
     /**
      * @var integer $camdram_id
      *
-     * @ORM\Column(name="camdram_id", type="integer")
+     * @ORM\Column(name="camdram_id", type="integer", nullable=true)
      */
     private $camdram_id;
 

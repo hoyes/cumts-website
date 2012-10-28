@@ -31,11 +31,11 @@ class NewsController extends Controller
      * Finds and displays a News entity.
      *
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('CumtsMainBundle:News')->find($id);
+        $entity = $em->getRepository('CumtsMainBundle:News')->findOneBySlug($slug);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find News entity.');

@@ -98,7 +98,7 @@ fos_js_routing:
 orderly_pay_pal_ipn:
 
     # If set to false then service loads settings with "sandbox_" prefix
-    islive:  false
+    islive:  true
 
     # Constants for the live environment (default settings in Configuration.php)
     email:   paypal@cumts.co.uk

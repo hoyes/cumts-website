@@ -10,7 +10,10 @@ class GraduationYearTransformer implements DataTransformerInterface
 {
 
     public function transform($value) {
-        if ($value) return $value->format('Y');
+        if ($value) {
+		if (is_numeric($value)) return $value;
+		else return $value->format('Y');
+	}
         else return NULL;
     }
     

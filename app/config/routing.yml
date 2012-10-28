@@ -1,6 +1,6 @@
-hoyes_image_manager:
-    resource: "@HoyesImageManagerBundle/Resources/config/routing.yml"
-    prefix:   /
+#ihoyes_image_manager:
+#    resource: "@HoyesImageManagerBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 CumtsAdminBundle:
     resource: "@CumtsAdminBundle/Resources/config/routing.yml"
