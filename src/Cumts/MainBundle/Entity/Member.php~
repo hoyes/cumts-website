@@ -22,6 +22,8 @@ class Member implements UserInterface
     const TYPE_ASSOCIATE = 2;
     const TYPE_SPECIAL = 3;
     const TYPE_COMMITTEE = 4;
+    
+    const TYPE_UNPAID = -10;
 
     /**
      * @var integer $id
