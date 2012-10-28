@@ -40,7 +40,7 @@ class PaypalController extends Controller
                 
                 //preparing message
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('Cambridge Musical Theatre Society membership confirmation')
+                    ->setSubject('Cambridge University Musical Theatre Society membership confirmation')
                     ->setFrom('membership@cumts.co.uk', 'Cambridge University Musical Theatre Society')
                     ->setTo($member->getEmail(), $member->getFullName())
                     ->setBcc('membership@cumts.co.uk', 'Cambridge University Musical Theatre Society')
@@ -55,7 +55,7 @@ class PaypalController extends Controller
             }
             else if ($this->paypal_ipn->getOrderStatus() == Ipn::REJECTED) {
                 $message = \Swift_Message::newInstance()
-                    ->setSubject('Cambridge Musical Theatre Society - payment failed')
+                    ->setSubject('Cambridge University Musical Theatre Society - payment failed')
                     ->setFrom('membership@cumts.co.uk', 'Cambridge University Musical Theatre Society')
                     ->setTo($order->getPayerEmail(), $order->getFirstName().' '.$order->getLastName())
                     ->setCc('membership@cumts.co.uk', 'Cambridge University Musical Theatre Society')

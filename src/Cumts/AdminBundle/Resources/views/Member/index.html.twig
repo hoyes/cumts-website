@@ -43,6 +43,7 @@
             <th>{{ entities.sortable('Last Name', 'm.last_name')|raw }}</th>
             <th>Email</th>
             <th>Membership Type</th>
+            <th>College</th>
             <th>{{ entities.sortable('Joined', 'm.joined_at')|raw }}</th>
             <th>{{ entities.sortable('Graduates', 'm.leaves_at')|raw }}</th>
             <th>Actions</th>
@@ -56,8 +57,9 @@
             <td>{{ entity.lastname }}</td>
             <td>{{ entity.email }}</td>
             <td>{{ entity.getMembershipTypeString() }}</td>
-            <td>{% if entity.joinedat %}{{ entity.joinedat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.leavesat %}{{ entity.leavesat|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.college }}</td>
+            <td>{% if entity.joinedat %}{{ entity.joinedat|date('d/m/Y') }}{% endif %}</td>
+            <td>{% if entity.leavesat %}{{ entity.leavesat|date('d/m/Y') }}{% endif %}</td>
             <td>
                 <ul>
                     <li>
