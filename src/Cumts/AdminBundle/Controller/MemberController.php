@@ -109,7 +109,6 @@ class MemberController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
-
         $editForm = $this->createForm(new MemberType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 

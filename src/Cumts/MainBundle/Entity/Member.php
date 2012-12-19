@@ -118,6 +118,11 @@ class Member implements UserInterface
      */
     private $camdram_id;
 
+    public function __construct()
+    {
+        $this->joined_at = new \DateTime;
+    }
+
     /**
      * Get id
      *

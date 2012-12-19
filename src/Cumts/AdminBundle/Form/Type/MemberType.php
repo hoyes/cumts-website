@@ -16,7 +16,7 @@ class MemberType extends AbstractType
             ->add('email', 'text', array('label' => 'Preferred e-mail'))
             ->add('membership_type', 'membership_type')
             ->add('college', 'college')
-            ->add('joined_at', 'date', array('data' => new \DateTime, 'label' => 'Joined on'))
+            ->add('joined_at', 'date', array('label' => 'Joined on', 'format' => 'd MMM y'))
             ->add('leaves_at', 'graduation_year', array('label' => 'Year of Graduation'))
             ->add('paid')
         ;
