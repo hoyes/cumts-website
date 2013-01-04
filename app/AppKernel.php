@@ -19,6 +19,11 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+            new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
+            new Sonata\BlockBundle\SonataBlockBundle(),
+            new Symfony\Cmf\Bundle\BlockBundle\SymfonyCmfBlockBundle(),
+
             new Cumts\MainBundle\CumtsMainBundle(),
             new Cumts\AdminBundle\CumtsAdminBundle(),
             new Misd\RavenBundle\MisdRavenBundle(),
@@ -27,7 +32,10 @@ class AppKernel extends Kernel
             new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-//            new Hoyes\ImageManagerBundle\HoyesImageManagerBundle(),
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
+            new Hoyes\ImageManagerBundle\HoyesImageManagerBundle(),
+
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

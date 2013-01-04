@@ -138,7 +138,8 @@ class Camdram
         $show->setTitle($data->title);
         $show->setAuthor($data->author);
         $show->setVenue($data->venue);
-        $show->setDescription("");
+        $show->setSummary("");
+        $show->setBody("");
         $show->setTicketUrl("");
         $show->setImage(0);
         $show->setCamdramId($id);

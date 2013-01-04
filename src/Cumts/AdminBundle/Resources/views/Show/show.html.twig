@@ -42,19 +42,19 @@
         </tr>
         <tr>
             <th>Description</th>
-            <td>{{ entity.description }}</td>
+            <td>{{ entity.body }}</td>
         </tr>
         <tr>
             <th>Ticket_url</th>
             <td>{{ entity.ticketurl }}</td>
         </tr>
         <tr>
-            <th>Image</th>
-            <td>{{ entity.image }}</td>
-        </tr>
-        <tr>
             <th>Camdram_id</th>
             <td>{{ entity.camdramid }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{% if entity.image %}{{ render_image(entity.image, 250, 200) }}{% endif %}</td>
         </tr>
     </tbody>
 </table>

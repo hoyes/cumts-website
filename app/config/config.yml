@@ -2,29 +2,10 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine_extensions.yml }
+    - { resource: @HoyesImageManagerBundle/Resources/config/config.yml }
 
 services:
-    cambridge_ldap:
-        class:        Cumts\MainBundle\Service\CambridgeLdap
-        arguments:    ["ldap.lookup.cam.ac.uk", "ou=people,o=University of Cambridge,dc=cam,dc=ac,dc=uk"]
-    camdram:
-        class:        Cumts\MainBundle\Service\Camdram
-        arguments: [@doctrine.orm.entity_manager, "http://www.camdram.net/queryxml.php?socid=19", "http://www.camdram.net/showdata.php"]
-    cumts_main.type.graduation_year:
-        class: Cumts\MainBundle\Form\Type\GraduationYearType
-        arguments: ~
-        tags:
-            - { name: form.type, alias: graduation_year }
-    cumts_main.type.college:
-        class: Cumts\MainBundle\Form\Type\CollegeType
-        arguments: ~
-        tags:
-            - { name: form.type, alias: college }
-    cumts_main.type.membership_type:
-        class: Cumts\MainBundle\Form\Type\MembershipTypeType
-        arguments: ~
-        tags:
-            - { name: form.type, alias: membership_type }
+
                       
 framework:
     #esi:             ~
@@ -85,16 +66,16 @@ swiftmailer:
 
 misd_raven:
     description: "Cambridge University Musical Theatre Society"
-    
+
 knp_paginator:
     page_range: 19                      # default page range used in pagination control
     template:
         pagination: CumtsAdminBundle::paginator.html.twig
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
-        
+
 fos_js_routing:
     routes_to_expose: [ 'admin_.*' ]
-    
+
 orderly_pay_pal_ipn:
 
     # If set to false then service loads settings with "sandbox_" prefix
@@ -109,7 +90,7 @@ orderly_pay_pal_ipn:
     sandbox_email:   peter_1349650760_biz@cumts.co.uk
     sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
     sandbox_debug:   true
-    
+
 stfalcon_tinymce:
     include_jquery: false
     tinymce_jquery: true
@@ -120,3 +101,24 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: ~
+
+ewz_recaptcha:
+    public_key:   6LeHDNsSAAAAAF2IhVjKAXrtP6ozdIMc5UqSK-yk
+    private_key:  6LeHDNsSAAAAAB-1_rJDP_YYO8wsFCbcXZsX0QJA
+    secure:       false
+    locale_key:   kernel.default_locale
+
+doctrine_phpcr:
+    session:
+        backend:
+            type: doctrinedbal
+            connection: doctrine.dbal.default_connection
+        workspace: default
+        username: admin
+        password: admin
+    odm:
+        auto_mapping: true
+        auto_generate_proxy_classes: %kernel.debug%
+
+sonata_block:
+    default_contexts: [cms]

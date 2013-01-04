@@ -6,6 +6,7 @@
 
 <h1>News</h1>
 
+
 <table class="record_properties">
     <tbody>
         <tr>
@@ -26,7 +27,11 @@
         </tr>
         <tr>
             <th>Body</th>
-            <td>{{ entity.body }}</td>
+            <td>{{ entity.body | raw }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{{ render_image(entity.image, 300, 200) }}</td>
         </tr>
         <tr>
             <th>Created_at</th>
@@ -39,10 +44,6 @@
         <tr>
             <th>Published_at</th>
             <td>{{ entity.publishedat|date('Y-m-d H:i:s') }}</td>
-        </tr>
-        <tr>
-            <th>Created_by_id</th>
-            <td>{{ entity.createdbyid }}</td>
         </tr>
     </tbody>
 </table>

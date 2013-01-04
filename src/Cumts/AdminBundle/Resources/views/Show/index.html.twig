@@ -27,8 +27,6 @@
             <th>Updated_at</th>
             <th>Start_at</th>
             <th>End_at</th>
-            <th>Image</th>
-            <th>Camdram_id</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -42,8 +40,6 @@
             <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.startat %}{{ entity.startat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.endat %}{{ entity.endat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.image }}</td>
-            <td>{{ entity.camdramid }}</td>
             <td>
                 <ul>
                     <li>

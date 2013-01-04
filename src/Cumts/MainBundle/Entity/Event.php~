@@ -8,9 +8,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Cumts\MainBundle\Entity\Event
  *
- * @ORM\Table()
+ * @ORM\Table(name="events")
  * @ORM\Entity(repositoryClass="Cumts\MainBundle\Entity\EventRepository")
  * @ORM\HasLifecycleCallbacks
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="event_type", type="string")
+ * @ORM\DiscriminatorMap({"show" = "Show", "bar_night" = "BarNight", "workshop" = "Workshop", "visit" = "Visit", "other" = "Event"})
  */
 class Event
 {
@@ -21,14 +24,14 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
+    protected $title;
 
     /**
      * @var string $slug
@@ -36,48 +39,60 @@ class Event
      * @ORM\Column(name="slug", type="string", length=255)
      * @Gedmo\Slug(fields={"title"})
      */
-    private $slug;
+    protected $slug;
 
     /**
      * @var datetime $start_at
      *
      * @ORM\Column(name="start_at", type="datetime")
      */
-    private $start_at;
+    protected $start_at;
 
     /**
      * @var datetime $end_at
      *
      * @ORM\Column(name="end_at", type="datetime")
      */
-    private $end_at;
+    protected $end_at;
 
     /**
      * @var text $summary
      *
      * @ORM\Column(name="summary", type="text")
      */
-    private $summary;
+    protected $summary = "";
 
     /**
      * @var text $body
      *
      * @ORM\Column(name="body", type="text")
      */
-    private $body;
+    protected $body = "";
 
     /**
-     * @var smallint $event_type
+     * @var integer $image
      *
-     * @ORM\Column(name="event_type", type="smallint")
+     * @ORM\Column(name="image", type="integer", nullable=true)
      */
-    private $event_type;
+    protected $image;
 
+    /**
+     * @var \DateTime $created_at
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $created_at;
 
-    const TYPE_SHOW = 0;
-    const TYPE_BAR_NIGHT = 1;
-    const TYPE_VISIT = 2;
-    const TYPE_WORKSHOP = 3;
+    /**
+     * @var \DateTime $updated_at
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updated_at;
+
+    protected $event_type = 'other';
+
+    protected $event_string = 'Event';
 
     /**
      * Get id
@@ -87,26 +102,6 @@ class Event
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string 
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -202,11 +197,16 @@ class Event
     /**
      * Get event_type
      *
-     * @return smallint 
+     * @return string
      */
     public function getEventType()
     {
         return $this->event_type;
+    }
+
+    public function getEventString()
+    {
+        return $this->event_string;
     }
     
    /** @ORM\PrePersist */
@@ -241,5 +241,97 @@ class Event
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Event
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set image
+     *
+     * @param integer $image
+     * @return Event
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return integer 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set created_at
+     *
+     * @param \DateTime $createdAt
+     * @return Event
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get created_at
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set updated_at
+     *
+     * @param \DateTime $updatedAt
+     * @return Event
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updated_at = $updatedAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated_at
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updated_at;
     }
 }

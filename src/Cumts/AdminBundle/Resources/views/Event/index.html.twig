@@ -9,7 +9,6 @@
 <table class="records_list">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
             <th>Start_at</th>
             <th>End_at</th>
@@ -22,13 +21,12 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('admin_events_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.title }}</td>
+            <td><a href="{{ path('admin_events_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
             <td>{% if entity.startat %}{{ entity.startat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{% if entity.endat %}{{ entity.endat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>{{ entity.summary }}</td>
             <td>{{ entity.body }}</td>
-            <td>{{ entity.eventtype }}</td>
+            <td>{{ entity.eventType }}</td>
             <td>
                 <ul>
                     <li>
@@ -45,11 +43,10 @@
 </table>
 
 <ul>
-    <li>
-        <a href="{{ path('admin_events_new') }}">
-            Create a new entry
-        </a>
-    </li>
+    <li><a href="{{ path('admin_events_new', {type: 'workshop'}) }}">Create new workshop</a></li>
+    <li><a href="{{ path('admin_events_new', {type: 'visit'}) }}">Create new visit</a></li>
+    <li><a href="{{ path('admin_events_new', {type: 'bar_night'}) }}">Create new bar night</a></li>
+    <li><a href="{{ path('admin_events_new', {type: 'other'}) }}">Create new event</a></li>
 </ul>
 
 {% endblock %}

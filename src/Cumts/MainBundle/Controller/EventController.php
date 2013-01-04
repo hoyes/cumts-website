@@ -18,9 +18,9 @@ class EventController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CumtsMainBundle:Event')->findAll();
+        $entities = $em->getRepository('CumtsMainBundle:Event')->findUpcoming();
 
         return $this->render('CumtsMainBundle:Event:index.html.twig', array(
             'entities' => $entities
@@ -31,11 +31,11 @@ class EventController extends Controller
      * Finds and displays a Event entity.
      *
      */
-    public function showAction($id)
+    public function showAction($slug)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CumtsMainBundle:Event')->find($id);
+        $entity = $em->getRepository('CumtsMainBundle:Event')->findOneBySlug($slug);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Event entity.');

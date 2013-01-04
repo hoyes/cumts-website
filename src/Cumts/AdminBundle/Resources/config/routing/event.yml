@@ -7,11 +7,11 @@ admin_events_show:
     defaults: { _controller: "CumtsAdminBundle:Event:show" }
 
 admin_events_new:
-    pattern:  /new
+    pattern:  /new/{type}
     defaults: { _controller: "CumtsAdminBundle:Event:new" }
 
 admin_events_create:
-    pattern:  /create
+    pattern:  /create/{type}
     defaults: { _controller: "CumtsAdminBundle:Event:create" }
     requirements: { _method: post }
 

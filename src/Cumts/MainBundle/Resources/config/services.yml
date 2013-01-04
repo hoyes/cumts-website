@@ -2,6 +2,30 @@ parameters:
 #    cumts_main.example.class: Cumts\MainBundle\Example
 
 services:
-#    cumts_main.example:
-#        class: %cumts_main.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    cambridge_ldap:
+        class:        Cumts\MainBundle\Service\CambridgeLdap
+        arguments:    ["ldap.lookup.cam.ac.uk", "ou=people,o=University of Cambridge,dc=cam,dc=ac,dc=uk"]
+    camdram:
+        class:        Cumts\MainBundle\Service\Camdram
+        arguments: [@doctrine.orm.entity_manager, "http://www.camdram.net/queryxml.php?socid=19", "http://www.camdram.net/showdata.php"]
+    cumts_main.type.graduation_year:
+        class: Cumts\MainBundle\Form\Type\GraduationYearType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: graduation_year }
+    cumts_main.type.college:
+        class: Cumts\MainBundle\Form\Type\CollegeType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: college }
+    cumts_main.type.membership_type:
+        class: Cumts\MainBundle\Form\Type\MembershipTypeType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: membership_type }
+
+    cumts_main.type.event_type:
+        class: Cumts\MainBundle\Form\Type\EventTypeType
+        arguments: ~
+        tags:
+            - { name: form.type, alias: event_type }

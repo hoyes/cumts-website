@@ -6,10 +6,11 @@ parameters:
     database_user:     cumts
     database_password: holeWamye
 
-    mailer_transport:  smtp
+    mailer_transport:  mail
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
 
+    contact_form_email: pahoyes@gmail.com
     locale:            en
     secret:            25b60185c3dbc6198ecd1ca196274b66

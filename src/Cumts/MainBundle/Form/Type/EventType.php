@@ -16,7 +16,6 @@ class EventType extends AbstractType
             ->add('end_at')
             ->add('summary')
             ->add('body')
-            ->add('event_type')
         ;
     }
 

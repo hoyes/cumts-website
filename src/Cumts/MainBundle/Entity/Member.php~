@@ -23,7 +23,7 @@ class Member implements UserInterface
     const TYPE_SPECIAL = 3;
     const TYPE_COMMITTEE = 4;
     
-    const TYPE_UNPAID = -10;
+    const UNPAID = -10;
 
     /**
      * @var integer $id
@@ -114,9 +114,14 @@ class Member implements UserInterface
     /**
      * @var integer $camdram_id
      *
-     * @ORM\Column(name="camdram_id", type="integer")
+     * @ORM\Column(name="camdram_id", type="integer", nullable=true)
      */
     private $camdram_id;
+
+    public function __construct()
+    {
+        $this->joined_at = new \DateTime;
+    }
 
     /**
      * Get id

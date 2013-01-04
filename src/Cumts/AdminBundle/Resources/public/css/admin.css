@@ -52,3 +52,14 @@ textarea#cumts_mainbundle_newstype_summary {
         float:right;
         margin-left:1em;
 }
+
+#image_upload_preview {
+    margin:0.8em 0;
+
+}
+.uploadify-queue {
+    float:right;
+}
+.uploadify {
+    margin:0.2em 1em;
+}

@@ -16,6 +16,10 @@ CumtsMainBundle_membership_ext:
 CumtsMainBundle_contact:
     pattern:  /contact
     defaults: { _controller: CumtsMainBundle:Contact:index }
+CumtsMainBundle_contact_post:
+    pattern:  /contact/send
+    defaults: { _controller: CumtsMainBundle:Contact:contact }
+    requirements: { _method: POST }
 CumtsMainBundle_news_ext:
      resource: "@CumtsMainBundle/Resources/config/routing/news.yml"
      prefix:   /news

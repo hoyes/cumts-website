@@ -5,6 +5,9 @@ namespace Cumts\AdminBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Cumts\MainBundle\Entity\Event;
+use Cumts\MainBundle\Entity\Workshop;
+use Cumts\MainBundle\Entity\Visit;
+use Cumts\MainBundle\Entity\BarNight;
 use Cumts\AdminBundle\Form\Type\EventType;
 
 /**
@@ -17,11 +20,13 @@ class EventController extends Controller
      * Lists all Event entities.
      *
      */
-    public function indexAction()
+    public function indexAction($page = 1, $limit = 25)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CumtsMainBundle:Event')->findAll();
+        $paginator = $this->get('knp_paginator');
+        $query = $em->getRepository('CumtsMainBundle:Event')->findAllNonShows($page, $limit);
+        $entities = $paginator->paginate($query, $page, $limit);
 
         return $this->render('CumtsAdminBundle:Event:index.html.twig', array(
             'entities' => $entities
@@ -55,14 +60,14 @@ class EventController extends Controller
      * Displays a form to create a new Event entity.
      *
      */
-    public function newAction()
+    public function newAction($type)
     {
-        $entity = new Event();
+        $entity  = $this->createEvent($type);
         $form   = $this->createForm(new EventType(), $entity);
 
         return $this->render('CumtsAdminBundle:Event:new.html.twig', array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form'   => $form->createView(),
         ));
     }
 
@@ -70,12 +75,11 @@ class EventController extends Controller
      * Creates a new Event entity.
      *
      */
-    public function createAction()
+    public function createAction($type)
     {
-        $entity  = new Event();
-        $request = $this->getRequest();
+        $entity  = $this->createEvent($type);
         $form    = $this->createForm(new EventType(), $entity);
-        $form->bindRequest($request);
+        $form->bindRequest($this->getRequest());
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
@@ -183,5 +187,19 @@ class EventController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    private function createEvent($type)
+    {
+        switch ($type) {
+            case 'bar_night':
+                return new BarNight();
+            case 'workshop':
+                return new Workshop();
+            case 'visit':
+                return new Visit();
+            default:
+                return new Event();
+        }
     }
 }

@@ -2,7 +2,9 @@
 /app/bootstrap*
 /app/cache/*
 /app/logs/*
+/app/data/*
 /vendor/
 /app/config/parameters.ini
 *~
 /nbproject/private
+.idea

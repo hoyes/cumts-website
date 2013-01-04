@@ -10,6 +10,7 @@ class NewsType extends AbstractType
     {
         $builder->add('headline');
         $builder->add('summary');
+        $builder->add('image', 'image_upload');
         $builder->add('body', 'textarea', array('attr' => array('class' => 'tinymce')));
         $builder->add('published_at', 'date');
     }

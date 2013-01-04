@@ -4,6 +4,7 @@ namespace Cumts\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Hoyes\ImageManagerBundle\Entity\Image;
 
 /**
  * Cumts\MainBundle\Entity\News
@@ -43,6 +44,12 @@ class News
      * @ORM\Column(name="body", type="text")
      */
     private $body;
+
+    /**
+     * @var Image $image;
+     * @ORM\ManyToOne(targetEntity="Hoyes\ImageManagerBundle\Entity\Image")
+     */
+    private $image;
 
     /**
      * @var datetime $created_at
@@ -267,5 +274,28 @@ class News
     public function getCreatedBy()
     {
         return $this->created_by;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Hoyes\ImageManagerBundle\Entity\Image $image
+     * @return News
+     */
+    public function setImage(\Hoyes\ImageManagerBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Hoyes\ImageManagerBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

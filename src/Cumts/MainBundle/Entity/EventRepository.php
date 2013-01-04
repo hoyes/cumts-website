@@ -21,4 +21,24 @@ class EventRepository extends EntityRepository
             ->getQuery();
         return $query->getResult();
     }
+
+    public function findAllNonShows($page, $limit)
+    {
+        $query = $this->createQueryBuilder("e")
+            ->where('e NOT INSTANCE OF (CumtsMainBundle:Show)')
+            ->orderBy("e.start_at", "DESC")
+            ->setMaxResults($limit)
+            ->setFirstResult(($page-1)*$limit)
+            ->getQuery();
+        return $query->getResult();
+    }
+
+    public function findUpcoming()
+    {
+        $query = $this->createQueryBuilder("e")
+            ->where('e.end_at > CURRENT_DATE()')
+            ->orderBy("e.start_at", "ASC")
+            ->getQuery();
+        return $query->getResult();
+    }
 }

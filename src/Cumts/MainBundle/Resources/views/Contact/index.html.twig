@@ -10,17 +10,20 @@ For enquires about this website, please contact <a href="mailto:webmaster@cumts.
 <p>
 Mail can be sent to:
 </p>
-<p>
-Cambridge University Musical Theatre Society<br />
-ADC Theatre<br />
-Park Street<br />
-Cambridge<br />
-CB5 8AS
+<p class="vcard">
+    <span class="org">Cambridge University Musical Theatre Society</span><br/>
+    <span class="adr">
+        <span class="street-address">ADC Theatre<br/>
+        Park Street</span><br />
+        <span class="locality">Cambridge</span><br/>
+        <span class="postal-code">CB5 8AS</span>
+    </span>
 </p>
 <h2>Contact Form</h2>
-<form method="post" action="CumtsMainBundle_contact">
-<div>
-
-</div>
+<form method="post" action="{{ path('CumtsMainBundle_contact_post') }}">
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Send</button>
+    </p>
 </form>
 {% endblock %}

@@ -67,7 +67,7 @@ class ShowRole
     /**
      * @var Show $show
      *
-     * @ORM\ManyToOne(targetEntity="Show")
+     * @ORM\ManyToOne(targetEntity="Show", inversedBy="roles")
      * @ORM\JoinColumn(name="show_id", referencedColumnName="id")
      */
     private $show;

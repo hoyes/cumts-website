@@ -59,7 +59,7 @@ class ShowController extends Controller
      */
     public function newAction()
     {
-        $entity = new Show();
+        $entity = new \Cumts\MainBundle\Entity\Show();
         $form   = $this->createForm(new ShowType(), $entity);
 
         return $this->render('CumtsAdminBundle:Show:new.html.twig', array(
@@ -140,7 +140,7 @@ class ShowController extends Controller
             $em->flush();
             $this->get('camdram')->updateShow($entity);
 
-            return $this->redirect($this->generateUrl('admin_shows_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_shows_show', array('id' => $id)));
         }
 
         return $this->render('CumtsAdminBundle:Show:edit.html.twig', array(
@@ -171,7 +171,7 @@ class ShowController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('shows'));
+        return $this->redirect($this->generateUrl('admin_shows'));
     }
 
     private function createDeleteForm($id)

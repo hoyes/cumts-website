@@ -6,7 +6,9 @@
 
 <h1>Event creation</h1>
 
-<form action="{{ path('admin_events_create') }}" method="post" {{ form_enctype(form) }}>
+<h3>Create new {{ form.vars.data.eventType }}</h3>
+
+<form action="{{ path('admin_events_create', {type: form.vars.data.eventType}) }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
         <button type="submit">Create</button>

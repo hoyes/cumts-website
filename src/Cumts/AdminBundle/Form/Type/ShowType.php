@@ -11,15 +11,18 @@ class ShowType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('camdram_id')
             ->add('title')
             ->add('author')
             ->add('venue')
+            ->add('ticket_url')
+            ->add('camdram_id')
             ->add('start_at')
             ->add('end_at')
-            ->add('description', null, array('required' => false))
-            ->add('ticket_url', null, array('required' => false))
-            ->add('image', null, array('required' => false))
+            ->add('image', 'image_upload')
+            ->add('summary', 'textarea', array('attr' => array('class' => 'tinymce')))
+            ->add('body', 'textarea', array('attr' => array('class' => 'tinymce')))
+            ->add('created_at')
+            ->add('updated_at')
         ;
     }
 

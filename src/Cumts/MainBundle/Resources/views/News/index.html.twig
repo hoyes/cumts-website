@@ -4,45 +4,22 @@
 
 {% block content %}
 
-<h1>News list</h1>
+<h1>News</h1>
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Headline</th>
-            <th>Slug</th>
-            <th>Summary</th>
-            <th>Body</th>
-            <th>Created_at</th>
-            <th>Updated_at</th>
-            <th>Published_at</th>
-            <th>Created_by_id</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.headline }}</td>
-            <td>{{ entity.slug }}</td>
-            <td>{{ entity.summary }}</td>
-            <td>{{ entity.body }}</td>
-            <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.updatedat %}{{ entity.updatedat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{% if entity.publishedat %}{{ entity.publishedat|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.createdbyid }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">show</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+{% for entity in entities %}
+<div class="news-item">
+    <h2><a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">{{ entity.headline }}</a></h2>
+    <td>{% if entity.publishedat %}{{ entity.publishedat|date('Y-m-d H:i:s') }}{% endif %}</td>
+
+
+    {{ entity.summary | raw }}
+
+
+
+    <p>
+        <a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">Read More</a>
+    </p>
+</div>
+{% endfor %}
 
 {% endblock %}
