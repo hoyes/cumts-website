@@ -25,7 +25,7 @@
         "stfalcon/tinymce-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "dev-master",
         "excelwebzone/recaptcha-bundle": "dev-master",
-	    "imagine/Imagine": "0.3.*",
+        "hoyes/symfony2-image-manager" : "dev-master",
         "jackalope/jackalope-doctrine-dbal": "dev-master",
         "doctrine/phpcr-bundle": "1.0.*",
         "doctrine/phpcr-odm": "1.0.*",
