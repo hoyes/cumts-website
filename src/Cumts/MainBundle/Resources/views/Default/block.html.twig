@@ -1,0 +1,6 @@
+{% createphp block as="rdf" %}
+<div {{ createphp_attributes(rdf) }}>
+    <h1{{ createphp_attributes( rdf.title ) }}>{{ createphp_content( rdf.title ) }}</h1>
+    <div {{ createphp_attributes( rdf.content ) }}>{{ createphp_content( rdf.content ) }}</div>
+</div>
+{% endcreatephp %}

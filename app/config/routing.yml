@@ -1,3 +1,6 @@
+_logout:
+    pattern: /logout
+
 #ihoyes_image_manager:
 #    resource: "@HoyesImageManagerBundle/Resources/config/routing.yml"
 #    prefix:   /
@@ -20,3 +23,11 @@ fos_js_routing:
 HoyesImageManagerBundle:
     resource: "@HoyesImageManagerBundle/Resources/config/routing.yml"
     prefix:   /image
+
+
+create:
+    resource: "@SymfonyCmfCreateBundle/Resources/config/routing/rest.xml"
+    prefix: /admin
+create_image:
+    resource: "@SymfonyCmfCreateBundle/Resources/config/routing/image.xml"
+    prefix: /admin

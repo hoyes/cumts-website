@@ -31,32 +31,16 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
-            form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
-            logout:
-                path:   /demo/secured/logout
-                target: /demo/
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
         admin:
-            pattern: ^/admin.*
+            pattern: ^/.*
             raven: true
             logout: ~
-        membership:
-            pattern: ^/membership/raven.*
-            raven: true
-            logout: ~
+            anonymous: true
+            logout:
+                path: /logout
 
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal/secure, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
         - { path ^/admin/.*, roles: ROLE_ADMIN }
+        - { path ^/membership/raven.*, roles: IS_AUTHENTICATED_FULLY }

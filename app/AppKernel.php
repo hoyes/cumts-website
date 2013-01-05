@@ -23,9 +23,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Symfony\Cmf\Bundle\BlockBundle\SymfonyCmfBlockBundle(),
+            new Symfony\Cmf\Bundle\CreateBundle\SymfonyCmfCreateBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle($this),
 
-            new Cumts\MainBundle\CumtsMainBundle(),
-            new Cumts\AdminBundle\CumtsAdminBundle(),
             new Misd\RavenBundle\MisdRavenBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
@@ -35,7 +36,8 @@ class AppKernel extends Kernel
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new Hoyes\ImageManagerBundle\HoyesImageManagerBundle(),
 
-
+            new Cumts\MainBundle\CumtsMainBundle(),
+            new Cumts\AdminBundle\CumtsAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

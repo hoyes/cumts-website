@@ -1,0 +1,19 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Content{% endblock %}
+
+{% block content %}
+
+<h1>Edit Content</h1>
+
+<p>
+    While you are logged in as a committee member, you can edit pages on the live site by clicking the 'edit'
+    button in the top-right hand corner.
+</p>
+<p>
+    If you're on a public computer, it is advised that you close the browser window once you're done to log out
+    of Raven.
+</p>
+<p><a href="{{ path('CumtsMainBundle_homepage') }}">Go to the public site</a</p>
+
+{% endblock %}

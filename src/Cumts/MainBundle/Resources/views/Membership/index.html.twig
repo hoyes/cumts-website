@@ -3,20 +3,8 @@
 {% block pagename %}Membership{% endblock %}
 
 {% block content %}
-<h1>Membership</h1>
-<p>
-Here you can sign up to become a member of the Cambridge University Musical Theatre Society. As well as being a necessity
-for participation in our shows, it also gives you reduced price or prioritised access to our workshops, theatre trips and 
-other events. Please note that membership is only open to people who are currently students in Cambridge.
-</p>
-<p>Membership costs just £10 and lasts until you graduate.</p>
+{% render 'CumtsMainBundle:Default:block' with {block_name: 'membership'} %}
 
-<h2>Sign up online</h2>
-<p>Click the link below to start the online sign up process. You will first be asked to sign in using Raven so we know 
-who you are and can check whether you are already registered. After provided a few more details about yourself, you will be
-taken to Paypal to make your payment.</p>
-<p>Unfortunately, we're not able to accept online membership applications for students without Raven accounts at this time, for example students at Anglia Ruskin University or elsewhere. If this applies to you, please e-mail <a href="mailto:membership@cumts.co.uk">membership@cumts.co.uk</a> to 
-arrange an alternative payment method.</p>
 <p><a href="{{ path("CumtsMainBundle_membership_raven") }}">Become a member &gt;&gt;</a></p>
 
 <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="#" onclick="javascript:window.open('https://www.paypal.com/uk/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img  src="{{ asset("bundles/cumtsmain/images/paypal.gif") }}" border="0" alt="Solution Graphics"></a></td></tr></table><!-- PayPal Logo -->

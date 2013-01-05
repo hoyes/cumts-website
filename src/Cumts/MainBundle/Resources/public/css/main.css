@@ -92,11 +92,13 @@ section h2 {
     margin-top:1.5em;
     padding-bottom:0.5em;
     margin-bottom:0.5em;
+    clear:both;
 }
 
 section h3 {
     color: #a00;
     font-weight:bold;
+    clear:both;
 }
 
 section p {
@@ -260,6 +262,7 @@ form:after {
 .event h2 {
     margin-top:0;
     border:none;
+    clear:none;
 }
 
 .event_type {
@@ -291,4 +294,10 @@ form:after {
 .more_link {
     clear:both;
     text-align: right;
+}
+
+.left {
+    float:left;
+    margin-right:15px;
+    margin-bottom:10px;
 }

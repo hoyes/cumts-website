@@ -6,10 +6,10 @@ CumtsMainBundle_homepage:
     defaults: { _controller: CumtsMainBundle:Default:index }
 CumtsMainBundle_about:
     pattern:  /about
-    defaults: { _controller: CumtsMainBundle:About:index }
+    defaults: { _controller: CumtsMainBundle:Default:page, block_name: 'about_us' }
 CumtsMainBundle_get_involved:
     pattern:  /get-involved
-    defaults: { _controller: CumtsMainBundle:GetInvolved:index }
+    defaults: { _controller: CumtsMainBundle:Default:page, block_name: 'get_involved' }
 CumtsMainBundle_membership_ext:
     resource: "@CumtsMainBundle/Resources/config/routing/membership.yml"
     prefix:   /membership

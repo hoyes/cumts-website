@@ -1,0 +1,3 @@
+admin_pages:
+    pattern:  /
+    defaults: { _controller: "CumtsAdminBundle:Page:index" }

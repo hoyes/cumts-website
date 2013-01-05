@@ -14,5 +14,8 @@ CumtsAdminBundle_ipnorders:
     resource: "@CumtsAdminBundle/Resources/config/routing/paypal-orders.yml"
     prefix:   /paypal/orders
 CumtsAdminBundle_shows:
-        resource: "@CumtsAdminBundle/Resources/config/routing/show.yml"
-        prefix:   /shows
+    resource: "@CumtsAdminBundle/Resources/config/routing/show.yml"
+    prefix:   /shows
+CumtsAdminBundle_pages:
+    resource: "@CumtsAdminBundle/Resources/config/routing/page.yml"
+    prefix:   /pages

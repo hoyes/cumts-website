@@ -5,6 +5,8 @@
 /app/data/*
 /vendor/
 /app/config/parameters.ini
+/web/js
+/web/css
 *~
 /nbproject/private
 .idea
