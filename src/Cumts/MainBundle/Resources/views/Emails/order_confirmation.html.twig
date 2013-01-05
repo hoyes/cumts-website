@@ -1,17 +1,13 @@
 Dear {{member.firstName}} {{member.lastName | raw}},
 
-Welcome to the Cambridge University Musical Theatre Society - thank you for becoming a member.
+This is an e-mail to confirm that you have ordered the following:
 
-The details you provided are below:
+{{ item.itemName }}
+Quantity: {{  item.quantity }}
+Total spend: {{ item.mcGross }}
 
-CRSid: {{member.authid}}
-College: {{member.college | raw}}
-Year of Graduation: {{ member.leavesat | date('Y') }}
-
-If you have any questions or problems, don't hesitate to contact me on membership@cumts.co.uk.
+If there's any problems with the above, please contact webmaster@cumts.co.uk.
 
 Regards,
 
-Chris Nash
-Membership Secretary 2012/3
 Cambridge University Musical Theatre Society

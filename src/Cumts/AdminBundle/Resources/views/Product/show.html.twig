@@ -1,0 +1,67 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Products{% endblock %}
+
+{% block content %}
+
+<h1>Product</h1>
+
+<p>URL to buy this item: <a href="{{ url('CumtsMainBundle_paypal_init', {id: entity.id}) }}">
+    {{ url('CumtsMainBundle_paypal_init', {id: entity.id}) }}</a></p>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>{{ entity.name }}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ entity.price }}</td>
+        </tr>
+        <tr>
+            <th>Member's Price</th>
+            <td>{{ entity.membersPrice }}</td>
+        </tr>
+        <tr>
+            <th>Maximum Quantity</th>
+            <td>{{ entity.maxQuantity }}</td>
+        </tr>
+        <tr>
+            <th>Number available</th>
+            <td>{{ entity.numberAvailable }}</td>
+        </tr>
+        <tr>
+            <th>Contact_email</th>
+            <td>{{ entity.contactemail }}</td>
+        </tr>
+        <tr>
+            <th>Created_at</th>
+            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_product') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_product_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('admin_product_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

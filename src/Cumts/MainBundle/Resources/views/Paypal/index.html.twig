@@ -1,0 +1,91 @@
+{% extends 'CumtsMainBundle::layout.html.twig' %}
+
+{% block pagename %}{% endblock %}
+
+{% block content %}
+
+<h1>{{ product.name }}</h1>
+
+<p>
+{% if product.membersPrice > 0 %}
+    <strong>Cost:</strong> &pound;{{ product.membersPrice }} (&pound;{{ product.price }} for non-members)
+{% else %}
+    <strong>Cost:</strong> &pound;{{ product.price }}
+{% endif %}
+</p>
+
+<form action="{{ path('CumtsMainBundle_paypal_redirect', {id: product.id}) }}" method="get">
+{% if product.maxQuantity is null or product.maxQuantity > 1 %}
+    <div>
+        <label for="quantity">How many would you like to purchase?</label>
+        <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ product.maxQuantity }}"/>
+    </div>
+    {% if product.maxQuantity > 0 %}
+    <p>
+        In order to ensure that there's enough to go around, there is a maximum quantity of
+        {{ product.maxQuantity }} item(s) per person.
+    </p>
+    {% endif %}
+    {% if product.membersPrice > 0 %}
+    <p>
+        Please note that the membership discount will only apply to the first item bought. We ask that other members
+        log in on this website individually so that we can confirm that they are a member.
+    </p>
+    {% endif %}
+{% endif %}
+{% if app.user.email is defined %}
+    <p>
+        <button type="submit">Buy</button>
+    </p>
+{% elseif product.membersPrice > 0 %}
+
+    {% if app.user %}
+
+        <p>This item is offered at a reduced rate of &pound;{{ product.membersPrice }} for members (compared to
+            &pound;{{ product.price }} for non-members). If you expect to be involved with CUMTS events in the future,
+            you can opt to sign up for membership at the same time as this purchase for an additional &pound;10. Would you
+            like to do this?
+        </p>
+        <div>
+            <button type="submit" name="membership" value="yes">Yes (pay &pound;{{ product.membersPrice }} plus &pound;10 membership fee)</button>
+            <button type="submit" name="membership" value="no">No (pay &pound;{{ product.price }} without membership)</button>
+        </div>
+    {% else %}
+        <form action="{{ path('CumtsMainBundle_paypal_redirect', {id: product.id}) }}" method="get">
+        <p>This item is available at a reduced rate for members (&pound;{{ product.membersPrice }} compared to
+            &pound;{{ product.price }}). Would you like to log in using Raven to check your membership status?
+        </p>
+        <div>
+            <button type="submit" name="membership" value="check">Yes, log in using Raven</button>
+            <button type="submit" name="membership" value="no">No, just pay &pound;{{ product.price }}</button>
+        </div>
+    {% endif %}
+{% elseif product.requiresMembership and  app.user.email is not defined %}
+
+    {% if app.user %}
+        <p>Only members of the Cambridge University Musical Theatre Society can buy thi buy this item. A &pound;10 membership
+            fee will be added to your order. Click below to continue
+        </p>
+        <div>
+
+            <button type="submit">Continue using Paypal</button>
+        </div>
+    {% else %}
+        <p>Only members of the Cambridge University Musical Theatre Society can buy this item. Please click below to
+            log in using Raven so that we can check your membership status. If you are not yet a member, the membership
+            fee of &pound;10 (for life) will be automatically added to the Paypal order. Click below to continue.
+        </p>
+        <div>
+            <button type="submit">Login using Raven</button>
+        </div>
+    {% endif %}
+{% else %}
+    <p>
+        <button type="submit">Buy</button>
+    </p>
+{% endif %}
+</form>
+
+<!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="#" onclick="javascript:window.open('https://www.paypal.com/uk/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=350');"><img  src="{{ asset("bundles/cumtsmain/images/paypal.gif") }}" border="0" alt="Solution Graphics"></a></td></tr></table><!-- PayPal Logo -->
+
+{% endblock %}

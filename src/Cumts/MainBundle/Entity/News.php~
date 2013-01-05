@@ -275,4 +275,27 @@ class News
     {
         return $this->created_by;
     }
+
+    /**
+     * Set image
+     *
+     * @param \Hoyes\ImageManagerBundle\Entity\Image $image
+     * @return News
+     */
+    public function setImage(\Hoyes\ImageManagerBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+    
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Hoyes\ImageManagerBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }

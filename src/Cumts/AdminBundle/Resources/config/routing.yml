@@ -19,3 +19,7 @@ CumtsAdminBundle_shows:
 CumtsAdminBundle_pages:
     resource: "@CumtsAdminBundle/Resources/config/routing/page.yml"
     prefix:   /pages
+CumtsMainBundle_product:
+    resource: "@CumtsAdminBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+

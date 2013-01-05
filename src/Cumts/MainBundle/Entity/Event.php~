@@ -70,9 +70,8 @@ class Event
     protected $body = "";
 
     /**
-     * @var integer $image
-     *
-     * @ORM\Column(name="image", type="integer", nullable=true)
+     * @var Image $image;
+     * @ORM\ManyToOne(targetEntity="Hoyes\ImageManagerBundle\Entity\Image")
      */
     protected $image;
 

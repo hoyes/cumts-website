@@ -1,0 +1,23 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Products{% endblock %}
+
+{% block content %}
+
+<h1>New product</h1>
+
+<form action="{{ path('admin_product_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_product') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

@@ -201,12 +201,17 @@ form textarea {
     font-family:Veranda, Arial, sans-serif;
 }
 
-form button {
+button {
     padding:0.5em 1.3em;
     margin-top:0.8em;
     margin-bottom:0.2em;
     background:#f55;
-    border-radius:5px;
+    border-radius:10px;
+    border-style:outset;
+}
+
+button:active {
+    border-style:inset;
 }
 
 form p button {

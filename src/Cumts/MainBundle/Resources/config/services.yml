@@ -29,3 +29,7 @@ services:
         arguments: ~
         tags:
             - { name: form.type, alias: event_type }
+
+    cumts_main.paypal:
+        class: Cumts\MainBundle\Service\Paypal
+        arguments: [%kernel.root_dir%, %kernel.cache_dir%]
