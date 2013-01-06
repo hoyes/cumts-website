@@ -17,5 +17,5 @@ class Visit extends Event
 
     protected $event_type = 'visit';
     protected $event_string = 'Visit';
-
+    
 }

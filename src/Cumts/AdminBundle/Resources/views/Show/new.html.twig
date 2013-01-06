@@ -34,7 +34,7 @@
 <script>
 $(function() {
     $('#lookup_button').click(function() {
-        id = $('#cumts_mainbundle_showtype_camdram_id').val();
+        var id = $('#cumts_mainbundle_showtype_camdram_id').val();
         $.get(Routing.generate('admin_shows_lookup', { id: id }), function(data) {
             if (data) {
                 if (data.exists) {

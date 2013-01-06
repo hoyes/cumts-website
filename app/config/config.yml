@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-#    - { resource: doctrine_extensions.yml }
+    - { resource: doctrine_extensions.yml }
     - { resource: @HoyesImageManagerBundle/Resources/config/config.yml }
 
 services:
@@ -31,7 +31,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ SymfonyCmfCreateBundle ]
+    bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -107,32 +107,3 @@ ewz_recaptcha:
     private_key:  6LeHDNsSAAAAAB-1_rJDP_YYO8wsFCbcXZsX0QJA
     secure:       false
     locale_key:   kernel.default_locale
-
-doctrine_phpcr:
-    session:
-        backend:
-            type: doctrinedbal
-            connection: doctrine.dbal.default_connection
-        workspace: default
-        username: admin
-        password: admin
-    odm:
-        auto_mapping: true
-        auto_generate_proxy_classes: %kernel.debug%
-
-sonata_block:
-    default_contexts: [cms]
-
-symfony_cmf_create:
-    phpcr_odm: true
-    map:
-        '<http://rdfs.org/sioc/ns#Block>': 'Symfony\Cmf\Bundle\BlockBundle\Document\SimpleBlock'
-    image:
-        model_class: Symfony\Cmf\Bundle\CreateBundle\Document\Image
-        controller_class: Symfony\Cmf\Bundle\CreateBundle\Controller\PHPCRImageController
-    role: ROLE_ADMIN
-
-fos_rest:
-    view:
-        formats:
-            json: true

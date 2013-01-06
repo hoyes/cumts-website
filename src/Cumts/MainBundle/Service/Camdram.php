@@ -56,7 +56,7 @@ class Camdram
     }
         
     public function updateShow($show) {
-       echo ($show->getTitle()."\r\n");
+
         $data = $this->getShowData($show->getCamdramId());
         $show->setTitle($data->title);
         $show->setAuthor($data->author);
@@ -141,7 +141,6 @@ class Camdram
         $show->setSummary("");
         $show->setBody("");
         $show->setTicketUrl("");
-        $show->setImage(0);
         $show->setCamdramId($id);
         $show->setStartAt($data->start_at);
         $show->setEndAt($data->end_at);

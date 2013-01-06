@@ -31,7 +31,7 @@ class Transaction
     /**
      * @var string
      *
-     * @ORM\Column(name="member_name", type="string", length=255)
+     * @ORM\Column(name="member_name", type="string", length=255, nullable=true)
      */
     private $member_name;
 
@@ -84,6 +84,11 @@ class Transaction
      */
     private $created_at;
 
+    public function __construct()
+    {
+        $this->created_at = new \DateTime;
+        $this->updated_at = new \DateTime;
+    }
 
     /**
      * Get id

@@ -249,5 +249,4 @@ class Show extends Event
     {
         return $this->roles;
     }
-
 }

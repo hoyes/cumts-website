@@ -42,13 +42,13 @@
     {% if app.user %}
 
         <p>This item is offered at a reduced rate of &pound;{{ product.membersPrice }} for members (compared to
-            &pound;{{ product.price }} for non-members). If you expect to be involved with CUMTS events in the future,
-            you can opt to sign up for membership at the same time as this purchase for an additional &pound;10. Would you
-            like to do this?
+            &pound;{{ product.price }} for non-members). 
+        </p>
+        <p> If you expect to be involved with CUMTS events in the future, you can first opt to become a member.
         </p>
         <div>
-            <button type="submit" name="membership" value="yes">Yes (pay &pound;{{ product.membersPrice }} plus &pound;10 membership fee)</button>
-            <button type="submit" name="membership" value="no">No (pay &pound;{{ product.price }} without membership)</button>
+            <button type="submit" name="membership" value="yes">Become a member of CUMTS</button>
+            <button type="submit" name="membership" value="no">No, just pay &pound;{{ product.price }}</button>
         </div>
     {% else %}
         <form action="{{ path('CumtsMainBundle_paypal_redirect', {id: product.id}) }}" method="get">
@@ -63,17 +63,15 @@
 {% elseif product.requiresMembership and  app.user.email is not defined %}
 
     {% if app.user %}
-        <p>Only members of the Cambridge University Musical Theatre Society can buy thi buy this item. A &pound;10 membership
-            fee will be added to your order. Click below to continue
+        <p>Only members of the Cambridge University Musical Theatre Society can buy thi buy this item. Please click
+        below to become a member of CUMTS, after which you can return here.
         </p>
         <div>
-
-            <button type="submit">Continue using Paypal</button>
+            <button type="submit">Become a member of CUMTS</button>
         </div>
     {% else %}
         <p>Only members of the Cambridge University Musical Theatre Society can buy this item. Please click below to
-            log in using Raven so that we can check your membership status. If you are not yet a member, the membership
-            fee of &pound;10 (for life) will be automatically added to the Paypal order. Click below to continue.
+            log in using Raven so that we can check your membership status.
         </p>
         <div>
             <button type="submit">Login using Raven</button>

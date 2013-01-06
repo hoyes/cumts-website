@@ -13,11 +13,11 @@ class ProductType extends AbstractType
         $builder
             ->add('name', 'text', array('label' => 'Product name'))
             ->add('price', 'number', array('label' => 'Product price (GBP)'))
-            ->add('members_price', 'number', array('label' => 'Member\'s only price (GBP) (optional)', 'required' => false))
-            ->add('max_quantity', 'number', array('label' => 'Maximum quantity per person', 'required' => false))
+            ->add('members_price', 'text', array('label' => 'Member\'s only price (GBP) (optional)', 'required' => false))
+            ->add('max_quantity', 'text', array('label' => 'Maximum quantity per person', 'required' => false))
             ->add('contact_email', 'email', array('label' => 'Contact email'))
-            ->add('number_available', 'number', array('label' => 'Number of items available', 'required' => false))
-            ->add('requires_membership')
+            ->add('number_available', 'text', array('label' => 'Number of items available', 'required' => false))
+            ->add('requires_membership', null, array('required' => false))
         ;
     }
 

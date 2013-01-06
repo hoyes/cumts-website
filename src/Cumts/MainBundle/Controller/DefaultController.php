@@ -18,20 +18,18 @@ class DefaultController extends Controller
        return $this->render('CumtsMainBundle:Default:holding.html.twig', array());
     }
 
-    public function pageAction($block_name)
+    public function pageAction($content_name)
     {
-        /** @var $manager BlockLoaderInterface */
-        $manager = $this->get('sonata.block.loader.chain');
-        $block = $manager->load(array('name' => '/blocks/'.$block_name));
-
-        return $this->render('CumtsMainBundle:Default:page.html.twig', array('block' => $block));
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Content');
+        $content = $repo->findOneByCode($content_name);
+        return $this->render('CumtsMainBundle:Default:page.html.twig', array('content' => $content));
     }
 
-    public function blockAction($block_name)
+    public function blockAction($content_name)
     {
-        $manager = $this->get('sonata.block.loader.chain');
-        $block = $manager->load(array('name' => '/blocks/'.$block_name));
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Content');
+        $content = $repo->findOneByCode($content_name);
 
-        return $this->render('CumtsMainBundle:Default:block.html.twig', array('block' => $block));
+        return $this->render('CumtsMainBundle:Default:block.html.twig', array('content' => $content));
     }
 }

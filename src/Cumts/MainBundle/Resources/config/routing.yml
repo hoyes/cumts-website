@@ -6,10 +6,10 @@ CumtsMainBundle_homepage:
     defaults: { _controller: CumtsMainBundle:Default:index }
 CumtsMainBundle_about:
     pattern:  /about
-    defaults: { _controller: CumtsMainBundle:Default:page, block_name: 'about_us' }
+    defaults: { _controller: CumtsMainBundle:Default:page, content_name: 'about' }
 CumtsMainBundle_get_involved:
     pattern:  /get-involved
-    defaults: { _controller: CumtsMainBundle:Default:page, block_name: 'get_involved' }
+    defaults: { _controller: CumtsMainBundle:Default:page, content_name: 'get-involved' }
 CumtsMainBundle_membership_ext:
     resource: "@CumtsMainBundle/Resources/config/routing/membership.yml"
     prefix:   /membership
@@ -36,7 +36,7 @@ CumtsMainBundle_paypal_redirect:
      pattern: /paypal/redirect/{id}
      defaults: { _controller: CumtsMainBundle:Paypal:redirect }
 CumtsMainBundle_paypal_complete:
-     pattern: /paypal/complete
+     pattern: /paypal/complete/{id}
      defaults: { _controller: CumtsMainBundle:Paypal:complete }
 CamdramUpdate:
         pattern: /cron/camdram

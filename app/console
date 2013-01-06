@@ -24,4 +24,5 @@ $kernel = new AppKernel($env, $debug);
 $application = new Application($kernel);
 $application->add(new CamdramCommand);
 $application->add(new NamesCommand);
+$application->setCatchExceptions(false);
 $application->run();

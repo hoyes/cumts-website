@@ -29,9 +29,6 @@ class CamdramCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-//        $name = $input->getArgument('name');
-
-//        if ($input->getOption('yell')) {
 
         $ids = $this->getContainer()->get('camdram')->getShows();
         $shows = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository('CumtsMainBundle:Show')->findAll();
@@ -40,9 +37,8 @@ class CamdramCommand extends ContainerAwareCommand
         }
         
         foreach ($ids as $id) {
+            $output->writeln("Checking show ".$id);
             $this->getContainer()->get('camdram')->addOrUpdateShow($id);
         }
-
-        $output->writeln("as");
     }
 }

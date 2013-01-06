@@ -20,13 +20,6 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 
-            new Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
-            new Sonata\BlockBundle\SonataBlockBundle(),
-            new Symfony\Cmf\Bundle\BlockBundle\SymfonyCmfBlockBundle(),
-            new Symfony\Cmf\Bundle\CreateBundle\SymfonyCmfCreateBundle(),
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
-
             new Misd\RavenBundle\MisdRavenBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),

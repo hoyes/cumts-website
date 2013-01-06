@@ -1,0 +1,30 @@
+admin_content:
+    pattern:  /
+    defaults: { _controller: "CumtsAdminBundle:Content:index" }
+
+admin_content_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumtsAdminBundle:Content:show" }
+
+admin_content_new:
+    pattern:  /new
+    defaults: { _controller: "CumtsAdminBundle:Content:new" }
+
+admin_content_create:
+    pattern:  /create
+    defaults: { _controller: "CumtsAdminBundle:Content:create" }
+    requirements: { _method: post }
+
+admin_content_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "CumtsAdminBundle:Content:edit" }
+
+admin_content_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "CumtsAdminBundle:Content:update" }
+    requirements: { _method: post }
+
+admin_content_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CumtsAdminBundle:Content:delete" }
+    requirements: { _method: post }

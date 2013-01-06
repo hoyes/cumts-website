@@ -1,12 +1,12 @@
-Dear {{member.firstName}} {{member.lastName | raw}},
+Dear {{name}},
 
 This is an e-mail to confirm that you have ordered the following:
 
 {{ item.itemName }}
 Quantity: {{  item.quantity }}
-Total spend: {{ item.mcGross }}
+Total spend: {{ order.mcGross }}
 
-If there's any problems with the above, please contact webmaster@cumts.co.uk.
+If there's any problems with the above, please contact webmaster@cumts.co.uk. You should also receive an e-mail from Paypal confirming that the payment has cleared.
 
 Regards,
 

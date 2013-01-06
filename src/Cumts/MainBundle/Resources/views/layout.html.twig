@@ -5,11 +5,6 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('bundles/cumtsmain/css/main.css') }}" type="text/css" media="all" />
 <link rel="stylesheet" href="{{ asset("bundles/hoyesimagemanager/css/fancybox.css") }}" type="text/css" media="all" />
-{% if is_granted('ROLE_ADMIN') %}
-    {% include "SymfonyCmfCreateBundle::includecssfiles.html.twig" %}
-    <link rel="stylesheet" href="{{ asset("bundles/hoyesimagemanager/css/uploadify.css") }}" type="text/css" media="all" />
-    <link rel="stylesheet" href="{{ asset("bundles/hoyesimagemanager/css/fancybox.css") }}" type="text/css" media="all" />
-{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -45,14 +40,10 @@ Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}.
     <script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script type="text/javascript" src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-
-    {% if is_granted('ROLE_ADMIN') %}
-        {% render "symfony_cmf_create.jsloader.controller:includeJSFilesAction" %}
-    {% endif %}
     <script src="{{ asset("bundles/hoyesimagemanager/js/jquery.fancybox.min.js") }}"></script>
-    {% if not is_granted('ROLE_ADMIN') %}<script>
+    <script>
         $(function() {
             $('a.fancybox').fancybox({openEffect: 'elastic', closeEffect: 'elastic'});
         });
-    </script>{% endif %}
+    </script>
 {% endblock %}

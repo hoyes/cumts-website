@@ -13,10 +13,28 @@ class Paypal
      */
     private $cache_dir;
 
-    public function __construct($root_dir, $cache_dir)
+    private $kernel;
+
+    public function __construct($root_dir, $cache_dir, $kernel)
     {
         $this->root_dir = $root_dir;
         $this->cache_dir = $cache_dir;
+        $this->kernel = $kernel;
+    }
+
+    private function useSandbox()
+    {
+        return $this->kernel->getEnvironment() == 'dev';
+    }
+    
+    public function getBaseUrl()
+    {
+        if ($this->useSandbox()) {
+            return "https://www.sandbox.paypal.com/cgi-bin/webscr";
+        }
+        else {
+            return "https://www.paypal.com/cgi-bin/webscr";
+        }
     }
 
     private function getKey($filename)
@@ -36,7 +54,47 @@ class Paypal
 
     private function getPaypalCertificate()
     {
-        return $this->getKey('paypal-cert.pem');
+        if ($this->useSandbox()) {
+            return $this->getKey('paypal-cert-sandbox.pem');
+        }
+        else {
+            return $this->getKey('paypal-cert.pem');
+        }
+    }
+    
+    private function getUsername()
+    {
+        if ($this->useSandbox()) {
+            return 'peter_1349650760_biz@cumts.co.uk';
+        }
+        else {
+            return 'paypal@cumts.co.uk';
+        }
+    }
+    
+    private function getCertificateId()
+    {
+        if ($this->useSandbox()) {
+            return 'YKJBJSPRKYBN2';
+        }
+        else {
+            return 'DPNNN66MU7U52';
+        }
+    }
+    
+    public function getUrl($params)
+    {
+        $params['business'] = $this->getUsername();
+        $params['cert_id'] = $this->getCertificateId();
+
+        $data = $this->encryptParams($params);
+
+        $params = array(
+            'cmd' => '_s-xclick',
+            'encrypted' => $data,
+        );
+
+        return $this->getBaseUrl() . '?'.http_build_query($params);
     }
 
     public function encryptParams(array $params)

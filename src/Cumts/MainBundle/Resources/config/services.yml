@@ -32,4 +32,4 @@ services:
 
     cumts_main.paypal:
         class: Cumts\MainBundle\Service\Paypal
-        arguments: [%kernel.root_dir%, %kernel.cache_dir%]
+        arguments: [%kernel.root_dir%, %kernel.cache_dir%, @kernel]

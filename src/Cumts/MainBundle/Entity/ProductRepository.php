@@ -15,13 +15,23 @@ class ProductRepository extends EntityRepository
 
     public function subtractItems($id, $quantity)
     {
-        return $this->createQueryBuilder('p')
-            ->set('p.number_available', 'p.number_available - :quantity')
-            ->set('p.number_sold', 'p.number_sold + :quantity')
+        $product = $this->findOneById($id);
+        
+        $query = $this->createQueryBuilder('p')
+            ->update();
+        
+        if ($product->getNumberAvailable() !== NULL) {
+             $query->set('p.number_available', 'p.number_available - :quantity');
+        }
+        
+        $query->set('p.number_sold', 'p.number_sold + :sold')
             ->where('p.id = :id')
             ->setParameter('id', $id)
             ->setParameter('quantity', $quantity)
+            ->setParameter('sold', $quantity)
             ->getQuery()->execute();
+    
+        
     }
 
 }

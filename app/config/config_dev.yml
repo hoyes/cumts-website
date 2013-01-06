@@ -21,3 +21,6 @@ monolog:
 
 assetic:
     use_controller: true
+
+orderly_pay_pal_ipn:
+    islive:  false
