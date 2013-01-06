@@ -1,0 +1,17 @@
+<div class="event" id="event-{{ entity.id }}">
+<div class="event_type {{ entity.eventtype }}">{{ entity.eventstring }}</div>
+<h2><a href="{{ path('CumtsMainBundle_events_show', { 'slug': entity.slug }) }}">{{ entity.title }}</a></h2>
+{% if entity.image %}
+    <a href="{{ path('CumtsMainBundle_events_show', {'slug': entity.slug}) }}">
+        {{ render_image(entity.image, 200, 150, true, {class: 'item_image'}) }}
+    </a>
+{% endif %}
+<p>{% if entity.startat %}{{ entity.startat|date('Y-m-d H:i:s') }}{% endif %}
+    {% if entity.endat %}{{ entity.endat|date('Y-m-d H:i:s') }}{% endif %}
+</p>
+{{ entity.summary | raw }}
+
+<p class="more_link">
+    <a href="{{ path('CumtsMainBundle_events_show', { 'slug': entity.slug }) }}">View more details</a>
+</p>
+</div>

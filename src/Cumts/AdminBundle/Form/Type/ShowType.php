@@ -21,8 +21,6 @@ class ShowType extends AbstractType
             ->add('image', 'image_upload')
             ->add('summary', 'textarea', array('attr' => array('class' => 'tinymce')))
             ->add('body', 'textarea', array('attr' => array('class' => 'tinymce')))
-            ->add('created_at')
-            ->add('updated_at')
         ;
     }
 

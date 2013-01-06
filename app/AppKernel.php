@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
             new Hoyes\ImageManagerBundle\HoyesImageManagerBundle(),
+	    new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
             new Cumts\MainBundle\CumtsMainBundle(),
             new Cumts\AdminBundle\CumtsAdminBundle(),

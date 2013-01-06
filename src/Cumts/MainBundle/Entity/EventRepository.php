@@ -21,6 +21,16 @@ class EventRepository extends EntityRepository
             ->getQuery();
         return $query->getResult();
     }
+    
+    public function findArchiveQuery()
+    {
+        $query = $this->createQueryBuilder("e")
+            ->orderBy("e.start_at", "DESC")
+            ->wherE("e.end_at < :now")
+            ->setParameter('now', new \DateTime())
+            ->getQuery();
+        return $query;
+    }
 
     public function findAllNonShows($page, $limit)
     {

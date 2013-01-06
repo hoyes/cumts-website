@@ -19,11 +19,11 @@
 <ul>
     <li><a href="{{ path('CumtsMainBundle_homepage') }}">Home</a></li>
     <li><a href="{{ path('CumtsMainBundle_get_involved') }}">Get Involved</a></li>
-    <li><a href="{{ path('CumtsMainBundle_events') }}">Shows &amp; Events</a></li>
+    <li><a href="{{ path('CumtsMainBundle_events') }}">Events</a></li>
+    <li><a href="{{ path('CumtsMainBundle_events_archive') }}">Past Events</a></li>
     <li><a href="{{ path('CumtsMainBundle_news') }}">News</a></li>
  <li><a href="{{ path('CumtsMainBundle_about') }}">About Us</a></li>
     <li><a href="{{ path('CumtsMainBundle_membership') }}">Membership</a></li>
-    <li><a href="{{ path('CumtsMainBundle_contact') }}">Contact</a></li>
 </ul>
 <div class="clear"></div>
 </nav>
@@ -31,7 +31,7 @@
 {% block content %}{% endblock %}
 </section>
 <footer>
-Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}.
+Copyright &copy; Cambridge Musical Theatre Society {{ "now"|date("Y") }}. <a href="{{ path('CumtsMainBundle_contact') }}">Contact Us</a>
 </footer>
 </div>
 {% endblock %}

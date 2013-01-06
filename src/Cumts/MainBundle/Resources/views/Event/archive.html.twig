@@ -3,13 +3,18 @@
 {% block pagename %}Shows &amp; Events{% endblock %}
 
 {% block content %}
-<div class="right_link">
-<a href="{{ path("CumtsMainBundle_events_archive") }}">View Archive</a>
+<h1>Events Archive</h1>
+
+<div class="paginator">
+{{ pagerfanta(entities) }}
 </div>
-<h1>Events</h1>
 
 {% for entity in entities %}
 {% include 'CumtsMainBundle:Event:item.html.twig' %}
 {% endfor %}
+
+<div class="paginator">
+{{ pagerfanta(entities) }}
+</div>
 
 {% endblock %}

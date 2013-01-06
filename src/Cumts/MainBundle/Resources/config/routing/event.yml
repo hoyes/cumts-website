@@ -2,6 +2,10 @@ CumtsMainBundle_events:
     pattern:  /
     defaults: { _controller: "CumtsMainBundle:Event:index" }
 
+CumtsMainBundle_events_archive:
+    pattern:  /archive/{page}
+    defaults: { _controller: "CumtsMainBundle:Event:archive", page: 1 }
+
 CumtsMainBundle_events_show:
     pattern:  /{slug}
     defaults: { _controller: "CumtsMainBundle:Event:show" }

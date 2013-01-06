@@ -3,6 +3,10 @@
 namespace Cumts\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Pagerfanta\Pagerfanta,
+    Pagerfanta\Adapter\DoctrineORMAdapter,
+    Pagerfanta\Exception\NotValidCurrentPageException;
+
 
 use Cumts\MainBundle\Entity\Event;
 
@@ -24,6 +28,20 @@ class EventController extends Controller
 
         return $this->render('CumtsMainBundle:Event:index.html.twig', array(
             'entities' => $entities
+        ));
+    }
+    
+    public function archiveAction($page)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $query = $em->getRepository('CumtsMainBundle:Event')->findArchiveQuery();
+        $pagerfanta = new Pagerfanta(new DoctrineORMAdapter($query));
+	$pagerfanta->setMaxPerPage(10);
+	$pagerfanta->setCurrentPage($page);
+
+        return $this->render('CumtsMainBundle:Event:archive.html.twig', array(
+            'entities' => $pagerfanta
         ));
     }
 
