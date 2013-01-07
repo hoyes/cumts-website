@@ -8,9 +8,14 @@
 
 <ul id="photo_list">
 {% for photo in entity.photos %}
-<a href="{{ image_url(photo.image) }}" class="fancybox">{{ render_image(photo.image, 120, 120, true) }}</a>
+<li>
+<a href="{{ image_url(photo.image) }}" class="fancybox">{{ render_image(photo.image, 200, 200, true) }}</a><br />
+<a href="#" class="delete_photo" rel="{{ photo.id }}">Delete</a>
+</li>
 {% endfor %}
 </ul>
+
+<div class="clear"></div>
 
 <div id="upload_button"></div>
 
@@ -42,9 +47,22 @@ $(function() {
             $('#photo_list').append(li);
             anchor.fancybox();
             $.ajax('{{ path('admin_photos_add', {id: entity.id}) }}?image_id=' + response.id)
+        },
+        onUploadError : function(file, code, msg, string) {
+        console.log(file, code, msg, string);
         }
     });
     $('.fancybox').fancybox();
+    $('.delete_photo').click(function() {
+        var id = $(this).attr('rel');
+        var self = $(this);
+        $.getJSON('{{ path('admin_photos_delete', {id: entity.id}) }}?image_id='+id, function(data) {
+            if (data) {
+                self.parent().remove();
+            }
+        });
+        return false;
+    });
 });
 </script>
 
