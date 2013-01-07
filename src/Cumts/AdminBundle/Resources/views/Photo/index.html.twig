@@ -1,0 +1,23 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Shows{% endblock %}
+
+{% block content %}
+
+<h1>Photos</h1>
+
+<p>Select a show</p>
+
+{{ entities.render()|raw }}
+
+<ul>
+{% for entity in entities %}
+<li>
+    <a href="{{ path('admin_photos_show', { 'id': entity.id }) }}">{{ entity.title }}</a>
+    {% if entity.startat %}({{ entity.startat|date('F Y') }}){% endif %}
+</li>
+{% endfor %}
+</ul>
+{{ entities.render()|raw }}
+
+{% endblock %}

@@ -9,7 +9,6 @@ use Doctrine\Common\Collections\Criteria;
 
 /**
  * Cumts\MainBundle\Entity\Show
- *
  * @ORM\Entity
  */
 class BarNight extends Event

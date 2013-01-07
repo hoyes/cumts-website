@@ -25,4 +25,7 @@ CumtsMainBundle_product:
 CumtsMainBundle_content:
     resource: "@CumtsAdminBundle/Resources/config/routing/content.yml"
     prefix:   /content
+CumtsMainBundle_photo:
+    resource: "@CumtsAdminBundle/Resources/config/routing/photo.yml"
+    prefix:   /photos
 

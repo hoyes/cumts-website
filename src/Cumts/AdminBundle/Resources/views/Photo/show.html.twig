@@ -1,0 +1,60 @@
+{% extends 'CumtsAdminBundle::layout.html.twig' %}
+
+{% block pagename %}Shows{% endblock %}
+
+{% block content %}
+
+<h1>Photos for {{ entity.title }}</h1>
+
+<ul id="photo_list">
+{% for photo in entity.photos %}
+<a href="{{ image_url(photo.image) }}" class="fancybox">{{ render_image(photo.image, 120, 120, true) }}</a>
+{% endfor %}
+</ul>
+
+<div id="upload_button"></div>
+
+<script>
+$(function() {
+    $('#upload_button').uploadify({
+        swf  : '{{ asset('bundles/hoyesimagemanager/uploadify.swf') }}',
+        uploader    : '{{ path('hoyes_image_manager_post') }}',
+        cancelImg : '{{ asset('bundles/hoyesimagemanager/images/cancel.png') }}',
+        formData   : {
+            _uploadify : true,
+            _sessionid : '{{ session_id }}',
+            width: 250,
+            height: 200
+        },
+        fileTypeDesc: 'All Images',
+        fileTypeExts: '*.png;*.jpg;*.jpeg;*.gif',
+        buttonText: 'Select Files',
+        multi: true,
+        auto : true,
+        debug: true,
+        onUploadSuccess  : function(file, data) {
+            response = $.parseJSON(data);
+            var img = $('<img/>').attr('src', response.url)
+                        .attr('width', response.width).attr('height', response.height);
+            var anchor = $('<a/>').attr('href', response.full_url).html(img);
+            var li = $('<li/>')
+            li.append(anchor);
+            $('#photo_list').append(li);
+            anchor.fancybox();
+            $.ajax('{{ path('admin_photos_add', {id: entity.id}) }}?image_id=' + data.id)
+        },
+        onUploadError : function(file, code, msg, string) {
+        console.log(file, code, msg, string);
+        }
+    });
+});
+</script>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_photos') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

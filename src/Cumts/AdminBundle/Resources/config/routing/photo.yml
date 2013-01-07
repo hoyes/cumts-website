@@ -1,0 +1,15 @@
+admin_photos:
+    pattern:  /{page}
+    defaults: 
+        _controller: "CumtsAdminBundle:Photo:index"
+        page: 1
+    requirements:
+        page: \d+
+
+admin_photos_add:
+    pattern:  /{id}/add
+    defaults: { _controller: "CumtsAdminBundle:Photo:add" }
+
+admin_photos_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "CumtsAdminBundle:Photo:show" }

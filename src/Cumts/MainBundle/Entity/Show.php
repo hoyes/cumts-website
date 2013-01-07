@@ -59,6 +59,11 @@ class Show extends Event
      * @ORM\OrderBy({"role_type" = "ASC", "sort" = "ASC"})
      */    
     private $roles;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="show")
+     */    
+    private $photos;
 
 
     public function __construct()
@@ -249,4 +254,38 @@ class Show extends Event
     {
         return $this->roles;
     }
+
+    /**
+     * Add photos
+     *
+     * @param \Cumts\MainBundle\Entity\Photo $photos
+     * @return Show
+     */
+    public function addPhoto(\Cumts\MainBundle\Entity\Photo $photos)
+    {
+        $this->photos[] = $photos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove photos
+     *
+     * @param \Cumts\MainBundle\Entity\Photo $photos
+     */
+    public function removePhoto(\Cumts\MainBundle\Entity\Photo $photos)
+    {
+        $this->photos->removeElement($photos);
+    }
+
+    /**
+     * Get photos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
+    }
+
 }
