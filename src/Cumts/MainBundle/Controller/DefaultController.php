@@ -32,4 +32,12 @@ class DefaultController extends Controller
 
         return $this->render('CumtsMainBundle:Default:block.html.twig', array('content' => $content));
     }
+    
+    public function headerImagesAction()
+    {
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Photo');
+        $photos = $repo->findRandom(4);
+        var_dump($photos);die();
+        return $this->render('CumtsMainBundle:Default:header-photos.html.twig', array('photos' => $photos));
+    }
 }

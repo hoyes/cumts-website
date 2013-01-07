@@ -1,0 +1,5 @@
+<ul id="header_images">
+{% foreach photo in photos %}
+<li>{{ render_image(photo.image) }}</li>
+{% endfor %}
+</ul>
