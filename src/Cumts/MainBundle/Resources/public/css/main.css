@@ -377,3 +377,14 @@ section nav {
     border-color: #fcc;
     color: #fcc;
 }
+
+#photo_list {
+    list-style:none;
+}
+
+#photo_list li {
+    float:left;
+    margin-right:15px;
+    height:200px;
+    margin-bottom:15px;
+}

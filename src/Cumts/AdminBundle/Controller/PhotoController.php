@@ -57,19 +57,34 @@ class PhotoController extends Controller
 
     public function addAction($id)
     {
-        $id = $this->getRequest()->get('image_id');    
+        $image_id = $this->getRequest()->query->get('image_id');    
         $img = $this->getDoctrine()->getRepository('HoyesImageManagerBundle:Image')->find($image_id);
-        $show = $em->getRepository('CumtsMainBundle:Show')->find($id);
+        $show = $this->getDoctrine()->getRepository('CumtsMainBundle:Show')->find($id);
         if (!$img || !$show) return new Response();
         
         $p = new Photo;
         $p->setImage($img);
         $p->setShow($show);
-        $em = $this->getDoctrine()->getManagaer();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($p);
         $em->flush();
         
         $data = array('photo_id' => $p->getId());
+        return new Response(json_encode($data),200,array('Content-Type'=>'application/json'));
+    }
+    
+    public function deleteAction($id)
+    {
+        $image_id = $this->getRequest()->query->get('image_id');    
+        $img = $this->getDoctrine()->getRepository('CumtsMainBundle:Photo')->find($image_id);
+
+        if (!$img) return new Response();
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($img);
+        $em->flush();
+        
+        $data = array('result' => 'success');
         return new Response(json_encode($data),200,array('Content-Type'=>'application/json'));
     }
 }
