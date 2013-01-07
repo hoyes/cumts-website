@@ -13,3 +13,7 @@ admin_photos_add:
 admin_photos_show:
     pattern:  /{id}/show
     defaults: { _controller: "CumtsAdminBundle:Photo:show" }
+    
+admin_photos_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "CumtsAdminBundle:Photo:delete" }
