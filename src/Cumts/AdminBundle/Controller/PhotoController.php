@@ -61,15 +61,15 @@ class PhotoController extends Controller
 
     public function addAction($id)
     {
-        $id = $this->getRequest()->get('image_id');    
+        $image_id = $this->getRequest()->get('image_id');    
         $img = $this->getDoctrine()->getRepository('HoyesImageManagerBundle:Image')->find($image_id);
-        $show = $em->getRepository('CumtsMainBundle:Show')->find($id);
+        $show = $this->getDoctrine()->getRepository('CumtsMainBundle:Show')->find($id);
         if (!$img || !$show) return new Response();
         
         $p = new Photo;
         $p->setImage($img);
         $p->setShow($show);
-        $em = $this->getDoctrine()->getManagaer();
+        $em = $this->getDoctrine()->getManager();
         $em->persist($p);
         $em->flush();
         

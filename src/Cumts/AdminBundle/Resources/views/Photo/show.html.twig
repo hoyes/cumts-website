@@ -31,7 +31,7 @@ $(function() {
         buttonText: 'Select Files',
         multi: true,
         auto : true,
-        debug: true,
+        debug: false,
         onUploadSuccess  : function(file, data) {
             response = $.parseJSON(data);
             var img = $('<img/>').attr('src', response.url)
@@ -41,12 +41,10 @@ $(function() {
             li.append(anchor);
             $('#photo_list').append(li);
             anchor.fancybox();
-            $.ajax('{{ path('admin_photos_add', {id: entity.id}) }}?image_id=' + data.id)
-        },
-        onUploadError : function(file, code, msg, string) {
-        console.log(file, code, msg, string);
+            $.ajax('{{ path('admin_photos_add', {id: entity.id}) }}?image_id=' + response.id)
         }
     });
+    $('.fancybox').fancybox();
 });
 </script>
 
