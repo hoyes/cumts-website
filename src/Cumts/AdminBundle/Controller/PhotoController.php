@@ -25,7 +25,11 @@ class PhotoController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $paginator = $this->get('knp_paginator');
-        $query = $em->getRepository('CumtsMainBundle:Show')->findBy(array(), array('start_at' => 'desc'));
+        $query = $em->getRepository('CumtsMainBundle:Show')->createQueryBuilder('s')
+                ->where('s.end_at < :now')
+                ->orderBy('s.start_at', 'desc')
+                ->setParameter('now', new \DateTime)
+                ->getQuery();
         $entities = $paginator->paginate($query, $page, $limit);
 
         return $this->render('CumtsAdminBundle:Photo:index.html.twig', array(
