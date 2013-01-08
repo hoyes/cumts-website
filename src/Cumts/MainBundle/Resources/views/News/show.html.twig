@@ -1,3 +1,4 @@
+{% set current_section='news' %}
 {% extends 'CumtsMainBundle::layout.html.twig' %}
 
 {% block pagename %}News - {{ entity.headline }}{% endblock %}
@@ -6,16 +7,18 @@
 
 <h1>{{ entity.headline }}</h1>
 
+{% if entity.image %}
+<a href="{{ image_url(entity.image) }}" class="fancybox item_image">{{ render_image(entity.image, 200) }}</a>
+{% endif %}
+
 {{ entity.body | raw }}
 
-        <tr>
-            <th>Published_at</th>
-            <td>{{ entity.publishedat|date('Y-m-d H:i:s') }}</td>
-        </tr>
+<p><em>{{ entity.publishedat|date('j F Y') }}</em></p>
 
-<p>
+
+<p class="clear">
     <a href="{{ path('CumtsMainBundle_news') }}">
-        More news
+        &lt;&lt; More news
     </a>
 </p>
 

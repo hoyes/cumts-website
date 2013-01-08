@@ -1,5 +1,5 @@
 {
-    "hash": "3a2e40c85177536635df759078a1819f",
+    "hash": "575249922b139081b1b9095bd639cbfd",
     "packages": [
         {
             "name": "doctrine/common",
@@ -1026,13 +1026,13 @@
             "target-dir": "Misd/RavenBundle",
             "source": {
                 "type": "git",
-                "url": "http://github.com/hoyes/raven-bundle",
-                "reference": "3f9a1fd847b1b3d3c8a884696e0fef69e91d3bee"
+                "url": "https://github.com/misd-service-development/raven-bundle.git",
+                "reference": "bff79a5637783c992571e846d167d29ff6b1692c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hoyes/raven-bundle/zipball/3f9a1fd847b1b3d3c8a884696e0fef69e91d3bee",
-                "reference": "3f9a1fd847b1b3d3c8a884696e0fef69e91d3bee",
+                "url": "https://github.com/misd-service-development/raven-bundle/archive/bff79a5637783c992571e846d167d29ff6b1692c.zip",
+                "reference": "bff79a5637783c992571e846d167d29ff6b1692c",
                 "shasum": ""
             },
             "require": {
@@ -1047,7 +1047,7 @@
                 "symfony/process": ">=2.1.0",
                 "symfony/yaml": ">=2.1.0"
             },
-            "time": "2013-01-08 15:13:04",
+            "time": "2013-01-07 08:49:49",
             "type": "symfony-bundle",
             "installation-source": "source",
             "autoload": {
@@ -1055,6 +1055,7 @@
                     "Misd\\RavenBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1067,14 +1068,10 @@
             "description": "Adds Raven authentication to your Symfony2 application",
             "homepage": "https://github.com/misd-service-development/raven-bundle",
             "keywords": [
-                "authentication",
+                "Authentication",
                 "bundle",
                 "University of Cambridge"
-            ],
-            "support": {
-                "issues": "https://github.com/misd-service-development/raven-bundle/issues",
-                "source": "https://github.com/hoyes/raven-bundle/tree/master"
-            }
+            ]
         },
         {
             "name": "monolog/monolog",
@@ -1509,7 +1506,7 @@
                     "dev-master": "4.2-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "lib/swift_required.php"
@@ -1953,15 +1950,15 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "excelwebzone/recaptcha-bundle": 20,
-        "friendsofsymfony/jsrouting-bundle": 20,
-        "hoyes/symfony2-image-manager": 20,
-        "knplabs/knp-paginator-bundle": 20,
+        "twig/extensions": 20,
         "misd/raven-bundle": 20,
+        "knplabs/knp-paginator-bundle": 20,
+        "friendsofsymfony/jsrouting-bundle": 20,
         "orderly/paypal-ipn-bundle": 20,
         "stfalcon/tinymce-bundle": 20,
         "stof/doctrine-extensions-bundle": 20,
-        "twig/extensions": 20,
+        "excelwebzone/recaptcha-bundle": 20,
+        "hoyes/symfony2-image-manager": 20,
         "white-october/pagerfanta-bundle": 20
     }
 }

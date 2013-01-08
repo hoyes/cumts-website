@@ -10,6 +10,8 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title')
+            ->add('venue')
+            ->add('ticket_url')
             ->add('summary')
             ->add('image', 'image_upload')
             ->add('body', 'textarea', array('attr' => array('class' => 'tinymce')))

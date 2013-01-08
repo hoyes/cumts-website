@@ -3,6 +3,7 @@
 namespace Cumts\MainBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * EventRepository
@@ -50,5 +51,17 @@ class EventRepository extends EntityRepository
             ->orderBy("e.start_at", "ASC")
             ->getQuery();
         return $query->getResult();
+    }
+    
+    public function getUpcoming($number, $except_id = -1)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.end_at > :now')
+            ->andWhere('e.id != :except_id')
+            ->orderBy('e.start_at', 'ASC')
+            ->setMaxResults($number)
+            ->setParameter('now', new \DateTime)
+            ->setParameter('except_id', $except_id)
+            ->getQuery()->getResult();
     }
 }

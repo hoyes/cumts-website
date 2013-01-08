@@ -28,20 +28,6 @@ class Show extends Event
     private $author;
 
     /**
-     * @var string $venue
-     *
-     * @ORM\Column(name="venue", type="string", length=255)
-     */
-    private $venue;
-
-    /**
-     * @var string $ticket_url
-     *
-     * @ORM\Column(name="ticket_url", type="string", length=255, nullable=true)
-     */
-    private $ticket_url;
-
-    /**
      * @var integer $camdram_id
      *
      * @ORM\Column(name="camdram_id", type="integer")
@@ -70,53 +56,6 @@ class Show extends Event
     {
         $this->performances = new ArrayCollection();
         $this->roles = new ArrayCollection();
-    }
-
-
-    /**
-     * Set venue
-     *
-     * @param string $venue
-     * @return Shows
-     */
-    public function setVenue($venue)
-    {
-        $this->venue = $venue;
-
-        return $this;
-    }
-
-    /**
-     * Get venue
-     *
-     * @return string
-     */
-    public function getVenue()
-    {
-        return $this->venue;
-    }
-
-    /**
-     * Set ticket_url
-     *
-     * @param string $ticketUrl
-     * @return Shows
-     */
-    public function setTicketUrl($ticketUrl)
-    {
-        $this->ticket_url = $ticketUrl;
-
-        return $this;
-    }
-
-    /**
-     * Get ticket_url
-     *
-     * @return string
-     */
-    public function getTicketUrl()
-    {
-        return $this->ticket_url;
     }
 
     /**

@@ -1,3 +1,4 @@
+{% set current_section='home' %}
 {% extends 'CumtsMainBundle::layout.html.twig' %}
 
 {% block pagename %}Home{% endblock %}
@@ -5,10 +6,59 @@
 {% block content %}
 {% render 'CumtsMainBundle:Default:block' with {content_name: 'home'} %}
 
+<div id="home_news">
+<h2>Latest News</h2>
+{% for item in news %}
+<div class="right_link"><a href="{{ path('CumtsMainBundle_news_show', {slug: item.slug}) }}">more &gt;&gt;</a></div>
+<h3><a href="{{ path('CumtsMainBundle_news_show', {slug: item.slug}) }}">{{item.headline }}</a></h3>
+{% if item.image %}
+<a href="{{ path('CumtsMainBundle_news_show', {slug: item.slug}) }}">{{ render_image(item.image, 50, 50, true, {class: 'item_image'}) }}</a>
+{% endif %}
+<p>{{item.summary}}</p>
+{% endfor %}
+<div class="clear"></div>
+</div>
+
+<div id="home_right">
+    <ul id="home_events">
+    <h2>What's On</h2>
+    {% for event in events %}
+    <li>
+            <h3><a href="{{ path('CumtsMainBundle_events_show', { 'slug': event.slug }) }}">{{ event.title }}</a>
+            {% if event.author is defined and event.author %}<small> - {{ event.author }} </small>{% endif %}
+            </h3>
+           <div class="date">
+           <p><em>{% if event.venue %}{{ event.venue }}, {% endif %}
+        {% if event.humanDate %}{{ event.humanDate }}
+        {% else %}{{ event.startAt | date('l j F Y \\a\\t g:i a') }}{% endif %}
+           </em></p>
+           
+            {% if event.image %} 
+                <a href="{{ path('CumtsMainBundle_events_show', { 'slug': event.slug }) }}">
+                {{ render_image(event.image, 70, 70, true, {class: 'left'}) }} 
+                </a>
+            {% endif %}
+
+           {{ event.summary | raw }}
+
+           <div class="more_link">
+                {% if not event.isArchived() and event.ticketUrl %}
+                <a href="{{ event.ticketUrl }}" target="_blank" rel="ext">Buy Tickets</a> |
+                {% endif %}
+            <a href="{{ path('CumtsMainBundle_events_show', { 'slug': event.slug }) }}">More details</a>
+           </div>
+           </li>
+    {% endfor %}
+    </ul>
+    <div class="more_link"><a href="{{ path('CumtsMainBundle_events') }}">View more &gt;&gt;</a></div>
+
+</div>
+
 <div style="width:420px">
 <a class="twitter-timeline" data-dnt=true href="https://twitter.com/CUMTS" data-widget-id="258728331938238464">Tweets by @CUMTS</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
     <iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fcumts&amp;width=420&amp;height=80&amp;show_faces=false&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=false&amp;appId=464689303574287" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:420px; height:80px;" allowTransparency="true"></iframe>
 
+<div class="clear"></div>
 {% endblock %}

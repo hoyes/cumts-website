@@ -1,3 +1,4 @@
+{% set current_section='news' %}
 {% extends 'CumtsMainBundle::layout.html.twig' %}
 
 {% block pagename %}News{% endblock %}
@@ -9,15 +10,17 @@
 {% for entity in entities %}
 <div class="news-item">
     <h2><a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">{{ entity.headline }}</a></h2>
-    <td>{% if entity.publishedat %}{{ entity.publishedat|date('Y-m-d H:i:s') }}{% endif %}</td>
-
-
-    {{ entity.summary | raw }}
-
-
+    <p><em>{% if entity.publishedat %}{{ entity.publishedat|date('j F Y') }}{% endif %}</em></p>
+   
+    {% if entity.image %}
+        <a href="{{ path('CumtsMainBundle_news_show', {'slug': entity.slug}) }}">
+            {{ render_image(entity.image, 200, 150, true, {class: 'item_image'}) }}
+        </a>
+    {% endif %}
+    <p>{{ entity.summary | raw }}</p>
 
     <p>
-        <a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">Read More</a>
+        <a href="{{ path('CumtsMainBundle_news_show', { 'slug': entity.slug }) }}">Read More &gt;&gt;</a>
     </p>
 </div>
 {% endfor %}

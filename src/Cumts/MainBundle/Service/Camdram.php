@@ -11,10 +11,11 @@ class Camdram
     private $showdata_url;
     private $em;
 
-    public function __construct($em, $query_url, $showdata_url) {
+    public function __construct($em, $query_url, $showdata_url, $date_formatter) {
         $this->em = $em;
         $this->query_url = $query_url;
         $this->showdata_url = $showdata_url;
+        $this->date_formatter = $date_formatter;
     }
 
     public function getShows() {
@@ -62,9 +63,11 @@ class Camdram
         $show->setAuthor($data->author);
         $show->setVenue($data->venue);
         
+        $dates = array();
         foreach ($show->getPerformances() as $p) {
                 //Find performances in data
                 $data_p = null;
+
                 foreach ($data->performances as &$perf) {
                         if ($p->getStartAt() == new \DateTime($perf->date->value, new \DateTimeZone($perf->date->timezone))) {
                                 $data_p = $perf;
@@ -78,7 +81,11 @@ class Camdram
                 else {
                     $this->em->remove($p);
                 }
+                $dates[] = $p->getStartAt();
         }
+        
+        $show->setHumanDate($this->date_formatter->createRangeFromDates($dates));
+        
         foreach ($data->performances as &$perf) {
             if (!isset($perf->found)) {
                 $p = new Performance;
@@ -129,11 +136,24 @@ class Camdram
                 $this->em->persist($r);
                 $r->setSort(0);
             }
-        } 
+        }
+        //Update sort fields;
+        $i=0;
+        foreach ($roles as &$role) {
+            preg_match("/\?person=([0-9]+)$/i",$role->url,$matches);
+            foreach ($show->getRoles() as $r) {
+                if ($r->getCamdramId() == $matches[1]) {
+                    $r->setSort($i);
+                }
+            }
+            $i++;
+        }
     }
     
     public function addShow($id) {
         $data = $this->getShowData($id);
+        if (preg_match("/Bar Night/i", $data->title)) return;
+        
         $show = new Show;
         $show->setTitle($data->title);
         $show->setAuthor($data->author);
@@ -146,6 +166,7 @@ class Camdram
         $show->setEndAt($data->end_at);
         $this->em->persist($show);
         
+        $dates = array();
         foreach ($data->performances as $perf) {
                 $p = new Performance;
                 $p->setShow($show);
@@ -153,7 +174,10 @@ class Camdram
                 $p->setVenue($perf->venue);
                 $show->addPerformance($p);
                 $this->em->persist($p);                
+                $dates[] = $p->getStartAt();
         }
+        
+        $show->setHumanDate($this->date_formatter->createRangeFromDates($dates));
 
         $i=0;
         foreach ($data->cast as $role) {

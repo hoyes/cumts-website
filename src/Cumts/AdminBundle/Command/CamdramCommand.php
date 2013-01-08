@@ -24,16 +24,26 @@ class CamdramCommand extends ContainerAwareCommand
                InputArgument::OPTIONAL,
                'If set, will only sync the show data'
             )
+            ->addOption(
+               'id',
+               null,
+               InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL ,
+               'If set, will only sync the show with this camdram id', array()
+            )
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        $ids = $this->getContainer()->get('camdram')->getShows();
-        $shows = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository('CumtsMainBundle:Show')->findAll();
-        foreach ($shows as $show) {
-            $ids[] = $show->getCamdramId();
+        if ($input->getOption('id')) {
+            $ids = $input->getOption('id');
+        }
+        else {   
+            $shows = $this->getContainer()->get('doctrine.orm.entity_manager')->getRepository('CumtsMainBundle:Show')->findAll();
+            $ids = $this->getContainer()->get('camdram')->getShows();
+            foreach ($shows as $show) {
+                $ids[] = $show->getCamdramId();
+            }
         }
         
         foreach ($ids as $id) {

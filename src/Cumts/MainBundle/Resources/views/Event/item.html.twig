@@ -1,17 +1,24 @@
 <div class="event" id="event-{{ entity.id }}">
 <div class="event_type {{ entity.eventtype }}">{{ entity.eventstring }}</div>
-<h2><a href="{{ path('CumtsMainBundle_events_show', { 'slug': entity.slug }) }}">{{ entity.title }}</a></h2>
+<h2><a href="{{ path('CumtsMainBundle_events_show', { 'slug': entity.slug }) }}">{{ entity.title }}</a>
+{% if entity.author is defined and entity.author %}<small> - {{ entity.author }}</small>{% endif %}</h2>
 {% if entity.image %}
     <a href="{{ path('CumtsMainBundle_events_show', {'slug': entity.slug}) }}">
         {{ render_image(entity.image, 200, 150, true, {class: 'item_image'}) }}
     </a>
 {% endif %}
-<p>{% if entity.startat %}{{ entity.startat|date('Y-m-d H:i:s') }}{% endif %}
-    {% if entity.endat %}{{ entity.endat|date('Y-m-d H:i:s') }}{% endif %}
+<p><strong>
+{% if entity.venue %}{{ entity.venue }}, {% endif %}
+{% if entity.humanDate %}{{ entity.humanDate }}
+{% else %}{{ entity.startAt | date('l j F Y \\a\\t g:i a') }}{% endif %}
+</strong>
 </p>
 {{ entity.summary | raw }}
 
 <p class="more_link">
-    <a href="{{ path('CumtsMainBundle_events_show', { 'slug': entity.slug }) }}">View more details</a>
+{% if not entity.isArchived() and entity.ticketUrl %}
+<a href="{{ entity.ticketUrl }}" target="_blank" rel="ext">Buy Tickets</a> |
+{% endif %}
+    <a href="{{ path('CumtsMainBundle_events_show', { 'slug': entity.slug }) }}">More details</a>
 </p>
 </div>

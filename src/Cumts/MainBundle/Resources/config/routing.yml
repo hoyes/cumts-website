@@ -7,6 +7,9 @@ CumtsMainBundle_homepage:
 CumtsMainBundle_about:
     pattern:  /about
     defaults: { _controller: CumtsMainBundle:Default:page, content_name: 'about' }
+CumtsMainBundle_logo:
+    pattern:  /logo
+    defaults: { _controller: CumtsMainBundle:Default:page, content_name: 'logo' }
 CumtsMainBundle_get_involved:
     pattern:  /get-involved
     defaults: { _controller: CumtsMainBundle:Default:page, content_name: 'get-involved' }

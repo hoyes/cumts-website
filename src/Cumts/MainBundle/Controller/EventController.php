@@ -51,16 +51,25 @@ class EventController extends Controller
      */
     public function showAction($slug)
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('CumtsMainBundle:Event')->findOneBySlug($slug);
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Event');
+        $entity = $repo->findOneBySlug($slug);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Event entity.');
         }
-
+        
         return $this->render('CumtsMainBundle:Event:show.html.twig', array(
             'entity'      => $entity,
+        ));
+    }
+    
+    public function otherEventsAction($id = null)
+    {
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Event');
+        $other_events = $repo->getUpcoming(2, $id);
+        
+        return $this->render('CumtsMainBundle:Event:other_events.html.twig', array(
+            'other_events' => $other_events,
         ));
     }
 

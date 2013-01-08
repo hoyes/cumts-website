@@ -1,0 +1,29 @@
+<ul id="other_events">
+{% for event in other_events %}
+<li>
+   <h3><a href="{{ path('CumtsMainBundle_events_show', { 'slug': event.slug }) }}">{{ event.title }}</a>
+   {% if event.author is defined and event.author %}<small> - {{ event.author }}</small>{% endif %}</h3>
+   <div class="date">
+   <p><em>{% if event.venue %}{{ event.venue }}, {% endif %}
+{% if event.humanDate %}{{ event.humanDate }}
+{% else %}{{ event.startAt | date('l j F Y \\a\\t g:i a') }}{% endif %}
+   </em></p>
+   
+{% if event.image %} 
+    <a href="{{ path('CumtsMainBundle_events_show', { 'slug': event.slug }) }}">
+    {{ render_image(event.image, 120, 120, true, {class: 'left'}) }} 
+    </a>
+{% endif %}
+
+   {{ event.summary | raw }}
+
+   <div class="more_link">
+{% if not event.isArchived() and event.ticketUrl %}
+<a href="{{ event.ticketUrl }}" target="_blank" rel="ext">Buy Tickets</a> |
+{% endif %}
+    <a href="{{ path('CumtsMainBundle_events_show', { 'slug': event.slug }) }}">More details</a>
+</div>
+</li>
+{% endfor %}
+</ul>
+<div class="clear"></div>

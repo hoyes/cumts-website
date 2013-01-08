@@ -10,7 +10,16 @@ class DefaultController extends Controller
     
     public function indexAction()
     {
-        return $this->render('CumtsMainBundle:Default:index.html.twig', array());
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Event');
+        $events = $repo->getUpcoming(3);
+        
+        $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:News');
+        $news = $repo->findRecent(2);
+    
+        return $this->render('CumtsMainBundle:Default:index.html.twig', array(
+            'events' => $events,
+            'news' => $news,
+        ));
     }
     
     public function holdingAction()

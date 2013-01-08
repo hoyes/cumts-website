@@ -53,6 +53,10 @@
             <td>{{ entity.camdramid }}</td>
         </tr>
         <tr>
+            <th>Human-readable date</th>
+            <td>{{ entity.humanDate }}</td>
+        </tr>
+        <tr>
             <th>Image</th>
             <td>{% if entity.image %}{{ render_image(entity.image, 250, 200) }}{% endif %}</td>
         </tr>

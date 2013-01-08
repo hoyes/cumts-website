@@ -54,6 +54,13 @@ class Event
      * @ORM\Column(name="end_at", type="datetime")
      */
     protected $end_at;
+    
+    /**
+     * @var string human_date
+     * 
+     * @ORM\Column(name="human_date", type="text")
+     */
+    protected $human_date = '';
 
     /**
      * @var text $summary
@@ -68,6 +75,20 @@ class Event
      * @ORM\Column(name="body", type="text")
      */
     protected $body = "";
+
+    /**
+     * @var string $venue
+     *
+     * @ORM\Column(name="venue", type="string", length=255, nullable=true)
+     */
+    private $venue;
+
+    /**
+     * @var string $ticket_url
+     *
+     * @ORM\Column(name="ticket_url", type="string", length=255, nullable=true)
+     */
+    private $ticket_url;
 
     /**
      * @var Image $image;
@@ -332,5 +353,79 @@ class Event
     public function getUpdatedAt()
     {
         return $this->updated_at;
+    }
+
+    /**
+     * Set human_date
+     *
+     * @param string $humanDate
+     * @return Event
+     */
+    public function setHumanDate($humanDate)
+    {
+        $this->human_date = $humanDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get human_date
+     *
+     * @return string 
+     */
+    public function getHumanDate()
+    {
+        return $this->human_date;
+    }
+    
+    public function isArchived()
+    {
+        return $this->getEndAt() < new \DateTime;
+    }
+
+    /**
+     * Set venue
+     *
+     * @param string $venue
+     * @return Event
+     */
+    public function setVenue($venue)
+    {
+        $this->venue = $venue;
+    
+        return $this;
+    }
+
+    /**
+     * Get venue
+     *
+     * @return string 
+     */
+    public function getVenue()
+    {
+        return $this->venue;
+    }
+
+    /**
+     * Set ticket_url
+     *
+     * @param string $ticketUrl
+     * @return Event
+     */
+    public function setTicketUrl($ticketUrl)
+    {
+        $this->ticket_url = $ticketUrl;
+    
+        return $this;
+    }
+
+    /**
+     * Get ticket_url
+     *
+     * @return string 
+     */
+    public function getTicketUrl()
+    {
+        return $this->ticket_url;
     }
 }

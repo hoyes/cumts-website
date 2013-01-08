@@ -1,9 +1,18 @@
+{% if entity.isArchived() %}{% set current_section='events_archive' %}
+{% else %} {% set current_section='events' %} {% endif %}
 {% extends 'CumtsMainBundle::layout.html.twig' %}
 
 {% block pagename %}Events - {{ entity.title }}{% endblock %}
 
 {% block content %}
+<p class="right_link">
+{% if not entity.isArchived() and entity.ticketUrl %}
+<a href="{{ entity.ticketUrl }}" target="_blank" rel="ext">Buy Tickets</a>
+{% endif %}
+</p>
 <h1>{{ entity.title }}</h1>
+
+{% if entity.author is defined and entity.author %}<p><em>{{ entity.author }}</em></p>{% endif %}
 
 {% if entity.image %}
 <a href="{{ image_url(entity.image, 1024, 768) }}" class="fancybox">
@@ -11,12 +20,23 @@
 </a>
 {% endif %}
 
-<p>
-    {{ entity.startat|date('Y-m-d H:i:s') }} to
-   {{ entity.endat|date('Y-m-d H:i:s') }}
+<p><strong>
+{% if entity.venue %}{{ entity.venue }}, {% endif %}
+{% if entity.humanDate %}{{ entity.humanDate }}
+{% else %}{{ entity.startAt | date('l j F Y \\a\\t g:i a') }}{% endif %}
+</strong>
 </p>
 
 {{ entity.body | raw}}
+
+{% if entity.photos is defined and entity.photos | length > 0 %}
+<h2>Photos</h2>
+<ul id="photo_list">
+{% for photo in entity.photos %}
+<li><a href="{{ image_url(photo.image) }}" rel="photo_gallery_{{ entity.id }}" class="fancybox">{{ render_image(photo.image, 135, 135, true) }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
 
 {% if entity.eventType == 'show' %}
     <h2>Cast &amp; Crew</h2>
@@ -56,10 +76,7 @@
     <div class="clear"></div>
 {% endif %}
 
-<p>
-    <a href="{{ path('CumtsMainBundle_events') }}">
-        More shows
-    </a>
-</p>
+<h2>{% if not entity.isArchived() %}Other {% endif %}Upcoming Events</h2>
+{% render 'CumtsMainBundle:Event:otherEvents' with {id: entity.id} %}
 
 {% endblock %}

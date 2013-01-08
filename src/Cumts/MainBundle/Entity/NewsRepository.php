@@ -21,4 +21,13 @@ class NewsRepository extends EntityRepository
             ->getQuery();
         return $query->getResult();
     }
+    
+    public function findRecent($number)
+    {
+        $query = $this->createQueryBuilder("n")
+            ->orderBy("n.published_at", "DESC")
+            ->setMaxResults($number)
+            ->getQuery();
+        return $query->getResult();
+    }
 }
