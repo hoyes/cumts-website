@@ -35,7 +35,8 @@ header h1 {
     
 }
 
-#header_content {
+#header_images {
+     list-style: none;
      position:absolute;
      right:0;
      top:0;
@@ -43,8 +44,9 @@ header h1 {
      margin-right:12px;
 }
 
-#headet_content img {
-      margin-left:12px
+#header_images li {
+      margin-left:12px;
+      float:right;
 }
 
 

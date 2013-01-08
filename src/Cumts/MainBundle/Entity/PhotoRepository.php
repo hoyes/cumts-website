@@ -3,7 +3,7 @@
 namespace Cumts\MainBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 /**
  * NewsRepository
@@ -15,10 +15,12 @@ class PhotoRepository extends EntityRepository
 {
     public function findRandom($number)
     {
-        $rsm = new ResultSetMapping;
-        $rsm->addEntityResult('Cumts\MainBundle\Entity\Photo', 'p');
+        $em = $this->getEntityManager();
+        $rsm = new ResultSetMappingBuilder($em);
+$rsm->addRootEntityFromClassMetadata('Cumts\MainBundle\Entity\Photo', 'p');
         $query = $this->getEntityManager()->createNativeQuery("select * from photos order by RAND() LIMIT ?", $rsm);
-        $query->setParameter(1, $number);
+        $query->setParameter(0, $number);
+       
         return $query->getResult();
     }
 }

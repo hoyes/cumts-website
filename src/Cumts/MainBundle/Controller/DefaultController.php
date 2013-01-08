@@ -37,7 +37,7 @@ class DefaultController extends Controller
     {
         $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Photo');
         $photos = $repo->findRandom(4);
-        var_dump($photos);die();
+       // var_dump($photos);die();
         return $this->render('CumtsMainBundle:Default:header-photos.html.twig', array('photos' => $photos));
     }
 }
