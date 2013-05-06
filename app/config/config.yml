@@ -85,6 +85,10 @@ orderly_pay_pal_ipn:
     email:   paypal@cumts.co.uk
     url:     https://www.paypal.com/cgi-bin/webscr
     debug:   %kernel.debug%
+    drivers: 
+        orm:
+            object_manager: doctrine.orm.entity_manager
+            classes: ~
 
     # Constants for the sandbox environment (default settings in Configuration.php)
     sandbox_email:   peter_1349650760_biz@cumts.co.uk

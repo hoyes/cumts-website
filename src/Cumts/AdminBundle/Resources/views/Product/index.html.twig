@@ -13,6 +13,7 @@
             <th>Price</th>
             <th>Contact_email</th>
             <th>Number available</th>
+	    <th>Number sold</th>
             <th>Created_at</th>
             <th>Actions</th>
         </tr>
@@ -24,6 +25,7 @@
             <td>{{ entity.price }}</td>
             <td>{{ entity.contactemail }}</td>
             <td>{{ entity.numberAvailable }}</td>
+	    <td>{{ entity.numberSold }}</td>
             <td>{% if entity.createdat %}{{ entity.createdat|date('Y-m-d H:i:s') }}{% endif %}</td>
             <td>
                 <ul>

@@ -1,5 +1,16 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+#
+#   RewriteCond %{REQUEST_URI} !=/index.php
+#   RewriteCond %{REQUEST_URI} !/bundles/.*
+#   RewriteCond %{REQUEST_URI} !/admin/.*
+#   RewriteCond %{REQUEST_URI} !/news.*
+#   RewriteRule .* /index.php [L]
+
+    RewriteCond %{HTTP_HOST} ^cumts.soc.srcf.net$
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*)$ http://www.cumts.co.uk/$1 [R=301,L] 
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>

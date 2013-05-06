@@ -115,7 +115,7 @@ class PaypalController extends Controller
                 }
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Cambridge University Musical Theatre Society order confirmation')
-                    ->setFrom('webmasterp@cumts.co.uk', 'Cambridge University Musical Theatre Society')
+                    ->setFrom('webmaster@cumts.co.uk', 'Cambridge University Musical Theatre Society')
                     ->setTo($email, $name)
                     ->setBcc($product->getContactEmail(), 'Cambridge University Musical Theatre Society')
                     ->setBody($this->renderView('CumtsMainBundle:Emails:order_confirmation.html.twig',
@@ -178,7 +178,7 @@ class PaypalController extends Controller
                 ->setSubject('Cambridge University Musical Theatre Society membership confirmation')
                 ->setFrom('membership@cumts.co.uk', 'Cambridge University Musical Theatre Society')
                 ->setTo($member->getEmail(), $member->getFullName())
-                ->setBcc('membership@cumts.co.uk', 'Cambridge University Musical Theatre Society')
+                ->setBcc('membership-notifications@cumts.co.uk', 'Cambridge University Musical Theatre Society')
                 ->setBody($this->renderView('CumtsMainBundle:Emails:membership_confirmation.html.twig',
                 // Prepare the variables to populate the email template:
                 array('order' => $order,
@@ -204,7 +204,7 @@ class PaypalController extends Controller
         }
 
         if ((($product->getRequiresMembership() || $product->getMembersPrice())
-                    && !$this->getUser() instanceof Member)
+                    && !($this->getUser() instanceof Member && $this->getUser()->getPaid()))
                     || $product->getMaxQuantity() > 1) {
             return $this->render('CumtsMainBundle:Paypal:index.html.twig', array(
                 'product' => $product,
@@ -235,20 +235,26 @@ class PaypalController extends Controller
         else {
             $membership = null;
         }
-
         if (($product->getRequiresMembership() || $membership == 'check') && !$this->getUser()) {
             if ($request->query->has('quantity')) {
                 $this->getRequest()->getSession()->set($product->getId().'_quantity', $request->get('quantity'));
             }
             throw new AuthenticationException('Checking CUMTS membership status');
         }
-        elseif (!$this->getUser() instanceof User && $membership == 'check') {
+        elseif (!($this->getUser() instanceof Member && $this->getUser()->getPaid()) && $membership == 'check') {
             return $this->render('CumtsMainBundle:Paypal:index.html.twig', array(
                 'product' => $product,
             ));
         }
-        elseif ($product->getRequiresMembership() && $membership == 'yes') {
-            return $this->redirect($this->generateUrl('CumtsMainBundle_membership'));
+        elseif ($product->getRequiresMembership() && !($this->getUser() instanceof Member && $this->getUser()->getPaid())) {
+	    if ($membership == 'yes') {
+	            return $this->redirect($this->generateUrl('CumtsMainBundle_membership_raven'));
+	    }
+            else {
+            return $this->render('CumtsMainBundle:Paypal:index.html.twig', array(
+                'product' => $product,
+            ));
+	    }
         }
 
         if ($request->query->has('quantity')) {
@@ -278,11 +284,11 @@ class PaypalController extends Controller
             'amount_1' => $product->getPrice(),
             'quantity_1' => $quantity,
         );
-        if ($product->getMembersPrice() > 0 && ($this->getUser() instanceof Member || $membership == 'yes')) {
+        if ($product->getMembersPrice() > 0 && (($this->getUser() instanceof Member && $this->getUser()->getPaid()) || $membership == 'yes')) {
             $params['discount_amount_1'] = $product->getPrice() - $product->getMembersPrice();
         }
 
-        if ($this->getUser() instanceof Member) {
+        if ($this->getUser() instanceof Member && $this->getUser()->getPaid()) {
             /** @var $user Member */
             $user = $this->getUser();
             $params['first_name'] = $user->getFirstName();

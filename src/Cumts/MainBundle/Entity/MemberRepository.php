@@ -29,4 +29,14 @@ class MemberRepository extends EntityRepository
         
         return $query->getQuery();
     }
+
+    public function findPaidMember($auth_id)
+    {
+	return $this->createQueryBuilder("m")
+		->where("m.auth_id = :auth_id")
+		->where("m.paid = :paid")
+		->setParameter('auth_id', $auth_id)
+		->setParameter('paid', true)
+		->getQuery()->getOneOrNullResult();
+    }
 }

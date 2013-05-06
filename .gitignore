@@ -7,6 +7,9 @@
 /app/config/parameters.ini
 /web/js
 /web/css
+/web/docs
+/web/google*
+/web/redirect
 *~
 /nbproject/private
 .idea

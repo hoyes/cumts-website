@@ -131,6 +131,13 @@ section a:hover {
     color:#800;
 }
 
+section ul {
+	margin-left:3em;
+}
+section li {
+	margin-bottom:0.8em;
+}
+
 footer {
     font-size:12px;
     text-align: center;
@@ -339,6 +346,7 @@ form:after {
     margin-left:10px;
     margin-bottom:7px;
     font-size:1.1em;
+    clear:both;
 }
 
 /* Paginator */
@@ -387,6 +395,7 @@ section nav {
 
 #photo_list {
     list-style:none;
+    margin:0;
 }
 
 #photo_list li {
@@ -397,6 +406,7 @@ section nav {
 
 #other_events {
     list-style:none;
+    margin:0;
 }
 
 #other_events li {
@@ -419,6 +429,7 @@ section nav {
 
 #home_events {
     list-style:none;
+    margin:0;
 }
 
 #home_events li {

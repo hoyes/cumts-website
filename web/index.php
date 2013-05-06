@@ -95,10 +95,10 @@ a:hover {
 <body>
 <div id="wrapper">
 <h1><img src="bundles/cumtsmain/images/logo.png" alt="Cambridge University Musical Theatre Society" /></h1>
-<p class="intro">We are currently redesigning our website</p>
-<p>Cambridge University Musical Theatre Society exists to enable high quality musical theatre to be staged in Cambridge and to allow its members opportunities to hone their skills, be it as a performer, musician, techie or production team member.</p>
+<p class="intro">The server is currently undergoing maintenance</p>
 
-<p>In the meantime, if you have any questions, e-mail <a href="mailto: info@cumts.co.uk">info@cumts.co.uk</a> or post a message on our <a href="http://www.facebook.com/cumts">Facebook page</a>.</p>
+<p>SRCF, who host our website, are curretly performing server maintenance (<a href="http://status.srcf.net/">view details</a>)
+. In the meantime, if you have any questions, e-mail <a href="mailto: info@cumts.co.uk">info@cumts.co.uk</a> or post a message on our <a href="http://www.facebook.com/cumts">Facebook page</a>.</p>
 </div>
 </body>
 </html>

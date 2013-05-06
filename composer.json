@@ -26,6 +26,7 @@
         "jms/di-extra-bundle": "1.1.*",
         "jms/security-extra-bundle": "1.2.*",
         "knplabs/knp-paginator-bundle": "dev-master",
+	"knplabs/knp-components": "dev-master",
         "misd/raven-bundle": "dev-master",
         "monolog/monolog": "1.2.1",
         "orderly/paypal-ipn-bundle": "dev-master",

@@ -5,14 +5,9 @@
 {% block pagename %}Events - {{ entity.title }}{% endblock %}
 
 {% block content %}
-<p class="right_link">
-{% if not entity.isArchived() and entity.ticketUrl %}
-<a href="{{ entity.ticketUrl }}" target="_blank" rel="ext">Buy Tickets</a>
-{% endif %}
-</p>
-<h1>{{ entity.title }}</h1>
-
-{% if entity.author is defined and entity.author %}<p><em>{{ entity.author }}</em></p>{% endif %}
+<h1>{{ entity.title }}
+{% if entity.author is defined and entity.author %}<small> - {{ entity.author }}</small>{% endif %}
+</h1>
 
 {% if entity.image %}
 <a href="{{ image_url(entity.image, 1024, 768) }}" class="fancybox">
@@ -28,6 +23,8 @@
 </p>
 
 {{ entity.body | raw}}
+
+{% if entity.ticketUrl and not entity.isArchived() %}<p><a href="{{ entity.ticketUrl}}" target="_blank" rel="ext">Buy Tickets</a></p>{% endif %}
 
 {% if entity.photos is defined and entity.photos | length > 0 %}
 <h2>Photos</h2>

@@ -63,7 +63,7 @@ class EventController extends Controller
         ));
     }
     
-    public function otherEventsAction($id = null)
+    public function otherEventsAction($id = -1)
     {
         $repo = $this->getDoctrine()->getRepository('CumtsMainBundle:Event');
         $other_events = $repo->getUpcoming(2, $id);

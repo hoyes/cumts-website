@@ -111,9 +111,11 @@ class Camdram
             if ($r->getRoleType() == $type) {
                 //Find performances in data
                 $data_r = null;
+		if ($r->getName() == 'Amelia Benson') {
+		}
                 foreach ($roles as &$role) {
-                    preg_match("/\?person=([0-9]+)$/i",$role->url,$matches);
-                    if ($r->getCamdramId() == $matches[1]) {
+                    preg_match("/\?person=([0-9]+)/i",$role->url,$matches);
+                    if ($r->getCamdramId() == $matches[1] && $r->getRole() == $role->role) {
                         $data_r = $role;
                         break;
                     }
@@ -140,7 +142,7 @@ class Camdram
         //Update sort fields;
         $i=0;
         foreach ($roles as &$role) {
-            preg_match("/\?person=([0-9]+)$/i",$role->url,$matches);
+            preg_match("/\?person=([0-9]+)/i",$role->url,$matches);
             foreach ($show->getRoles() as $r) {
                 if ($r->getCamdramId() == $matches[1]) {
                     $r->setSort($i);
@@ -153,6 +155,7 @@ class Camdram
     public function addShow($id) {
         $data = $this->getShowData($id);
         if (preg_match("/Bar Night/i", $data->title)) return;
+        if (preg_match("/Songs from the/i", $data->title)) return;
         
         $show = new Show;
         $show->setTitle($data->title);
@@ -225,7 +228,7 @@ class Camdram
         $r = new ShowRole;
         $r->setName($role_json->name);
         $r->setRole($role_json->role);
-        preg_match("/\?person=([0-9]+)$/i",$role_json->url,$matches);
+        preg_match("/\?person=([0-9]+)/i",$role_json->url,$matches);
         $r->setCamdramId($matches[1]);
         $r->setMember($this->findMember($r->getCamdramId(), $r->getName()));
         return $r;

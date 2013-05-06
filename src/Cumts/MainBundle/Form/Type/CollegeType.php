@@ -28,7 +28,7 @@ class CollegeType extends AbstractType
                 "Emmanuel" => "Emmanuel",
                 "Fitzwilliam" => "Fitzwilliam",
                 "Girton" => "Girton",
-                "Gonville & Caius",
+                "Gonville & Caius" => "Gonville & Caius",
                 "Homerton" => "Homerton",
                 "Hughes Hall" => "Hughes Hall",
                 "Jesus" => "Jesus", 

@@ -33,13 +33,13 @@
     </p>
     {% endif %}
 {% endif %}
-{% if app.user.email is defined %}
+{% if app.user.email is defined and app.user.paid %}
     <p>
         <button type="submit">Buy</button>
     </p>
 {% elseif product.membersPrice > 0 %}
 
-    {% if app.user %}
+    {% if app.user and app.user.paid %}
 
         <p>This item is offered at a reduced rate of &pound;{{ product.membersPrice }} for members (compared to
             &pound;{{ product.price }} for non-members). 
@@ -60,14 +60,13 @@
             <button type="submit" name="membership" value="no">No, just pay &pound;{{ product.price }}</button>
         </div>
     {% endif %}
-{% elseif product.requiresMembership and  app.user.email is not defined %}
-
+{% elseif product.requiresMembership and (app.user.email is not defined or not app.user.paid) %}
     {% if app.user %}
-        <p>Only members of the Cambridge University Musical Theatre Society can buy thi buy this item. Please click
+        <p>Only members of the Cambridge University Musical Theatre Society can buy this item. Please click
         below to become a member of CUMTS, after which you can return here.
         </p>
         <div>
-            <button type="submit">Become a member of CUMTS</button>
+            <button type="submit" name="membership" value="yes">Become a member of CUMTS</button>
         </div>
     {% else %}
         <p>Only members of the Cambridge University Musical Theatre Society can buy this item. Please click below to

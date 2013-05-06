@@ -20,7 +20,7 @@ class NewsController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('CumtsMainBundle:News')->findAll();
+        $entities = $em->getRepository('CumtsMainBundle:News')->findRecent(10);
 
         return $this->render('CumtsMainBundle:News:index.html.twig', array(
             'entities' => $entities
