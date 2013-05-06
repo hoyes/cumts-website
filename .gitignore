@@ -10,6 +10,7 @@
 /web/docs
 /web/google*
 /web/redirect
+/app/*.pem
 *~
 /nbproject/private
 .idea
