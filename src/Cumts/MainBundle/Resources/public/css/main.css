@@ -137,6 +137,9 @@ section ul {
 section li {
 	margin-bottom:0.8em;
 }
+section table ul, section table li {
+	margin:0;
+}
 
 footer {
     font-size:12px;

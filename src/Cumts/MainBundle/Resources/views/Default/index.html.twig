@@ -4,7 +4,7 @@
 {% block pagename %}Home{% endblock %}
 
 {% block content %}
-{% render 'CumtsMainBundle:Default:block' with {content_name: 'home'} %}
+{{ render(controller('CumtsMainBundle:Default:block', {content_name: 'home'})) }}
 
 <div id="home_news">
 <h2>Latest News</h2>

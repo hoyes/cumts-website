@@ -33,19 +33,19 @@
 </div>
 </form>
 
-{{ entities.render()|raw }}
+{{ knp_pagination_render(entities) }}
 
 <table class="records_list">
     <thead>
         <tr>
-            <th>{{ entities.sortable('Auth ID', 'm.auth_id')|raw }}</th>
+            <th>{{ knp_pagination_sortable(entities, 'Auth ID', 'm.auth_id')|raw }}</th>
             <th>First Name</th>
-            <th>{{ entities.sortable('Last Name', 'm.last_name')|raw }}</th>
+            <th>{{ knp_pagination_sortable(entities, 'Last Name', 'm.last_name')|raw }}</th>
             <th>Email</th>
             <th>Membership Type</th>
             <th>College</th>
-            <th>{{ entities.sortable('Joined', 'm.joined_at')|raw }}</th>
-            <th>{{ entities.sortable('Graduates', 'm.leaves_at')|raw }}</th>
+            <th>{{ knp_pagination_sortable(entities, 'Joined', 'm.joined_at')|raw }}</th>
+            <th>{{ knp_pagination_sortable(entities, 'Graduates', 'm.leaves_at')|raw }}</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -75,7 +75,7 @@
     </tbody>
 </table>
 
-{{ entities.render()|raw }}
+{{ knp_pagination_render(entities) }}
 
 {% endblock %}
 

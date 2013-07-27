@@ -74,6 +74,6 @@
 {% endif %}
 
 <h2>{% if not entity.isArchived() %}Other {% endif %}Upcoming Events</h2>
-{% render 'CumtsMainBundle:Event:otherEvents' with {id: entity.id} %}
+{{ render(controller('CumtsMainBundle:Event:otherEvents', {id: entity.id})) }}
 
 {% endblock %}
