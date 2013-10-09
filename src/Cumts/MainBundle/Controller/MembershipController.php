@@ -85,7 +85,7 @@ class MembershipController extends Controller
         
         $form    = $this->createForm(new MemberType(), $entity);
         if ($this->getRequest()->getMethod() == 'POST') {
-                $form->bindRequest($request);
+                $form->bind($request);
                 if ($form->isValid()) {
                     $entity->setJoinedAt(new \DateTime);
                     $entity->setPaid(false);

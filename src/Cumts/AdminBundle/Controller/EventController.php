@@ -79,7 +79,7 @@ class EventController extends Controller
     {
         $entity  = $this->createEvent($type);
         $form    = $this->createForm(new EventType(), $entity);
-        $form->bindRequest($this->getRequest());
+        $form->bind($this->getRequest());
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
@@ -139,7 +139,7 @@ class EventController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->bind($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -164,7 +164,7 @@ class EventController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->bind($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
