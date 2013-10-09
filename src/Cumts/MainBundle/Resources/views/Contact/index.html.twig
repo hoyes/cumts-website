@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{% render 'CumtsMainBundle:Default:block' with {content_name: 'contact'} %}
+{{ render(controller('CumtsMainBundle:Default:block', {content_name: 'contact'})) }}
 
 <h2>Contact Form</h2>
 <form method="post" action="{{ path('CumtsMainBundle_contact_post') }}">
