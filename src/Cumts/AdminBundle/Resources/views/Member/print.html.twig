@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<title>CUMTS Membership List</title>
+<style>
+p, td, th {
+	font-size:12px;
+}
+table {
+	width:100%;
+	border-collapse:collapse;
+}
+tr {
+	border-bottom:1px solid #777;
+}
+th {
+	font-weight:bold;
+	border-top:1px solid black;
+	border-bottom: 1px solid black;
+}
+td {
+	padding:0.3em 0;
+}
+a {
+	color:black;
+	text-decoration:none;
+}
+thead {
+	display: table-header-group;
+}
+</style>
+</head>
+<body>
+<p>Generated {{ 'now' | date('r') }}</p>
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(entities, 'CrsID', 'm.auth_id')|raw }}</th>
+            <th>First Name</th>
+            <th>{{ knp_pagination_sortable(entities, 'Last Name', 'm.last_name')|raw }}</th>
+            <th>Email</th>
+            <th>Membership Type</th>
+            <th>College</th>
+            <th>{{ knp_pagination_sortable(entities, 'Joined', 'm.joined_at')|raw }}</th>
+            <th>{{ knp_pagination_sortable(entities, 'Graduates', 'm.leaves_at')|raw }}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.authid }}</td>
+            <td>{{ entity.firstname }}</td>
+            <td>{{ entity.lastname }}</td>
+            <td>{{ entity.email }}</td>
+            <td>{{ entity.getMembershipTypeString() }}</td>
+            <td>{{ entity.college }}</td>
+            <td>{% if entity.joinedat %}{{ entity.joinedat|date('d/m/Y') }}{% endif %}</td>
+            <td>{% if entity.leavesat %}{{ entity.leavesat|date('d/m/Y') }}{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<script>
+     window.print();
+</script>
+</body>
+</html>

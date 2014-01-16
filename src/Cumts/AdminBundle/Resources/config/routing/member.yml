@@ -32,7 +32,11 @@ admin_members_ldap:
 admin_members_check:
     pattern:  /check
     defaults: { _controller: "CumtsAdminBundle:Member:check" }
-    
+
+admin_members_print:
+    pattern: /print
+    defaults: { _controller: "CumtsAdminBundle:Member:print", filter: 0 }
+
 admin_members:
     pattern:  /{page}/{filter}
     defaults: 

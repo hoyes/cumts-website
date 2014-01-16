@@ -65,7 +65,7 @@ class Member implements UserInterface
     /**
      * @var string $auth_id
      *
-     * @ORM\Column(name="auth_id", type="string", length=255)
+     * @ORM\Column(name="auth_id", type="string", length=255, nullable=true)
      */
     private $auth_id;
     

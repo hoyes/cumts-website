@@ -17,6 +17,11 @@
             Bulk membership check
         </a>
     </li>
+    <li>
+        <a href="{{ path('admin_members_print') }}" target="_blank">
+            Printable membership list
+        </a>
+    </li>
 </ul>
 
 <form id="filter_form">
@@ -24,7 +29,7 @@
 <label for="filter">Filter by membership type:</label>
 <select id="filter">
         <option value="all">All</option>
-        <option value="0" {% if filter is sameas('0') %} selected {% endif %}>Active</option>
+        <option value="0" {% if filter is sameas(0) %} selected {% endif %}>Active</option>
         <option value="3" {% if filter is sameas('3') %} selected {% endif %}>Special</option>
         <option value="2" {% if filter is sameas('2') %} selected {% endif %}>Associate</option>
         <option value="4" {% if filter is sameas('4') %} selected {% endif %}>Committee</option>

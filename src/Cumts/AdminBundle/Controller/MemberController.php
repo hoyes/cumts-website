@@ -30,8 +30,21 @@ class MemberController extends Controller
             'entities' => $entities, 'filter' => $filter
         ));
     }
+    
+    public function printAction($filter)
+    {
+    
+        $em = $this->getDoctrine()->getEntityManager();
+        $paginator = $this->get('knp_paginator');
+        $query = $em->getRepository('CumtsMainBundle:Member')->findAllQuery($filter);
+	$entities = $paginator->paginate($query, 1, 99999);
 
-    /**
+        return $this->render('CumtsAdminBundle:Member:print.html.twig', array(
+            'entities' => $entities, 'filter' => $filter
+        ));
+    }
+
+    /*
      * Finds and displays a Member entity.
      *
      */
@@ -224,7 +237,7 @@ class MemberController extends Controller
             }
             
             foreach ($crsids as $crsid) {
-                $m = $repo->findOneBy(array('auth_id' => $crsid));
+                $m = $repo->findOneBy(array('auth_id' => $crsid, 'paid' => true));
                 if ($m) $members[] = $m;
                 else {
                     $m = $ldap->lookup($crsid);
@@ -248,4 +261,5 @@ class MemberController extends Controller
             'data' => ''
         ));
     }
+
 }
