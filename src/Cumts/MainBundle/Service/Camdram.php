@@ -111,8 +111,7 @@ class Camdram
             if ($r->getRoleType() == $type) {
                 //Find performances in data
                 $data_r = null;
-		if ($r->getName() == 'Amelia Benson') {
-		}
+
                 foreach ($roles as &$role) {
                     preg_match("/\?person=([0-9]+)/i",$role->url,$matches);
                     if ($r->getCamdramId() == $matches[1] && $r->getRole() == $role->role) {

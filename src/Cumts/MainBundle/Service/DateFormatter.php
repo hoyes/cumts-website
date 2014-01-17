@@ -52,12 +52,7 @@ class DateFormatter
         foreach ($time_ranges as $time => $ranges) {
             $range_strs = array();
             foreach ($ranges as $range) {
-                if ($range['start'] == $range['end']) {
-                    $range_str = $range['start']->format('l j');
-                }
-                else {
-                    $range_str = $this->dateRange($range['start'], $range['end']);
-                }
+                $range_str = $this->dateRange($range['start'], $range['end']);
                 $range_strs[] = $range_str;
             }
             $time_strs[] = implode(', ', $range_strs).' at '.$time;
