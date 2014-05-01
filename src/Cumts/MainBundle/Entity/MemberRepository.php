@@ -26,8 +26,21 @@ class MemberRepository extends EntityRepository
                     ->andWhere("m.paid = true");
             }
         }
-        
+
         return $query->getQuery();
+    }
+
+    public function findActive()
+    {
+        $qb = $this->createQueryBuilder("m");
+            $qb->orderBy("m.last_name", "ASC")
+            ->addOrderBy("m.first_name", "ASC")
+            ->where($qb->expr()->orX("m.membership_type = :type1", "m.membership_type = :type2"))
+            ->andWhere("m.paid = true")
+            ->setParameter('type1', Member::TYPE_CURRENT)
+            ->setParameter('type2', Member::TYPE_COMMITTEE);
+
+        return $qb->getQuery()->getResult();
     }
 
     public function findPaidMember($auth_id)

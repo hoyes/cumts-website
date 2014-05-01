@@ -37,6 +37,10 @@ admin_members_print:
     pattern: /print
     defaults: { _controller: "CumtsAdminBundle:Member:print", filter: 0 }
 
+admin_members_export:
+    pattern: /export
+    defaults: { _controller: "CumtsAdminBundle:Member:export" }
+
 admin_members:
     pattern:  /{page}/{filter}
     defaults: 

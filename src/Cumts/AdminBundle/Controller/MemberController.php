@@ -33,15 +33,35 @@ class MemberController extends Controller
     
     public function printAction($filter)
     {
-    
-        $em = $this->getDoctrine()->getEntityManager();
+
+        $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
         $query = $em->getRepository('CumtsMainBundle:Member')->findAllQuery($filter);
-	$entities = $paginator->paginate($query, 1, 99999);
+        $entities = $paginator->paginate($query, 1, 999999999);
 
         return $this->render('CumtsAdminBundle:Member:print.html.twig', array(
             'entities' => $entities, 'filter' => $filter
         ));
+    }
+
+    public function exportAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $entities = $em->getRepository('CumtsMainBundle:Member')->findActive();
+
+        $text = '"CrsID", "First Name", "Surname", "College"'."\r\n";
+
+        foreach ($entities as $member) {
+            $text .= '"' . addslashes($member->getAuthId()) . '", "'
+                . $member->getFirstName() . '", "'
+                . $member->getLastName() . '", "'
+                . $member->getCollege() . '"'."\r\n";
+        }
+        $response = new Response($text);
+        $response->headers->set('Content-Type', 'text/csv');
+        $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s"', 'members.csv'));
+        return $response;
     }
 
     /*
@@ -220,8 +240,7 @@ class MemberController extends Controller
             $data = $this->get('request')->get('crsids');
             $lines = explode("\n",$data);
             $crsids = array();
-                        
-            $repo = $this->getDoctrine()->getEntityManager()->getRepository('CumtsMainBundle:Member');
+
             $ldap = $this->get('cambridge_ldap');
             $members = array();
             $not_members = array();
